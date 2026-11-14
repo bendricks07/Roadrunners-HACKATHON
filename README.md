@@ -1,5 +1,13 @@
 # Roadrunners HACKATHON
 
+## Next task: satellite parking map
+
+**Teammate / GPT: start with the [satellite parking map handoff](docs/handoffs/satellite-parking-map.md).** Added November 14, 2026.
+
+The next interface should put real satellite/terrain imagery behind colored parking areas, street segments, and parking-type symbols, while keeping the polished Apple-style design. The handoff contains the implementation order, data requirements, color meanings, and acceptance checks.
+
+The working browser app is on [`codex/campuscurb-demo`](https://github.com/bendricks07/Roadrunners-HACKATHON/tree/codex/campuscurb-demo), under `demo/`. Start this feature from that branch; `main` currently contains planning and research. This handoff adds instructions only. GitHub pushes do not automatically update the [public judge demo](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site/).
+
 ## Research handoff
 
 Official-source desk research for the builder, checked November 14, 2026:
