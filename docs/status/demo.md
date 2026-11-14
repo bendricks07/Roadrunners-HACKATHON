@@ -33,6 +33,7 @@ Open http://localhost:5173. Check with `npm --prefix demo run check`.
 
 ## Handoff
 
+- Integrated the team's sourced research handoff from main (`387a752`). Its JSON explicitly identifies itself as a research inventory, not executable parking policy. Entrances and walking times are unset; keep those records separate from fictional demo fixtures until the team validates them.
 - The complete prototype is isolated under `demo/`; keep a separate production/native app outside it.
 - Pure session/rules helpers can be reused. See `docs/architecture.md` for the record contract.
 - A maps link opens the actual campus destination; on-screen parking locations and routes are illustrative.

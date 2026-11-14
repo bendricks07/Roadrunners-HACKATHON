@@ -21,6 +21,16 @@ Check with `npm --prefix demo run check`. See [`docs/architecture.md`](docs/arch
 
 Rules, prices, routes, map geometry, and reports are illustrative. Live occupancy, verified eligibility, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
 
+## Research handoff
+
+Official-source desk research for the builder, checked November 14, 2026:
+
+- [Cal Poly SLO parking findings, conflicts, and source register](docs/research/cal-poly-slo-parking-2026-11-14.md)
+- [Ten campus location records and five city district summaries (JSON)](data/research/cal-poly-slo-parking-seed.json)
+- [Field survey, demo acceptance scenarios, and interview checklist](docs/research/parking-field-and-demo-checklist.md)
+
+This research is not a live availability feed or a field-verified eligibility dataset. Unknown entrances, boundaries, payment zones, and availability remain explicitly unset.
+
 ## App planning note: CampusCurb
 
 > **Status: product outline; only the browser-demo subset above is implemented.** Added November 14, 2026. CampusCurb is a working name, not a finalized brand. Features, integrations, and release stages below describe the intended product. Local rules and sources must be verified before use in a live app.

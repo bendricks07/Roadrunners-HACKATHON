@@ -1,0 +1,645 @@
+{
+  "schema_version": "1.0",
+  "dataset_kind": "research_inventory_not_executable_policy",
+  "campus_id": "cal-poly-slo",
+  "researched_on": "2026-11-14",
+  "timezone": "America/Los_Angeles",
+  "production_ready": false,
+  "notes": [
+    "Desk research only; no field verification or live availability.",
+    "Unknown values remain null. Evaluate signs, current sources, permit, space category, and the whole stay.",
+    "Source conflicts are documented in docs/research/cal-poly-slo-parking-2026-11-14.md.",
+    "No location here is automatically approved for navigation or parking recommendations."
+  ],
+  "sources": [
+    {
+      "id": "L",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/parking-lots/",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "C",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/permits/general",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "E",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/enforcement-hours",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "F",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/permits/fees",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "M",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/meters",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "P",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/pay-stations",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "V",
+      "url": "https://afd.calpoly.edu/parking/slo/parking-on-campus/visiting-the-campus/",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "X",
+      "url": "https://afd.calpoly.edu/parking/slo/lot-closures/",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "N",
+      "url": "https://afd.calpoly.edu/facilities/about/news/",
+      "checked_on": "2026-11-14",
+      "access": "html_retrieved"
+    },
+    {
+      "id": "R",
+      "url": "https://www.slocity.org/government/department-directory/public-works/parking-services/residential-permits",
+      "checked_on": "2026-11-14",
+      "access": "official_search_index_direct_fetch_403"
+    },
+    {
+      "id": "MH",
+      "url": "https://www.slocity.org/home/showpublisheddocument/3628/635546028948770000",
+      "checked_on": "2026-11-14",
+      "access": "pdf_text_only_geometry_unverified"
+    },
+    {
+      "id": "MU",
+      "url": "https://www.slocity.org/home/showpublisheddocument/3630/635496687412870000",
+      "checked_on": "2026-11-14",
+      "access": "pdf_text_only_geometry_unverified"
+    },
+    {
+      "id": "GIS",
+      "url": "https://mapsa.slocity.org/hosting/rest/services/sloGISlayers/slogisLandManagement/FeatureServer/31",
+      "checked_on": "2026-11-14",
+      "access": "metadata_only_query_unverified"
+    }
+  ],
+  "locations": [
+    {
+      "id": "cal-poly-slo-h1",
+      "name": "H1",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "short_term_commuter",
+        "ada"
+      ],
+      "source_ids": [
+        "L",
+        "P",
+        "F"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": null,
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-h12",
+      "name": "H12",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "long_term_commuter",
+        "staff"
+      ],
+      "source_ids": [
+        "L",
+        "C",
+        "P"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": null,
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-h14",
+      "name": "H14",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "commuter",
+        "limited_time_bc",
+        "ada"
+      ],
+      "source_ids": [
+        "L",
+        "C",
+        "P"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": "subarea_required",
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-h16",
+      "name": "H16",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "commuter",
+        "staff"
+      ],
+      "source_ids": [
+        "L",
+        "C",
+        "P"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": null,
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-grand-structure",
+      "name": "Grand Avenue Structure",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "commuter",
+        "staff",
+        "metered",
+        "ada",
+        "ev"
+      ],
+      "source_ids": [
+        "L",
+        "C",
+        "P"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": "distinct_from_structure_131",
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-structure-131",
+      "name": "Structure 131",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "visitor",
+        "resident",
+        "ada",
+        "ev"
+      ],
+      "source_ids": [
+        "L",
+        "V",
+        "F"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": "ordinary_commuter_and_staff_permits_excluded",
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-g2",
+      "name": "G2",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "limited_time",
+        "ada"
+      ],
+      "source_ids": [
+        "L",
+        "C",
+        "P"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": 120,
+      "maximum_stay_scope": "general_limited_time_category_exceptions_require_review",
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": "staff_exception_and_space_rules_need_review",
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-a1",
+      "name": "A1",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "metered",
+        "sponsored_guest",
+        "ada"
+      ],
+      "source_ids": [
+        "L",
+        "P"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": null,
+      "review_flag": "space_category_required",
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-r3",
+      "name": "R3 Structure",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "r3_commuter",
+        "residential_area"
+      ],
+      "source_ids": [
+        "C"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": "271 Village Drive",
+      "review_flag": "commuter_and_resident_rights_differ",
+      "production_ready": false
+    },
+    {
+      "id": "cal-poly-slo-r4",
+      "name": "R4 Structure",
+      "jurisdiction_id": "cal-poly-slo",
+      "space_categories": [
+        "r4_commuter",
+        "residential_area"
+      ],
+      "source_ids": [
+        "C"
+      ],
+      "research_status": "official_source_listed_field_check_required",
+      "eligibility": "unknown_until_context_evaluated",
+      "published_maximum_stay_minutes": null,
+      "maximum_stay_scope": null,
+      "entrance_coordinates": null,
+      "boundary_geojson": null,
+      "pedestrian_exit_coordinates": null,
+      "payment_zone_ids": null,
+      "walking_minutes": null,
+      "availability": {
+        "status": "unknown",
+        "observed_at": null,
+        "source": null
+      },
+      "published_address_hint": "371 Canyon Drive",
+      "review_flag": "commuter_and_resident_rights_differ",
+      "production_ready": false
+    }
+  ],
+  "published_short_term_prices": {
+    "source_ids": [
+      "F"
+    ],
+    "currency": "USD",
+    "observed_on": "2026-11-14",
+    "universal_location_rate": false,
+    "transaction_total_verified": false,
+    "products": [
+      {
+        "duration": "1_hour",
+        "base_price": 4
+      },
+      {
+        "duration": "2_hours",
+        "base_price": 8
+      },
+      {
+        "duration": "daily",
+        "base_price": 8
+      },
+      {
+        "duration": "weekly",
+        "base_price": 40
+      }
+    ],
+    "published_mobile_session_fee": {
+      "amount": 0.35,
+      "source_ids": [
+        "M"
+      ],
+      "current_checkout_total_verified": false
+    }
+  },
+  "city_district_summaries": [
+    {
+      "id": "slo-city-monterey-heights",
+      "name": "Monterey Heights",
+      "jurisdiction_id": "city-of-san-luis-obispo",
+      "source_ids": [
+        "R",
+        "MH"
+      ],
+      "published_permit_restriction": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR"
+        ],
+        "local_start": "02:00",
+        "local_end": "22:00",
+        "crosses_midnight": false
+      },
+      "boundary_geojson": null,
+      "verified_unrestricted_segments": [],
+      "production_ready": false,
+      "notes": "District summary only; exact curb eligibility and exceptions are unverified."
+    },
+    {
+      "id": "slo-city-murray",
+      "name": "Murray",
+      "jurisdiction_id": "city-of-san-luis-obispo",
+      "source_ids": [
+        "R",
+        "MU"
+      ],
+      "published_permit_restriction": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR"
+        ],
+        "local_start": "08:00",
+        "local_end": "17:00",
+        "crosses_midnight": false
+      },
+      "boundary_geojson": null,
+      "verified_unrestricted_segments": [],
+      "production_ready": false,
+      "notes": "District summary only; exact curb eligibility and exceptions are unverified."
+    },
+    {
+      "id": "slo-city-college-highlands",
+      "name": "College Highlands",
+      "jurisdiction_id": "city-of-san-luis-obispo",
+      "source_ids": [
+        "R"
+      ],
+      "published_permit_restriction": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "local_start": "22:00",
+        "local_end": "10:00",
+        "crosses_midnight": true
+      },
+      "boundary_geojson": null,
+      "verified_unrestricted_segments": [],
+      "production_ready": false,
+      "notes": "District summary only; exact curb eligibility and exceptions are unverified."
+    },
+    {
+      "id": "slo-city-ferrini",
+      "name": "Ferrini",
+      "jurisdiction_id": "city-of-san-luis-obispo",
+      "source_ids": [
+        "R"
+      ],
+      "published_permit_restriction": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "local_start": "00:00",
+        "local_end": "17:00",
+        "crosses_midnight": false
+      },
+      "boundary_geojson": null,
+      "verified_unrestricted_segments": [],
+      "production_ready": false,
+      "notes": "District summary only; exact curb eligibility and exceptions are unverified."
+    },
+    {
+      "id": "slo-city-park-view",
+      "name": "Park View",
+      "jurisdiction_id": "city-of-san-luis-obispo",
+      "source_ids": [
+        "R"
+      ],
+      "published_permit_restriction": {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "local_start": "00:00",
+        "local_end": "07:00",
+        "crosses_midnight": false
+      },
+      "boundary_geojson": null,
+      "verified_unrestricted_segments": [],
+      "production_ready": false,
+      "notes": "District summary only; exact curb eligibility and exceptions are unverified."
+    }
+  ],
+  "closure_exclusions": [
+    {
+      "name": "C3",
+      "reported_status": "permanently_closed",
+      "source_ids": [
+        "X"
+      ],
+      "checked_on": "2026-11-14",
+      "exclude_from_recommendations": true
+    },
+    {
+      "name": "C4",
+      "reported_status": "permanently_closed",
+      "source_ids": [
+        "X"
+      ],
+      "checked_on": "2026-11-14",
+      "exclude_from_recommendations": true
+    },
+    {
+      "name": "K1",
+      "reported_status": "permanently_closed",
+      "source_ids": [
+        "X"
+      ],
+      "checked_on": "2026-11-14",
+      "exclude_from_recommendations": true
+    },
+    {
+      "name": "K2",
+      "reported_status": "permanently_closed",
+      "source_ids": [
+        "X"
+      ],
+      "checked_on": "2026-11-14",
+      "exclude_from_recommendations": true
+    },
+    {
+      "name": "R1",
+      "reported_status": "permanently_closed",
+      "source_ids": [
+        "X"
+      ],
+      "checked_on": "2026-11-14",
+      "exclude_from_recommendations": true
+    }
+  ],
+  "scheduled_restrictions": [
+    {
+      "id": "h2b-2026-11-16",
+      "location_label": "H-2b eastern portion",
+      "scope": "partial",
+      "starts_at": "2026-11-16T06:00:00-08:00",
+      "expected_ends_at": "2026-12-04T16:00:00-08:00",
+      "source_ids": [
+        "N"
+      ],
+      "affected_geometry": null,
+      "reopening_confirmed": false
+    },
+    {
+      "id": "fleet-71-2026-11-16",
+      "location_label": "Fleet Services Building 71 staff parking",
+      "scope": "partial",
+      "starts_at": "2026-11-16T07:00:00-08:00",
+      "expected_ends_at": "2026-11-30T15:30:00-08:00",
+      "source_ids": [
+        "N"
+      ],
+      "affected_geometry": null,
+      "reopening_confirmed": false
+    }
+  ]
+}
