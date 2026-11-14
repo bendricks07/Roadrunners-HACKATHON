@@ -1,8 +1,29 @@
 # Roadrunners HACKATHON
 
+## Run the working CampusCurb demo
+
+The interactive browser prototype is in [`demo/`](demo/). It implements a subset of the product plan below, using clearly labeled sample data.
+
+```bash
+npm --prefix demo start
+```
+
+Open **http://localhost:5173**. Requires Node.js 20 or newer; **no install step, API keys, account, or backend service** is needed.
+
+- Explore four campus destinations, compare three sample parking areas, and change permit/stay settings.
+- Preview a route, confirm parking, save a car-location note, and manage a persisted parking session.
+- See a live countdown and a calculated head-back time including walking and buffer.
+- Use **Try a 90-second session**: an in-app reminder appears after 30 seconds and the session expires after 90 seconds.
+- Ask a rule-based demo guide; add/resolve local reports. A simulated walkway closure changes the return estimate.
+- Switch light/dark appearances and use the responsive desktop or phone layout.
+
+Check with `npm --prefix demo run check`. See [`docs/architecture.md`](docs/architecture.md), [`docs/decisions.md`](docs/decisions.md), and [`docs/status/demo.md`](docs/status/demo.md) for implementation and handoff notes.
+
+Rules, prices, routes, map geometry, and reports are illustrative. Live occupancy, verified eligibility, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
+
 ## App planning note: CampusCurb
 
-> **Status: proposed product outline, not an implemented app.** Added November 14, 2026. CampusCurb is a working name, not a finalized brand. Features, integrations, and release stages below describe the intended product. Local rules and sources must be verified before use in a live app.
+> **Status: product outline; only the browser-demo subset above is implemented.** Added November 14, 2026. CampusCurb is a working name, not a finalized brand. Features, integrations, and release stages below describe the intended product. Local rules and sources must be verified before use in a live app.
 
 The app is a parking companion that answers four questions: **Where can I park, can I stay there, when should I head back, and how do I get there?**
 
