@@ -1,5 +1,11 @@
 # Roadrunners HACKATHON
 
+## Open the live demo
+
+**[Try CampusCurb](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site)**
+
+The public demo works on a computer or phone without installation or sign-in. Share this link with judges. Each published version uses the same address. GitHub pushes alone do not publish changes; see [deployment notes](docs/deployment.md).
+
 ## Run the working CampusCurb demo
 
 The interactive browser prototype is in [`demo/`](demo/). It implements a subset of the product plan below, using clearly labeled sample data.
