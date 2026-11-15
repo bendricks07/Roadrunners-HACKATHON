@@ -40,7 +40,7 @@ These are street centerlines. MapLibre draws paired approximate curb display ban
 
 ## Chance colors, rules, and reminders
 
-**No permit** is an exclusive setting. Red missing-permit/payment and permit-mismatch warnings include their specific reason without claiming complete policy. The common weekday 7 AM-5 PM window avoids assuming academic-break evening hours; current holiday/event calendars remain unconnected. Residential 131/R3/R4 authorization is checked 24/7. C-lot daytime commuter cautions concern general staff spaces, with special stalls separate. Neither unknown street rules nor after-hours rules establish free parking. A supported second permit can clear another product's warning.
+**No permit** is an exclusive setting. Reviewed ordinary-space facilities now use published general enforcement hours (Mon-Thu 7 AM-10 PM; Friday 7 AM-5 PM), including the regular Friday 5 PM-Monday 7 AM exemption. Academic-break/holiday calendars and signed event/special stalls remain separate. Unreviewed areas retain conservative checks and unknown eligibility. Blue means a researched permit rule, not an open space. The ordinary Commuter Annual and Grand Annual products are distinguished using the current guide. See [reviewed scope and sources](research/permit-status-2026-11-15.md).
 
 **Where are you headed?** is edited below map search alongside Trip date & time. Destination ordering remains illustrative, not verified walking navigation. Editors survive background geometry refreshes.
 

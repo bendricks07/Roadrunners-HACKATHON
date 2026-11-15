@@ -50,6 +50,7 @@
 .geo-destination-label { display: grid; gap: 6px; font-size: 12px; padding: 4px 0 8px; }
 .geo-destination-label select { width: 100%; min-width: 0; min-height: 44px; font-size: 14px; }
 .geo-entry-help { padding-bottom: 14px; }
+.geo-rule-availability { font-size: 11px; line-height: 1.4; margin-top: 7px; font-weight: 600; }
 .map-home:has(.geo-destination-entry[open]) .geo-map-legend { display: none; }
 .map-home .geo-dock { max-height: 75dvh; overflow-y: auto; }
 #geo-trip-error:empty { display: none; }

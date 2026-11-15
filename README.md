@@ -10,6 +10,8 @@ Edit **Where are you headed?** and **Trip date & time** directly below map searc
 
 ## Run and check
 
+The map now distinguishes reviewed **permit requirements** from unknown **empty-space availability**. Grand Avenue and 17 other reviewed ordinary-space facilities use time-based permit-rule labels, including the regular Friday 5 PM-Monday 7 AM exemption with signed exceptions. [Sources and limits](docs/research/permit-status-2026-11-15.md).
+
 Requires Node.js 20 or newer. No npm install, backend, or API key is required for the credited map fallbacks.
 
 ```sh

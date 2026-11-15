@@ -1,3 +1,4 @@
+import { researchedPermitRule } from './campus-permit-policy.js';
 export const MINUTE = 60_000;
 
 // Only the common weekday 7-17 window is used: academic-break evening hours
@@ -79,6 +80,13 @@ export function evaluateCampusParking(area, plan) {
   const result = (status, reason, nextRestrictionAt = null) => ({ status, reason, nextRestrictionAt, occupancy: 'unknown' });
   if (rules.closed) return result('ineligible', 'Campus closure notice: this lot is permanently closed.');
   if (!Number.isFinite(plan.arrivalAt) || !Number.isFinite(plan.departureAt) || plan.departureAt <= plan.arrivalAt) return result('unknown', 'Choose a valid arrival and departure in campus time.');
+  // Apply closures before any recurring permit exemption.
+  for (const restriction of rules.closures || []) {
+    if (restriction.scope === 'whole-area' && plan.arrivalAt < restriction.endsAt && plan.departureAt > restriction.startsAt) return result('ineligible', restriction.reason || 'A closure overlaps your planned stay.', restriction.startsAt);
+  }
+  const researched = researchedPermitRule(area, plan);
+  if (researched && !C_LOTS.has(area.id)) return researched;
+  if (researched?.permitExempt || researched?.permitConflict) return researched;
   if (!plan.permit || plan.permit === 'unknown') return result('unknown', 'Select your permit. Unconfirmed rules still need checking.');
   if (plan.permit === 'none' && area.kind !== 'street') {
     const residential = ['cal-poly-slo-r3', 'cal-poly-slo-r4', 'cal-poly-slo-structure-131'].includes(area.id);
@@ -88,6 +96,7 @@ export function evaluateCampusParking(area, plan) {
   }
   if (rules.deniedPermits?.includes(plan.permit)) return result('ineligible', 'The official lot directory excludes your selected permit here.');
   if (C_LOTS.has(area.id) && ['commuter', 'commuter-grand', 'r3', 'r4', 'ag-commuter'].includes(plan.permit) && overlapsCampusDaytime(plan.arrivalAt, plan.departureAt)) return { ...result('unknown', `Permit mismatch: ${area.name} has no general commuter spaces in the published C-lot directory. Your selected commuter permit does not cover general staff stalls during daytime enforcement. Separately signed special spaces and holiday exceptions need verification.`), permitConflict: true };
+  if (researched) return researched;
   if (rules.maxStayMinutes && !rules.limitExemptPermits?.includes(plan.permit) && plan.departureAt - plan.arrivalAt > rules.maxStayMinutes * MINUTE) return result('ineligible', `Your stay exceeds the published ${rules.maxStayMinutes / 60}-hour limit.`, plan.arrivalAt + rules.maxStayMinutes * MINUTE);
   for (const restriction of rules.closures || []) {
     if (restriction.scope === 'whole-area' && plan.arrivalAt < restriction.endsAt && plan.departureAt > restriction.startsAt) return result('ineligible', restriction.reason || 'A closure overlaps your planned stay.', restriction.startsAt);

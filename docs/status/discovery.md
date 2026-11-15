@@ -1,5 +1,9 @@
 # Current CampusCurb app status
 
+## November 15: reviewed permit schedules
+
+Replaced generic unknown labels with source-backed permit-rule statuses for ordinary spaces in 18 reviewed facilities. Grand Avenue now shows No general permit required for trips wholly within Friday 5 PM-Monday 7 AM, with event/special-space exceptions and the next regular enforcement start. Blue means a reviewed rule; empty-space availability remains unknown. Product matching distinguishes ordinary Commuter Annual from Grand Annual. See [findings, limits and 50 passing tests](../research/permit-status-2026-11-15.md).
+
 ## November 15: no-permit and main destination controls
 
 Added exclusive No permit selection and contextual red missing-permit/payment or mismatch explanations. Selected restricted areas stay red across map styles. Where are you headed? is now a main-map entry alongside Trip date & time, with draft/open-state retention during background refreshes. Full parking has a separate source-verified, expiring display contract; no live occupancy feed is connected. Rules, limits, 43 tests, desktop/phone checks and screenshots are in [the verification record](../../artifacts/permit-destination-controls/README.md).

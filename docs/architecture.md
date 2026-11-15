@@ -10,6 +10,7 @@
 | `demo/src/rules.js` | Eligibility, active reports, walking adjustments, earliest deadlines, sessions, and reminder phases |
 | `demo/src/map.js` | Separate walkthrough's original SVG map, selected markers, and illustrative routes |
 | `demo/src/map-model.js` | Real campus IDs, GIS queries, source identity checks, and campus-time conversion |
+| `demo/src/campus-permit-policy.js` | Scoped researched permit schedules, trip-wide enforcement checks, and published commuter-product distinctions; separate from occupancy/full policy |
 | `demo/src/geographic-map.js` | Google, MapLibre, and non-WebGL Leaflet adapters; retained geographic map |
 | `demo/src/street-model.js` | Stable City segment IDs, source identity checks, and separate illustrative chance fixtures |
 | `demo/src/map-style.js` | Original satellite/dark/standard/terrain styling and parking overlay layers |
