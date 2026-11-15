@@ -1,6 +1,6 @@
 # Geographic Explore implementation
 
-Redesign merged into local `main`; feature branch `codex/map-first-redesign` is fully merged and deleted. App source `fd63c2a`. GitHub push is pending because the signed-in desktop connection became unavailable. November 14, 2026 local time.
+Redesign, free-data research, detector pilot, and all design/research deliverables are published to GitHub `main`, including commit `1b8fe13`. The research branch `codex/free-parking-research` is also published. Feature branch `codex/map-first-redesign` is fully merged and deleted. App source remains `fd63c2a`. November 14, 2026 local time.
 
 Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site . Published version 5 uses Site source `d9675b3`; full provenance and GitHub sync status are recorded in `docs/deployment.md`. No shared Google browser/demo key has been supplied.
 
@@ -23,13 +23,14 @@ Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site 
 - JSDOM integration with the actual vendored Leaflet fallback and fetched official source responses passed: nine campus pins, eight outlines, 40 street segments, minimal home, retained map DOM, street search/selection/directions, manual save/restore/end, dark appearance, chance toggle, G2 commuter/time exclusions, Google setup form, and original walkthrough.
 - City runtime query returned HTTP 200 with all 40 source features. CDFW sample returned HTTP 200/JPEG with working CORS; the official California catalog documents 2022/0.6 m/public-use attribution terms.
 - Returning visitors open the new map even when the old walkthrough preference was saved; an old fictional session remains preserved and reachable through the walkthrough.
-- Native preview showed the new desktop shell, but its browser connection disconnected during visual review. Full visual QA across both appearances and phone sizes was not completed; DOM integration/style validation are not a substitute for a rendered visual pass. Google rendering/authentication still requires an appropriate key.
+- A subsequent rendered review tested the local app at 1280×900 and 390×844 and checked the public app. It reproduced disappearing parking overlays after a style switch and a compressed expanded search field, plus phone framing/touch-target concerns. See the [review and screenshots](../../artifacts/campuscurb-design-test-review.md). These defects remain open; automated checks do not cover them. Google rendering/authentication still requires an appropriate key.
 
 ## Remaining data and integration work
 
 Free-source research on `codex/free-parking-research` adds a separate [feasibility study](../research/free-parking-data-feasibility.md), [working research prototype](../../tools/parking-research/README.md), and [G2 vehicle detector pilot](../research/g2-vehicle-detector-pilot.md). The tested NAIP archive supplies seven acquisition dates across 2012–2024 over the selected SLO area; clock times are unverified. A pinned MIT-declared quantized Mask R-CNN ran locally: a 512px baseline found no candidates, and exploratory 36m tiling matched 7 of 18 provisional assistant labels in two County 2014 windows. The two 2022 windows had no candidates and are unscored. Labels need independent human verification; counts are not whole-lot occupancy. All 28 research tests and 32 app checks pass. No live occupancy, new eligibility policy, forecast, or browser UI change is claimed.
 
 - Connect a suitable Google key for the shared judge deployment; current UI connection is per browser only.
+- Fix the rendered style-switch overlay loss and expanded-search compression documented in the [app review](../../artifacts/campuscurb-design-test-review.md), then verify phone framing and touch areas.
 - Replace the explicit chance fixtures with a validated forecast or actual feed, including freshness/confidence metadata.
 - Verify exact block faces, current signs, permits, curb markings, temporary restrictions, stalls/subareas, entrances, costs, and walking routes. City centerlines provide no parking permission or occupancy fields. Do not infer permission from imagery.
 - City permit district layer 31 mixes residential districts and timed zones; its redistribution restrictions mean no district snapshot is committed. Current street permissions remain unconfirmed.
