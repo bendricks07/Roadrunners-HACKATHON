@@ -1,5 +1,41 @@
 # Public demo deployment
 
+**[Open the current CampusCurb demo](https://campuscurb-cal-poly-current.jammyhoneydew6.chatgpt.site)**
+
+The new public Site was created at the user's request on November 15, 2026 because the previous project's publishing permissions were unavailable in this account. Anyone with the new link can visit. The previous Site remains intact at its original address.
+
+## Current publication
+
+- Site project: `appgprj_6af9ebd565e0819191160fadd87c9a66`
+- Version: 1
+- GitHub app source: `main`, `4372816a68fc067f0d8ae346f5352db0a73d05d6`
+- Sites source commit: `63b6aa1b498c874ef6ce93bcf6d1368f3ff086c4`
+- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_a97bcacf92848191bdb1e2bae4e0dd12`
+- Successful deployment: `appgdep_6af9ece189848191b0fae60ef2d64241`, November 15, 2026 at 17:33:33 UTC (9:33 AM Pacific)
+- Local publication checkout: `C:/Users/bhend/.codex/visualizations/2026/11/14/01a1dbb4-8b2b-7f32-a933-ed9fe30ee6a7/campuscurb-current-site`
+
+The static app is an exact copy of `demo/index.html`, `demo/favicon.svg`, `demo/manifest.webmanifest`, and `demo/src/`. Its checked-in `SOURCE.json` records the GitHub source. All 21 files under `src/` matched by SHA-256; all 43 tests and source syntax checks passed. The new hosted map and current destination/trip UI loaded in the browser. No Google key or user browser data was copied. Saved sessions/preferences belong to each browser origin, so they do not migrate from the old URL automatically. Live occupancy remains unconnected.
+
+GitHub main was fetched repeatedly, including after the user's request to include additional commits. The latest remote app source throughout publication was `4372816`. Later documentation commits record this publication without changing its app assets.
+
+## Updating this Site
+
+GitHub pushes still do not automatically publish the website. Reuse this new project identity, checkout and URL for future publications; no additional Site is needed.
+
+1. Read the publication checkout's `.openai/hosting.json` and obtain a fresh credential for the project above.
+2. Open the checkout with the Sites source helper before editing. Fetch GitHub main and preserve teammate changes.
+3. Synchronize only the app assets listed above into `dist/`, and update `SOURCE.json`. Keep credentials out of files.
+4. Check the app, push/package exact source with the supported Sites workflow, save a version, and deploy it.
+5. Confirm deployment success. Preserve public access unless the user asks for a different audience.
+
+Only app assets are hosted; repository research, history, credentials and parked-car notes are not uploaded. No shared Google key is configured. Browser notes, sessions and local reports remain private to that browser.
+
+## Historical publication on the original Site
+
+The record below describes the original project, which this account could not update. Its version 7 remains intact; it is no longer the primary demo link in this repository.
+
+### Original Site deployment
+
 Public URL: https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site
 
 The demo is public and does not require ChatGPT or GitHub sign-in. The GitHub repository's visibility is unchanged. App sessions, parking notes, and fictional reports stay in each visitor's browser.

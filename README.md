@@ -2,7 +2,7 @@
 
 A parking companion for Cal Poly San Luis Obispo and nearby neighborhoods. The browser prototype combines a geographic map, campus parking inventory, trip and permit settings, source-linked restrictions, directions, and saved-car reminders.
 
-**[Open the hosted demo](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site)** · [Current app status](docs/status/discovery.md) · [Documentation](docs/README.md) · [Design and research evidence](artifacts/README.md)
+**[Open the hosted demo](https://campuscurb-cal-poly-current.jammyhoneydew6.chatgpt.site)** · [Current app status](docs/status/discovery.md) · [Documentation](docs/README.md) · [Design and research evidence](artifacts/README.md)
 
 GitHub `main` is the integrated source. The hosted demo is published separately and can lag behind it; see [deployment status](docs/deployment.md). The [branch audit](docs/status/repository.md) records which branches are included in `main`.
 
