@@ -2,6 +2,8 @@
 
 ## November 15: trip duration limits
 
+Published to the current public URL as Site version 3 from app commit `8d60077`; the live Abbott over-limit warning was verified. See [deployment provenance](../deployment.md).
+
 Trips exceeding an area's maximum parking duration now turn it red with planned and allowed times. The shared check runs before permit/general-hours shortcuts and preserves area-specific exemptions. Abbott's 10-hour limit is explicitly user-reported; exact signed curbs/hours remain unverified. Time-limit details remain visible without the chance preview. All 55 tests pass; see [verification and limitations](../../artifacts/trip-duration-limits/README.md).
 
 ## November 15: reviewed permit schedules

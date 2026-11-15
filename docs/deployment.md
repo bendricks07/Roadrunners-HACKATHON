@@ -7,16 +7,18 @@ The new public Site was created at the user's request on November 15, 2026 becau
 ## Current publication
 
 - Site project: `appgprj_6af9ebd565e0819191160fadd87c9a66`
-- Version: 2
-- GitHub app source: `main`, `38505912eeb34d0f517c7e3ee5b623543293fc81`
-- Sites source commit: `c97da36d400b1d84ae1d8fff5ca55f764e6a8ba2`
-- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_6c315714a2d88191af6a06482e4b09e5`
-- Successful deployment: `appgdep_6af9f14647588191b2c420c509fdd134`, November 15, 2026 at 17:52:11 UTC (9:52 AM Pacific)
+- Version: 3
+- GitHub app source: `main`, `8d600777138a6672e36e261f465a68cf5a7ac21b`
+- Sites source commit: `f555835c8be0b74d6992670e7770f99eec16b796`
+- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_0cf1a55174988191b97534e8584d22a5`
+- Successful deployment: `appgdep_6af9f514d1ac819187f44d2a1392ec44`, November 15, 2026 at 18:08:25 UTC (10:08 AM Pacific)
 - Local publication checkout: `C:/Users/bhend/.codex/visualizations/2026/11/14/01a1dbb4-8b2b-7f32-a933-ed9fe30ee6a7/campuscurb-current-site`
 
-The static app is an exact copy of `demo/index.html`, `demo/favicon.svg`, `demo/manifest.webmanifest`, and `demo/src/`. Its checked-in `SOURCE.json` records the GitHub source. All 22 files under `src/` matched by SHA-256; all 50 tests and source syntax checks passed. The new hosted map and current destination/trip UI loaded in the browser. No Google key or user browser data was copied. Saved sessions/preferences belong to each browser origin, so they do not migrate from the old URL automatically. Live occupancy remains unconnected.
+The static app is an exact copy of `demo/index.html`, `demo/favicon.svg`, `demo/manifest.webmanifest`, and `demo/src/`. Its checked-in `SOURCE.json` records the GitHub source. All 22 files under `src/` matched by SHA-256; all 55 tests and source syntax checks passed. The new hosted map and current destination/trip UI loaded in the browser. No Google key or user browser data was copied. Saved sessions/preferences belong to each browser origin, so they do not migrate from the old URL automatically. Live occupancy remains unconnected.
 
-Version 2 publishes researched permit-rule statuses for ordinary spaces at 18 campus facilities, including Grand Avenue's regular Friday 5 PM-Monday 7 AM exemption. Blue identifies a permit rule; occupancy and full stall eligibility remain separate. Friday/Monday boundaries, exceptions and DST were tested. The live card shows the next regular enforcement start and still says empty spaces are unknown. See [findings](research/permit-status-2026-11-15.md) and [hosted evidence](../artifacts/researched-permit-status/grand-weekend-live.jpg).
+Version 3 adds elapsed-trip checks against applicable parking time limits. Overlong trips turn red and display planned and allowed durations. Abbott uses the user-reported 10-hour cap with explicit sign/curb/hour limitations; G2 retains its published two-hour rule and staff exception. The live Abbott card was verified for an 11-hour trip. [Verification and screenshot](../artifacts/trip-duration-limits/README.md).
+
+Version 2 published researched permit-rule statuses for ordinary spaces at 18 campus facilities, including Grand Avenue's regular Friday 5 PM-Monday 7 AM exemption. Blue identifies a permit rule; occupancy and full stall eligibility remain separate. Friday/Monday boundaries, exceptions and DST were tested. The live card shows the next regular enforcement start and still says empty spaces are unknown. See [findings](research/permit-status-2026-11-15.md) and [hosted evidence](../artifacts/researched-permit-status/grand-weekend-live.jpg).
 
 Version 1 was initially published from GitHub app commit `4372816`. Version 2 uses app commit `3850591`; subsequent documentation commits do not change hosted app assets. The packaging helper verified the newly committed and pushed Sites source before building the archive; the opening checkout's older Sites SHA was not used for native publication.
 
