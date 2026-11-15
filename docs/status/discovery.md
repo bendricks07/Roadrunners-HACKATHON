@@ -27,6 +27,8 @@ Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site 
 
 ## Remaining data and integration work
 
+Free-source research on `codex/free-parking-research` adds a separate [feasibility study](../research/free-parking-data-feasibility.md) and [working research prototype](../../tools/parking-research/README.md). The tested NAIP archive supplies seven acquisition dates across 2012–2024 over the selected SLO area; clock times are unverified. County 2014 cached imagery and CDFW 2022 crops support a labeling pilot, not an hourly forecast. No trained detector, live occupancy, new eligibility policy, or browser UI change is claimed.
+
 - Connect a suitable Google key for the shared judge deployment; current UI connection is per browser only.
 - Replace the explicit chance fixtures with a validated forecast or actual feed, including freshness/confidence metadata.
 - Verify exact block faces, current signs, permits, curb markings, temporary restrictions, stalls/subareas, entrances, costs, and walking routes. City centerlines provide no parking permission or occupancy fields. Do not infer permission from imagery.
