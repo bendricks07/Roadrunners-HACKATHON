@@ -18,6 +18,8 @@ Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site 
 
 ## Implemented
 
+- The campus inventory adds named facilities and GIS-mapped subareas, with published stall categories, known time limits and closures. City permit hours and district maps are available under **Plan parking → City permit districts**. Street guidance links historical timed zones to their City reports and calls for current sign verification. Source listings without matching GIS features remain searchable.
+
 - The approved satellite/dark concepts now drive a full-screen map UI. Launch shows only search, layers/location controls, a compact estimate legend, and required attribution. No persistent sidebar, header, results, filter form, or tab bar.
 - A compact selected-place card includes street/lot/garage type, explicit demo estimate, sign/permit caution, Google Maps directions to the mapped area, detailed rules, and saved-car reminders. Exact driving entrances remain unverified.
 - Search groups nearby street names and campus parking, with parking-type filters and trip/permit settings behind an explicit action. Keyboard search/Enter/Escape and map selection retain the same map instance.

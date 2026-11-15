@@ -89,7 +89,13 @@
 .geo-results-heading h2 { font-size: 14px; font-weight: 600; letter-spacing: -.2px; }
 .geo-results-heading button { min-height: 32px; display: flex; align-items: center; gap: 4px; color: var(--blue); font-size: 12px; padding: 0; }
 .geo-results-heading .icon { width: 13px; height: 13px; }
+.geo-browse-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 12px; }
 .geo-results { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.geo-district-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.geo-district-list li { display: grid; gap: 4px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.geo-district-list li>span { color: var(--secondary); }
+.geo-district-list a { display: inline-flex; align-items: center; gap: 5px; width: fit-content; font-size: 12px; }
+.geo-district-list a .icon { width: 13px; height: 13px; }
 .geo-result { display: flex; align-items: center; gap: 12px; min-height: 75px; width: 100%; padding: 13px 2px; border-bottom: 1px solid #8392a41c; text-align: left; }
 .geo-result:hover { background: #8392a410; }
 .geo-result-icon { width: 39px; height: 39px; border-radius: 12px; display: grid; place-items: center; background: var(--blue-soft); color: var(--blue); flex-shrink: 0; }

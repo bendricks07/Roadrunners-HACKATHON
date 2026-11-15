@@ -1,4 +1,5 @@
-import { MAP_STATUS, CHECKED_ON, GIS_POLYGONS, GIS_POINTS, campusDateInput, parseCampusDateInput, fetchCampusFeatures, featureCenter } from './map-model.js';
+import { MAP_STATUS, CHECKED_ON, GIS_POLYGONS, GIS_POINTS, ENFORCEMENT_SOURCE, campusDateInput, parseCampusDateInput, fetchCampusFeatures, featureCenter } from './map-model.js';
+import { RESIDENTIAL_DISTRICTS } from './neighborhood-parking.js';
 import { PARKING_AREAS, STREET_AREAS, CITY_STREETS, CITY_PARKING, CHANCE, fetchStreetFeatures, parkingDisplay } from './street-model.js';
 import { createGeographicMap } from './geographic-map.js';
 import { validateTrip } from './trip-model.js';
@@ -55,7 +56,10 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
   const apiKey = () => s.forceFallback ? '' : read(sessionStorage, GOOGLE_KEY) || read(localStorage, GOOGLE_KEY) || MAP_CONFIG.googleMapsApiKey;
   const persist = () => { try { localStorage.setItem(PREFS, JSON.stringify({ selectedId: s.selectedId, permits: s.permits, destinationId: s.destinationId, priority: s.priority, basemap: s.basemap, estimates: s.estimates, forceFallback: s.forceFallback })); } catch { /* Still usable in this tab. */ } };
   const refresh = () => { persist(); onRefresh(); };
-  const visible = () => PARKING_AREAS.filter(a => (s.kind === 'all' || a.kind === s.kind) && `${a.name} ${a.shortName} ${a.categories.join(' ')}`.toLowerCase().includes(s.query.trim().toLowerCase()));
+  const visible = () => PARKING_AREAS.filter(area => {
+    const searchTerms = [area.name, area.shortName, ...area.categories, ...(area.guidance?.districts || [])];
+    return (s.kind === 'all' || area.kind === s.kind) && searchTerms.join(' ').toLowerCase().includes(s.query.trim().toLowerCase());
+  });
   const matchingDestinations = () => DESTINATIONS.filter(d => `${d.name} ${d.subtitle}`.toLowerCase().includes(s.query.trim().toLowerCase()));
   const permitSummary = () => s.permits.length ? s.permits.map(id => PERMITS.find(p => p.id === id)?.label).filter(Boolean).join(' · ') : 'No permit selected';
   const chance = a => { const d = display(a); return `<span class="geo-chance ${d.chance}"><i style="background:${d.color}"></i>${a.rules.closed ? 'Closed' : d.label}${d.illustrative ? '<span>· Demo estimate</span>' : ''}</span>`; };
@@ -66,7 +70,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
     const seen = new Set(), list = visible().filter(a => { if (seen.has(a.name)) return false; seen.add(a.name); return true; });
     const destinations = s.query.trim() ? matchingDestinations().map(d => `<button class="geo-result geo-destination-result" data-geo-action="set-destination" data-id="${d.id}"><span class="geo-result-icon">${icon('building')}</span><span class="geo-result-copy"><strong>Plan parking for ${esc(d.name)}</strong><small>${esc(d.subtitle)}</small></span>${icon('chevron')}</button>`).join('') : '';
     if (!list.length && !destinations) return `<div class="geo-empty">${icon('search')}<h3>No places found</h3><p>Try Library, Engineering, dorms, H1, Grand, or another campus area.</p></div>`;
-    return destinations + list.map(a => `<button class="geo-result" data-geo-action="select" data-id="${a.id}"><span class="geo-result-icon ${a.kind}">${icon(a.kind === 'garage' ? 'building' : a.kind === 'street' ? 'pin' : 'car')}</span><span class="geo-result-copy"><strong>${esc(a.name)}</strong><small>${typeName(a)}${a.kind === 'street' ? ` · ${STREET_AREAS.filter(x => x.name === a.name).length} mapped blocks` : ' · Cal Poly'}</small></span>${icon('chevron')}</button>`).join('');
+    return destinations + list.map(a => `<button class="geo-result" data-geo-action="select" data-id="${a.id}"><span class="geo-result-icon ${a.kind}">${icon(a.kind === 'garage' ? 'building' : a.kind === 'street' ? 'pin' : 'car')}</span><span class="geo-result-copy"><strong>${esc(a.name)}</strong><small>${typeName(a)}${a.kind === 'street' ? ` · ${STREET_AREAS.filter(x => x.name === a.name).length} mapped blocks` : a.categories.length ? ` · ${esc(a.categories.join(' · '))}` : ' · Cal Poly'}</small></span>${icon('chevron')}</button>`).join('');
   }
   function recommendationCards() {
     const choices = recommended();
@@ -77,7 +81,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
     }).join('');
   }
   function searchPanel() {
-    return `<div class="geo-search-content"><div class="geo-sheet-heading"><div><h1>Plan parking</h1><p>Choose where you are headed, then compare areas</p></div>${dismissButton('Close search')}</div>${searchField()}<button class="geo-trip-summary" data-geo-action="trip"><span>${icon('pin')}<strong>${esc(destination().name)}</strong><small>${esc(permitSummary())}</small></span>${icon('chevron')}</button><section class="geo-recommendations" aria-label="Recommended parking areas"><div class="geo-results-heading"><h2>Highlighted areas to review</h2><button data-geo-action="trip">${icon('permit')}Settings</button></div><p>For ${esc(destination().name)} · ${s.priority === 'garage' ? 'prefer a garage' : s.priority === 'chance' ? 'higher demo chance first' : 'closest area first'}</p>${recommendationCards()}</section><div class="geo-kind-filter" aria-label="Parking type">${[['all', 'All'], ['street', 'Streets'], ['lot', 'Lots'], ['garage', 'Garages']].map(([id, name]) => `<button data-geo-kind="${id}" class="${id === s.kind ? 'active' : ''}" aria-pressed="${id === s.kind}">${name}</button>`).join('')}</div><div class="geo-results-heading"><h2>Browse places</h2><button data-geo-action="trip">${icon('permit')}Settings</button></div><div id="geo-results" class="geo-results">${cards()}</div><p class="geo-search-footnote">Blue highlights are illustrative trip matches. Permit fit, signs, space type, and availability still need checking.</p></div>`;
+    return `<div class="geo-search-content"><div class="geo-sheet-heading"><div><h1>Plan parking</h1><p>Choose where you are headed, then compare areas</p></div>${dismissButton('Close search')}</div>${searchField()}<button class="geo-trip-summary" data-geo-action="trip"><span>${icon('pin')}<strong>${esc(destination().name)}</strong><small>${esc(permitSummary())}</small></span>${icon('chevron')}</button><section class="geo-recommendations" aria-label="Recommended parking areas"><div class="geo-results-heading"><h2>Highlighted areas to review</h2><button data-geo-action="trip">${icon('permit')}Settings</button></div><p>For ${esc(destination().name)} · ${s.priority === 'garage' ? 'prefer a garage' : s.priority === 'chance' ? 'higher demo chance first' : 'closest area first'}</p>${recommendationCards()}</section><div class="geo-kind-filter" aria-label="Parking type">${[['all', 'All'], ['street', 'Streets'], ['lot', 'Lots'], ['garage', 'Garages']].map(([id, name]) => `<button data-geo-kind="${id}" class="${id === s.kind ? 'active' : ''}" aria-pressed="${id === s.kind}">${name}</button>`).join('')}</div><div class="geo-results-heading"><h2>Browse places</h2><div class="geo-browse-actions"><button data-geo-action="trip">${icon('permit')}Settings</button><button data-geo-action="districts">${icon('permit')}City permit districts</button></div></div><div id="geo-results" class="geo-results">${cards()}</div><p class="geo-search-footnote">Blue highlights are illustrative trip matches. Permit fit, signs, space type, and availability still need checking.</p></div>`;
   }
   function details() {
     const a = selected(), d = display(a), f = feature(a.id), center = featureCenter(f?.geometry);
@@ -154,7 +158,30 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
   }
   function rules() {
     const a = selected(), r = result(a), f = feature(a.id);
-    showModal(`${modalHeader(a.name, typeName(a))}<div class="geo-decision ${r.status}">${icon('info')}<div><strong>${MAP_STATUS[r.status].label}</strong><p>${esc(r.reason)}</p></div></div>${chance(a)}<p class="modal-copy">${esc(display(a).reason)}</p><p class="modal-copy">${esc(a.note)}</p><div class="grouped-list"><div><span>Actual availability</span><strong>Unknown</strong></div><div><span>Permits considered</span><strong>${esc(permitSummary())}</strong></div><div><span>Return walk & price</span><strong>Not verified</strong></div></div><p class="modal-copy">${f ? esc(f.properties.geometryStatus) : 'Source geometry is not currently available.'} Directions open the mapped area, not a verified parking entrance.</p><a class="secondary-button" href="${a.rules.sourceUrl || a.sourceUrl}" target="_blank" rel="noopener noreferrer">Official parking information${icon('external')}</a><button class="secondary-button" data-geo-action="trip">Change permits${icon('permit')}</button><button class="primary-button" data-geo-action="reminder" ${r.status === 'ineligible' ? 'disabled' : ''}>Save car & set reminder${icon('car')}</button>`);
+    showModal(`${modalHeader(a.name, typeName(a))}<div class="geo-decision ${r.status}">${icon('info')}<div><strong>${MAP_STATUS[r.status].label}</strong><p>${esc(r.reason)}</p></div></div>${chance(a)}<p class="modal-copy">${esc(display(a).reason)}</p>${parkingGuidance(a)}<div class="grouped-list"><div><span>Actual availability</span><strong>Unknown</strong></div><div><span>Permits considered</span><strong>${esc(permitSummary())}</strong></div><div><span>Return walk & price</span><strong>Not verified</strong></div></div><p class="modal-copy">${f ? esc(f.properties.geometryStatus) : 'No matching location in the campus or City map feed.'} Directions open the mapped area, not a verified parking entrance.</p><a class="secondary-button" href="${a.rules.sourceUrl || a.sourceUrl}" target="_blank" rel="noopener noreferrer">Official parking information${icon('external')}</a>${a.kind === 'street' ? `<button class="secondary-button" data-geo-action="districts">City permit districts${icon('chevron')}</button>` : `<a class="secondary-button" href="${ENFORCEMENT_SOURCE}" target="_blank" rel="noopener noreferrer">Campus enforcement hours${icon('external')}</a>`}<button class="secondary-button" data-geo-action="trip">Change permits${icon('permit')}</button><button class="primary-button" data-geo-action="reminder" ${r.status === 'ineligible' ? 'disabled' : ''}>Save car & set reminder${icon('car')}</button>`);
+  }
+  function parkingGuidance(area) {
+    const categories = area.categories.join(' · ');
+    const districtNames = area.guidance?.districts || [];
+    const districts = RESIDENTIAL_DISTRICTS.filter(district => districtNames.includes(district.name));
+    const districtNotes = districts.map(district =>
+      `<li><strong>${esc(district.name)}</strong> · ${esc(district.hours)}</li>`
+    ).join('');
+    return `<p class="modal-copy"><strong>${esc(categories)}</strong></p>
+      <p class="modal-copy">${esc(area.note)}</p>
+      ${districtNotes ? `<p class="modal-copy">District maps to check for this street</p><ul class="geo-district-list">${districtNotes}</ul>` : ''}
+      ${area.guidance?.timed ? `<p class="modal-copy">${esc(area.guidance.timed)}
+        <a href="${area.guidance.timedSource}" target="_blank" rel="noopener noreferrer">City report</a></p>` : ''}`;
+  }
+  function showDistricts() {
+    const districtRows = RESIDENTIAL_DISTRICTS.map(district =>
+      `<li><strong>${esc(district.name)}</strong><span>${esc(district.hours)}</span>
+      <a href="${district.map || CITY_PARKING}" target="_blank" rel="noopener noreferrer" aria-label="City map for ${esc(district.name)}">City map ${icon('external')}</a></li>`
+    ).join('');
+    showModal(`${modalHeader('City permit districts', 'San Luis Obispo residential parking')}
+      <p class="modal-copy">Use the City district permit during the listed hours on signed blocks. A Cal Poly permit does not cover City permit parking. Check the map, both sides of the street, and signs at your space.</p>
+      <ul class="geo-district-list">${districtRows}</ul>
+      <a class="secondary-button" href="${CITY_PARKING}" target="_blank" rel="noopener noreferrer">Official City permit information ${icon('external')}</a>`);
   }
   function settings() {
     showModal(`${modalHeader('Map connection', 'Google Maps is the preferred provider.')}<p class="modal-copy">Currently using <strong id="geo-provider-status">${esc(provider)}</strong>. Without a Google key, satellite uses 2022 USDA NAIP aerial imagery through CDFW, and the crisp standard/dark map uses OpenFreeMap.</p><form id="geo-google-form"><label class="form-label" for="geo-google-key">Google Maps browser or demo key</label><input type="password" id="geo-google-key" name="key" autocomplete="off" required placeholder="Paste your restricted browser key"><label class="geo-checkbox"><input type="checkbox" name="remember">Remember in this browser</label><button class="primary-button" type="submit">Connect Google Maps${icon('arrow')}</button></form><p class="modal-copy">This connects this browser only. Use a website-restricted key with Maps JavaScript API access. Keys are not added to the team repository.</p><a class="secondary-button" href="https://developers.google.com/maps/documentation/javascript/demo-key" target="_blank" rel="noopener noreferrer">Get a Google Maps demo key${icon('external')}</a><button class="text-button" data-geo-action="fallback">Use the aerial / vector fallback</button>`);
@@ -193,6 +220,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
         navigator.geolocation.getCurrentPosition(p => { control.classList.remove('locating'); adapter?.locate([p.coords.latitude, p.coords.longitude]); }, () => { control.classList.remove('locating'); onToast('Location access is unavailable. Search for a place or show campus from Layers.'); }, { enableHighAccuracy: true, timeout: 10_000, maximumAge: 30_000 }); break;
       }
       case 'sources': sources(); break;
+      case 'districts': showDistricts(); break;
       case 'settings': settings(); break;
       case 'reminder': reminder(); break;
       case 'retry-data': document.getElementById('modal').close(); mapError = ''; void loadData(); break;

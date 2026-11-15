@@ -1,4 +1,5 @@
 import { CAMPUS_AREAS, featureCenter, CHECKED_ON } from './map-model.js';
+import { STREET_GUIDANCE } from './neighborhood-parking.js';
 
 export const CITY_STREETS = 'https://mapsa.slocity.org/hosting/rest/services/sloGISlayers/slogisLandManagement/FeatureServer/16';
 export const CITY_PARKING = 'https://www.slocity.org/government/department-directory/public-works/parking-services/residential-permits';
@@ -53,6 +54,7 @@ export const STREET_AREAS = STREET_RECORDS.map(([sourceId, gisName, name, demoCh
   dataset: 'campus-research', categories: ['Street parking', 'Check signs'],
   policyComplete: false, occupancy: 'unknown', entrance: null, walkMinutes: null,
   sourceUrl: CITY_PARKING, checkedOn: CHECKED_ON, rules: {}, demoChance,
+  guidance: STREET_GUIDANCE[gisName],
   note: 'City street geometry only. Parking on either side, permit requirements, curb markings, and temporary signs have not been verified. The chance color is an illustrative demo estimate.',
 }));
 export const PARKING_AREAS = [...CAMPUS_AREAS, ...STREET_AREAS];
