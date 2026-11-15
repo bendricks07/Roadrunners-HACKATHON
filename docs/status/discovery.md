@@ -1,5 +1,9 @@
 # Current CampusCurb app status
 
+## November 15: City street rules
+
+Published as Site version 4 from app source `e18066c`. All 42 mapped street sections expose source address ranges and reviewed time/district evidence. Separate City permits drive trip-wide red warnings; overlong stays show allowed durations. Unknown local limits and City-ceiling-only sections are excluded from street suggestions. Street colors never claim live vacancies. All 64 tests and syntax checks pass. Live Slack warning and City controls verified with no captured errors. See [research coverage](../research/city-street-rules-2026-11-15.md), [browser checks](../../artifacts/city-street-rules/README.md), and [deployment provenance](../deployment.md).
+
 ## November 15: trip duration limits
 
 Published to the current public URL as Site version 3 from app commit `8d60077`; the live Abbott over-limit warning was verified. See [deployment provenance](../deployment.md).

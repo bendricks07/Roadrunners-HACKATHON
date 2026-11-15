@@ -15,3 +15,7 @@ Browser checks on the local build:
 ![Phone warning in Dark](slack-phone-local.png)
 
 City centerlines/address ranges and nearby zone evidence do not establish exact curb permissions. Timed-zone enforcement hours, shorter signs, special spaces and temporary restrictions require sign checks. No actual vacancies are inferred. The general City 72-hour ceiling is not permission or a street suggestion. These checks cover the app's 42 mapped street sections, not all City streets.
+
+Published as Site version 4 from GitHub app source e18066c3a58c4d211dca177d3ccebedb74a58459. The live City permit controls and all five Slack section search results loaded. The live Monday three-hour Slack warning shows the two-hour maximum and red map overlay. No browser errors were captured.
+
+![Published Slack warning](slack-live.png)

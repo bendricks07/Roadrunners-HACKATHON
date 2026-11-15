@@ -7,16 +7,18 @@ The new public Site was created at the user's request on November 15, 2026 becau
 ## Current publication
 
 - Site project: `appgprj_6af9ebd565e0819191160fadd87c9a66`
-- Version: 3
-- GitHub app source: `main`, `8d600777138a6672e36e261f465a68cf5a7ac21b`
-- Sites source commit: `f555835c8be0b74d6992670e7770f99eec16b796`
-- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_0cf1a55174988191b97534e8584d22a5`
-- Successful deployment: `appgdep_6af9f514d1ac819187f44d2a1392ec44`, November 15, 2026 at 18:08:25 UTC (10:08 AM Pacific)
+- Version: 4
+- GitHub app source: `main`, `e18066c3a58c4d211dca177d3ccebedb74a58459`
+- Sites source commit: `0a9c560b7913c495b9962d4b7a4e01919ff510ca`
+- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_c604aa6e67b4819196ced23f7842a26b`
+- Successful deployment: `appgdep_6af9fc3d27d081918fd2d6e6aae87fea`, November 15, 2026 at 18:38:57 UTC (10:38 AM Pacific)
 - Local publication checkout: `C:/Users/bhend/.codex/visualizations/2026/11/14/01a1dbb4-8b2b-7f32-a933-ed9fe30ee6a7/campuscurb-current-site`
 
-The static app is an exact copy of `demo/index.html`, `demo/favicon.svg`, `demo/manifest.webmanifest`, and `demo/src/`. Its checked-in `SOURCE.json` records the GitHub source. All 22 files under `src/` matched by SHA-256; all 55 tests and source syntax checks passed. The new hosted map and current destination/trip UI loaded in the browser. No Google key or user browser data was copied. Saved sessions/preferences belong to each browser origin, so they do not migrate from the old URL automatically. Live occupancy remains unconnected.
+The static app is an exact copy of `demo/index.html`, `demo/favicon.svg`, `demo/manifest.webmanifest`, and `demo/src/`. Its checked-in `SOURCE.json` records the GitHub source. All 24 files under `src/` matched by SHA-256; all 64 tests and source syntax checks passed. The new hosted map and current destination/trip UI loaded in the browser. No Google key or user browser data was copied. Saved sessions/preferences belong to each browser origin, so they do not migrate from the old URL automatically. Live occupancy remains unconnected.
 
-Version 3 adds elapsed-trip checks against applicable parking time limits. Overlong trips turn red and display planned and allowed durations. Abbott uses the user-reported 10-hour cap with explicit sign/curb/hour limitations; G2 retains its published two-hour rule and staff exception. The live Abbott card was verified for an 11-hour trip. [Verification and screenshot](../artifacts/trip-duration-limits/README.md).
+Version 4 publishes reviewed rule evidence for all 42 mapped street sections, address-range selection, separate City neighborhood permits, red trip/permit warnings and filtered street suggestions. The live Slack 1600-1799 card was verified for a three-hour Monday trip: red with a two-hour maximum. City permit controls also loaded; no browser errors were captured. [Research](research/city-street-rules-2026-11-15.md) and [browser evidence](../artifacts/city-street-rules/README.md). Unknown local rules remain yellow, not parking permission.
+
+Version 3 adds elapsed-trip checks against applicable parking time limits. Overlong trips turn red and display planned and allowed durations. Version 3 used a user-reported Abbott 10-hour cap, superseded by the City-mapped zone evidence in version 4; G2 retains its published two-hour rule and staff exception. The live Abbott card was verified for an 11-hour trip. [Verification and screenshot](../artifacts/trip-duration-limits/README.md).
 
 Version 2 published researched permit-rule statuses for ordinary spaces at 18 campus facilities, including Grand Avenue's regular Friday 5 PM-Monday 7 AM exemption. Blue identifies a permit rule; occupancy and full stall eligibility remain separate. Friday/Monday boundaries, exceptions and DST were tested. The live card shows the next regular enforcement start and still says empty spaces are unknown. See [findings](research/permit-status-2026-11-15.md) and [hosted evidence](../artifacts/researched-permit-status/grand-weekend-live.jpg).
 
