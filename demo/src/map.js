@@ -30,7 +30,7 @@ export function campusMap({ selectedId = 'north', destinationId = 'library', rou
   const dest = DESTINATIONS.find(d => d.id === destinationId) || DESTINATIONS[0];
   const routePath = `M${selected.x} ${selected.y} C${selected.x + 35} ${selected.y + 65}, ${dest.x - 90} ${dest.y - 40}, ${dest.x} ${dest.y}`;
   const closedIds = reports.filter(r => r.type === 'closure' && r.active !== false && r.expiresAt > Date.now()).map(r => r.areaId);
-  return `<svg class="campus-map ${compact ? 'compact-map' : ''}" viewBox="0 0 1280 1040" preserveAspectRatio="xMidYMid slice" aria-label="Illustrative Cal Poly campus map${compact ? '' : ', select a parking marker to view details'}" role="img">
+  return `<svg class="campus-map ${compact ? 'compact-map' : ''}" viewBox="0 0 1280 1040" preserveAspectRatio="xMidYMid slice" aria-label="Illustrative Cal Poly campus map${compact ? '' : ', select a parking marker to view details'}" role="${compact ? 'img' : 'group'}">
     <defs>
       <pattern id="map-dots${compact ? '-small' : ''}" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".7" fill="currentColor" opacity=".055"/></pattern>
       <filter id="pin-shadow${compact ? '-small' : ''}" x="-100%" y="-100%" width="300%" height="300%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity=".16"/></filter>

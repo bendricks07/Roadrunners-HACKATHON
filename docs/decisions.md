@@ -11,3 +11,9 @@ These are choices for Matthew's one-hour demonstration branch, not agreements im
 7. Provide a 90-second demo with a 30-second return walk, 30-second buffer, and reminder after 30 seconds.
 8. Keep reports local; use a walkway-closure simulation to demonstrate connected recommendations and reminders.
 9. Deliver on `codex/campuscurb-demo`, keeping main stable for review and integration.
+10. The geographic extension is isolated on `codex/satellite-parking-map`. Google Maps is preferred, with an explicit USGS fallback while the browser key is missing. Real campus IDs and GIS geometry are separate from fictional walkthrough data; manual real-area reminders never inherit sample rules or walking times. See `docs/maps.md`.
+
+11. The approved second/third map concepts now drive the geographic interface: satellite home, crisp dark map, and compact tap-to-open place cards. Move persistent controls into search and Layers, retaining the separate sample walkthrough.
+12. Replace the coarse z16 imagery fallback with credited 2022 USDA NAIP / CDFW imagery (0.6 m native) and original MapLibre styling over OpenFreeMap for dark/standard maps. Google remains preferred when configured; no Google imagery is scraped or relabeled.
+13. Use 40 live-queried official City street centerlines with stable IDs. Approximate display bands do not establish curb-side parking legality. Do not copy the City's restrictive-license district polygons into the repository.
+14. Demonstrate the requested red/yellow/green parking-chance layer with explicitly labeled fixtures, independent of eligibility. Provide a clear off switch. Known closures/exclusions remain restricted; actual vacancies stay unknown until a genuine feed/model is connected.

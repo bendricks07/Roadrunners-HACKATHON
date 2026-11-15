@@ -1,5 +1,17 @@
 # Roadrunners HACKATHON
 
+## Geographic parking map
+
+Teammates / GPTs: read the [current implementation status](docs/status/discovery.md), [map configuration](docs/maps.md), and [updated handoff](docs/handoffs/satellite-parking-map.md) before starting new work. Use the latest `main` as your base.
+
+The home screen now opens directly to a full-screen geographic map, floating search, and two essential controls. Tap a street or lot for its compact detail card, directions, rules, and a saved-car reminder. Open **Layers** for Satellite, Dark, Standard, or Terrain, trip/permit settings, source details, and the separate sample walkthrough.
+
+The map extends beyond campus with **40 source-backed City street segments on nine nearby roads**, campus lot outlines, and distinct garage symbols. The satellite fallback now uses **2022 USDA NAIP aerial imagery at 0.6 m native resolution**, with a sharp OpenFreeMap vector map for dark/standard views. No npm install is needed.
+
+**Chance colors are illustrative demo estimates, not live availability or a validated forecast.** They are independent of permit eligibility, can be turned off in Layers, and never override known exclusions or closed K1. Actual availability and incomplete parking permissions remain unknown. Street highlights are approximate display bands around source centerlines, not surveyed curbs or proof that parking is allowed.
+
+**Google Maps remains the preferred provider.** Open **Layers → Map connection** with a restricted Maps JavaScript API browser key or a [Google Maps demo key](https://developers.google.com/maps/documentation/javascript/demo-key). This connects that browser only. No shared Google key has been supplied; current fallbacks retain their actual provider credits. See [map configuration](docs/maps.md).
+
 ## Open the live demo
 
 **[Try CampusCurb](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site)**
@@ -8,13 +20,13 @@ The public demo works on a computer or phone without installation or sign-in. Sh
 
 ## Run the working CampusCurb demo
 
-The interactive browser prototype is in [`demo/`](demo/). It implements a subset of the product plan below, using clearly labeled sample data.
+The interactive browser prototype is in [`demo/`](demo/). Explore uses real geographic context and sourced campus records; **Try the sample walkthrough** opens the separate fictional demonstration.
 
 ```bash
 npm --prefix demo start
 ```
 
-Open **http://localhost:5173**. Requires Node.js 20 or newer; **no install step, API keys, account, or backend service** is needed.
+Open **http://localhost:5173**. Requires Node.js 20 or newer; no npm install or backend is needed. Google Maps needs a browser/demo key; the credited NAIP / OpenFreeMap / USGS fallbacks and sample walkthrough work without one.
 
 - Explore four campus destinations, compare three sample parking areas, and change permit/stay settings.
 - Preview a route, confirm parking, save a car-location note, and manage a persisted parking session.
@@ -25,7 +37,7 @@ Open **http://localhost:5173**. Requires Node.js 20 or newer; **no install step,
 
 Check with `npm --prefix demo run check`. See [`docs/architecture.md`](docs/architecture.md), [`docs/decisions.md`](docs/decisions.md), and [`docs/status/demo.md`](docs/status/demo.md) for implementation and handoff notes.
 
-Rules, prices, routes, map geometry, and reports are illustrative. Live occupancy, verified eligibility, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
+The sample walkthrough's rules, prices, routes, map geometry, and reports are illustrative. The geographic view uses separately sourced campus GIS and research records, with eligibility left unknown where incomplete. Live occupancy, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
 
 ## Research handoff
 
@@ -34,6 +46,10 @@ Official-source desk research for the builder, checked November 14, 2026:
 - [Cal Poly SLO parking findings, conflicts, and source register](docs/research/cal-poly-slo-parking-2026-11-14.md)
 - [Ten campus location records and five city district summaries (JSON)](data/research/cal-poly-slo-parking-seed.json)
 - [Field survey, demo acceptance scenarios, and interview checklist](docs/research/parking-field-and-demo-checklist.md)
+- [Free SLO parking-data feasibility study](docs/research/free-parking-data-feasibility.md)
+- [G2 vehicle detector pilot and limitations](docs/research/g2-vehicle-detector-pilot.md)
+- [Runnable research and detector tools](tools/parking-research/README.md)
+- [All design concepts, app screenshots, research evidence, and downloadable handoffs](artifacts/README.md)
 
 This research is not a live availability feed or a field-verified eligibility dataset. Unknown entrances, boundaries, payment zones, and availability remain explicitly unset.
 

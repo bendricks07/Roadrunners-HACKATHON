@@ -1,13 +1,16 @@
 import { AREAS, DESTINATIONS, PERMITS, INITIAL_REPORTS, REPORT_TYPES, DATA_NOTICE } from './data.js';
-import { activeReports, evaluateParking, getWalkMinutes, createSession, headBackAt, sessionPhase, isValidSession, MINUTE } from './rules.js';
+import { activeReports, evaluateParking, getWalkMinutes, createSession, headBackAt, sessionPhase, isValidSession, parseSavedState, normalizeReports, MINUTE } from './rules.js';
 import { campusMap } from './map.js';
+import { PARKING_AREAS } from './street-model.js';
+import { createDiscovery } from './discovery.js';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const root = $('#app');
 const modal = $('#modal');
 const KEY = 'campuscurb.demo.v1';
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
-const time = value => new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' }).format(value);
+const timeFormatter = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
+const time = value => timeFormatter.format(value);
 const shortTime = value => time(value).replace(' AM', '').replace(' PM', '');
 const paths = {
   compass: '<circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5Z"/>',
@@ -44,24 +47,32 @@ const paths = {
 const icon = (name, className = '') => `<svg class="icon ${className}" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.info}</svg>`;
 
 function readSaved() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+  try { return parseSavedState(localStorage.getItem(KEY)); } catch { return {}; }
 }
 const saved = readSaved();
-const restoredSession = isValidSession(saved.session, AREAS.map(a => a.id), DESTINATIONS.map(d => d.id)) ? saved.session : null;
+function validStoredSession(value) {
+  return isValidSession(value, [...AREAS, ...PARKING_AREAS].map(a => a.id), DESTINATIONS.map(d => d.id)) && (PARKING_AREAS.some(a => a.id === value.areaId) === (value.manual === true));
+}
+const restoredSession = validStoredSession(saved.session) ? saved.session : null;
 const state = {
-  tab: restoredSession ? 'parking' : 'explore', detail: false, selectedId: restoredSession?.areaId || 'north', destinationId: DESTINATIONS.some(d => d.id === saved.destinationId) ? saved.destinationId : 'library',
+  // Every launch opens the map. A previous walkthrough remains available in
+  // Layers, with its saved session preserved separately from real parking.
+  mode: 'real',
+  tab: restoredSession?.manual ? 'parking' : 'explore', detail: false, selectedId: restoredSession?.areaId || 'north', destinationId: DESTINATIONS.some(d => d.id === saved.destinationId) ? saved.destinationId : 'library',
   permit: PERMITS.some(p => p.id === saved.permit) ? saved.permit : 'commuter', durationMinutes: [60,90,120,180,240].includes(saved.durationMinutes) ? saved.durationMinutes : 90,
   sort: 'best', favorites: Array.isArray(saved.favorites) ? saved.favorites.filter(id => AREAS.some(a => a.id === id)) : [],
-  reports: Array.isArray(saved.reports) ? saved.reports.filter(r => AREAS.some(a => a.id === r.areaId) && REPORT_TYPES[r.type] && Number.isFinite(r.expiresAt) && typeof r.description === 'string').map(r => ({ ...r, title: REPORT_TYPES[r.type], description: r.description.slice(0, 500), simulated: true })) : [...INITIAL_REPORTS],
+  reports: Array.isArray(saved.reports) ? normalizeReports(saved.reports, AREAS.map(a => a.id), REPORT_TYPES) : INITIAL_REPORTS.map(r => ({ ...r })),
   session: restoredSession,
   theme: saved.theme === 'dark' ? 'dark' : 'light', messages: [], reminderPreview: false, routeMode: 'drive', zoom: 1, mapPosition: { x: 0, y: 0 },
 };
 let toastTimer;
 let lastPhase = state.session ? sessionPhase(state.session) : null;
+const reportSignature = () => activeReports(state.reports).map(r => r.id).join('|');
+let lastReportSignature = reportSignature();
 
 function persist() {
-  const { destinationId, permit, durationMinutes, favorites, reports, session, theme } = state;
-  try { localStorage.setItem(KEY, JSON.stringify({ destinationId, permit, durationMinutes, favorites, reports, session, theme })); }
+  const { destinationId, permit, durationMinutes, favorites, reports, session, theme, mode } = state;
+  try { localStorage.setItem(KEY, JSON.stringify({ destinationId, permit, durationMinutes, favorites, reports, session, theme, mode })); }
   catch { toast('Browser storage is unavailable. Keep this tab open to retain your session.'); }
 }
 function toast(message) {
@@ -76,6 +87,10 @@ const plan = () => ({ permit: state.permit, durationMinutes: state.durationMinut
 const eligibility = a => evaluateParking(a, plan(), state.reports);
 const walk = a => getWalkMinutes(a, state.destinationId, state.reports);
 const money = a => a.price === 0 ? a.permits.includes(state.permit) ? 'Included with permit' : 'Permit required' : `$${a.price} demo rate`;
+const discovery = createDiscovery({ icon, escape, time, onRefresh: render, onToast: toast, showModal, modalHeader, getSession: () => state.session, onAppearance(theme) { state.theme = theme; persist(); }, onSession(session) {
+  state.session = session; state.tab = 'parking'; state.mode = 'real'; state.reminderPreview = false; lastPhase = sessionPhase(session); persist(); render(); toast('Your manual reminder is saved in this browser.');
+} });
+const usesRealMap = () => state.mode === 'real' && !(state.tab === 'parking' && state.session && !state.session.manual);
 
 function nav() {
   const items = [['explore','compass','Explore'],['parking','car','My Parking'],['ask','chat','Ask'],['updates','bell','Updates']];
@@ -111,13 +126,14 @@ function parkingCard(a, index) {
 }
 
 function explorePanel() {
+  if (state.mode === 'real') return discovery.panel();
   if (state.detail) return detailPanel();
   const rank = a => { const result = eligibility(a); return result.status === 'eligible' ? 0 : result.status === 'unknown' ? 1000 : 2000; };
   const sorted = [...AREAS].sort((a,b) => rank(a)-rank(b) || (state.sort === 'price' ? a.price-b.price : state.sort === 'closest' ? walk(a)-walk(b) : walk(a)+a.price-walk(b)-b.price));
   const eligibleCount = sorted.filter(a => eligibility(a).status === 'eligible').length;
-  return `${heading('MAKE ROOM FOR YOUR DAY', 'Find your place.', 'A simpler way to park around campus.')}
+  return `<button class="geo-return-button" data-action="real-map">${icon('back')}Back to the real campus map</button>${heading('SAMPLE WALKTHROUGH', 'Find your place.', 'Fictional lots and rules for the presentation.')}
     <div class="plan-section">${searchControl()}${filters()}</div>
-    <div class="results-header"><h2>${eligibleCount ? `${eligibleCount} options for you` : state.permit === 'unknown' ? 'Check before parking' : 'Adjust your plan'}</h2><span>Near ${destination().name.replace('Kennedy ', '').replace('University ', '')}</span></div>
+    <div class="results-header"><h2>${eligibleCount ? `${eligibleCount} option${eligibleCount === 1 ? '' : 's'} for you` : state.permit === 'unknown' ? 'Check before parking' : 'Adjust your plan'}</h2><span>Near ${destination().name.replace('Kennedy ', '').replace('University ', '')}</span></div>
     <div class="segmented" aria-label="Sort parking">${[['best','Best match'],['closest','Closest'],['price','Lowest cost']].map(([id,label]) => `<button class="${state.sort===id?'active':''}" data-sort="${id}" aria-pressed="${state.sort===id}">${label}</button>`).join('')}</div>
     <div class="parking-results">${sorted.map((a,index) => `${eligibility(a).status!=='eligible' && (index===0 || eligibility(sorted[index-1]).status!==eligibility(a).status)?`<div class="result-group-label">${eligibility(a).status==='unknown'?'CHECK BEFORE PARKING':'DOESN’T FIT THIS PLAN'}</div>`:''}${parkingCard(a,index)}`).join('')}</div>
     <div class="quiet-note">${icon('info')}<p>Permit fit and space availability are different. Always check the signs when you arrive.</p></div>
@@ -145,6 +161,7 @@ function countdownText(session) {
 }
 function parkingPanel() {
   const session = state.session;
+  if (session?.manual) return discovery.sessionPanel(session);
   if (!session) return `${heading('ONE LESS THING TO THINK ABOUT', 'My Parking', 'Your car. Your time. All in one place.')}<div class="empty-parking"><div class="empty-car">${icon('car')}</div><h2>A little peace of park.</h2><p>Pick a spot, confirm you’ve parked,<br>and we’ll keep an eye on the time.</p><button class="primary-button" data-tab="explore">Find parking${icon('arrow')}</button><button class="text-button" data-action="demo">Try a 90-second demo${icon('play')}</button></div><div class="session-benefits"><div>${icon('pin')}<span>Remember where you parked</span></div><div>${icon('clock')}<span>Know exactly when to head back</span></div><div>${icon('walk')}<span>Make time for the walk</span></div></div>`;
   const a = AREAS.find(a => a.id===session.areaId);
   const phase = sessionPhase(session);
@@ -164,12 +181,14 @@ function parkingPanel() {
 }
 
 function askPanel() {
-  return `${heading('A CLEARER ANSWER', 'Ask CampusCurb', 'Less parking guesswork. More getting on with your day.')}<div class="guide-label">${icon('info')}Demo guide · Uses the sample parking rules</div><div class="chat-messages" id="chat-messages">${state.messages.length ? state.messages.map(m => `<div class="chat-message ${m.role}">${m.role==='assistant'?'<span class="assistant-avatar">P</span>':''}<div>${escape(m.text).replace(/\n/g,'<br>')}</div></div>`).join('') : `<div class="ask-welcome"><div class="ask-orbit">${icon('chat')}</div><h2>What’s on your mind?</h2><p>I can help compare the sample parking options and explain your current session.</p></div><div class="suggested-questions">${['Where should I park?','Does my permit work here?','When should I head back?','Any parking updates?'].map(q => `<button data-question="${q}">${q}${icon('arrow')}</button>`).join('')}</div>`}</div><form id="ask-form" class="ask-input"><label class="sr-only" for="question-input">Your parking question</label><input id="question-input" name="question" placeholder="Ask about your parking…" maxlength="300" required autocomplete="off"><button type="submit" class="send-button" aria-label="Send question">${icon('send')}</button></form><p class="detail-disclaimer">Rule-based demo answers. No live AI service or real-time parking feed is connected.</p>`;
+  return `${heading('A CLEARER ANSWER', 'Ask CampusCurb', 'Less parking guesswork. More getting on with your day.')}<div class="guide-label">${icon('info')}${state.mode==='real'?'Source guide · Campus records · Eligibility unconfirmed':'Demo guide · Uses the sample parking rules'}</div><div class="chat-messages" id="chat-messages">${state.messages.length ? state.messages.map(m => `<div class="chat-message ${m.role}">${m.role==='assistant'?'<span class="assistant-avatar">P</span>':''}<div>${escape(m.text).replace(/\n/g,'<br>')}</div></div>`).join('') : `<div class="ask-welcome"><div class="ask-orbit">${icon('chat')}</div><h2>What’s on your mind?</h2><p>${state.mode==='real'?'I can explain the selected parking area, source confidence, and your return reminder.':'I can help compare the sample parking options and explain your current session.'}</p></div><div class="suggested-questions">${['Where should I park?','Does my permit work here?','When should I head back?','Any parking updates?'].map(q => `<button data-question="${q}">${q}${icon('arrow')}</button>`).join('')}</div>`}</div><form id="ask-form" class="ask-input"><label class="sr-only" for="question-input">Your parking question</label><input id="question-input" name="question" placeholder="Ask about your parking…" maxlength="300" required autocomplete="off"><button type="submit" class="send-button" aria-label="Send question">${icon('send')}</button></form><p class="detail-disclaimer">Rule-based demo answers. No live AI service or real-time parking feed is connected.</p>`;
 }
 function answerQuestion(question) {
+  if (state.mode === 'real' || state.session?.manual) return discovery.answer(question, state.session);
   const q = question.toLowerCase();
   const a = area();
   const result = eligibility(a);
+  if (/overnight|over night|tomorrow|weekend|holiday/.test(q)) return 'I cannot verify overnight, future-day, weekend, or holiday parking permission from these sample rules. A positive result for your selected short demo stay does not establish permission for those times. Check the current official Cal Poly guidance and posted signs.';
   if (/head|back|expire|deadline|time|long|when/.test(q)) {
     if (!state.session) return 'You don’t have an active parking session yet. Choose a parking option and tap “I parked here.” I’ll calculate your head-back time from the confirmed deadline, return walk, and buffer.';
     const s=state.session;
@@ -204,19 +223,37 @@ function mapPanel() {
   return `<section class="map-pane" aria-label="Campus parking map"><div class="map-toolbar"><div class="campus-chip">${icon('building')}<span>Cal Poly, San Luis Obispo</span><span class="location-online"></span></div><button class="data-chip" data-action="data-info">Demo data${icon('info')}</button></div><div class="map-canvas" id="map-canvas"><div class="map-world" id="map-world" style="transform:translate(${state.mapPosition.x}px,${state.mapPosition.y}px) scale(${state.zoom})">${campusMap({selectedId:mapArea.id,destinationId:dest.id,route:true,mode:isSession?'car':'drive',reports:state.reports})}</div></div><div class="map-controls"><button class="icon-button" data-action="zoom-in" aria-label="Zoom in">${icon('plus')}</button><button class="icon-button" data-action="zoom-out" aria-label="Zoom out">${icon('minus')}</button><span></span><button class="icon-button" data-action="recenter" aria-label="Recenter map">${icon('locate')}</button></div><div class="map-location-card"><div class="location-card-icon">${icon(isSession?'walk':'navigate')}</div><div><div class="location-card-eyebrow">${isSession?'YOUR RETURN WALK':mapEligibility==='eligible'?'A SPOT THAT FITS YOUR DAY':mapEligibility==='unknown'?'CHECK YOUR PERMIT FIRST':'DOESN’T FIT YOUR CURRENT PLAN'}</div><h2>${isSession?`Back to ${mapArea.name}`:mapArea.name}</h2><p>${isSession?'From '+dest.name:dest.name+' is a short walk away'}</p></div><div class="route-duration"><strong>${isSession && state.session.demo?'30 sec':selectedWalk+' min'}</strong><span>${icon('walk')}walk</span></div><button class="round-action" data-action="${isSession?'walk-back':'details'}" data-id="${mapArea.id}" aria-label="${isSession?'View return route':'View parking details'}">${icon('arrow')}</button></div><div class="map-footer"><span>${icon('pin')}Illustrative campus map</span><span>Rules and routes are simulated</span></div><div class="map-compass" aria-hidden="true"><span>N</span>${icon('navigate')}</div></section>`;
 }
 
-function render() {
+function render({ preserveDrafts = false } = {}) {
+  const focusedId = root.contains(document.activeElement) ? document.activeElement.id : null;
+  const draft = preserveDrafts && focusedId ? document.getElementById(focusedId) : null;
+  const draftState = draft && 'value' in draft ? { value: draft.value, start: draft.selectionStart, end: draft.selectionEnd } : null;
+  const focusId = document.activeElement?.id?.startsWith('geo-') ? document.activeElement.id : null;
+  discovery.detach();
   syncSessionWalk();
+  lastReportSignature = reportSignature();
   document.documentElement.dataset.theme = state.theme;
   $('meta[name="theme-color"]').content = state.theme==='dark'?'#111316':'#f7f8fa';
   const content = state.tab==='parking'?parkingPanel():state.tab==='ask'?askPanel():state.tab==='updates'?updatesPanel():explorePanel();
-  root.innerHTML = `<div class="app-shell tab-${state.tab}"><header class="mobile-appbar"><a href="#" data-tab="explore" class="mobile-brand"><span class="brand-icon">P<span></span></span>CampusCurb</a><div><button class="icon-button" data-action="demo" aria-label="Start 90-second demo">${icon('play')}</button><button class="icon-button" data-action="theme" aria-label="Switch to ${state.theme==='light'?'dark':'light'} appearance">${icon(state.theme==='light'?'moon':'sun')}</button></div></header>${nav()}<main id="main-content" class="content-panel" tabindex="-1">${content}<div class="panel-bottom-brand">CampusCurb<span>A little less circling.</span></div></main>${mapPanel()}</div>`;
+  const realMap = usesRealMap();
+  root.innerHTML = realMap ? discovery.shell({ session: state.session, showSession: state.tab === 'parking' }) : `<div class="app-shell tab-${state.tab}"><header class="mobile-appbar"><a href="#" data-tab="explore" class="mobile-brand"><span class="brand-icon">P<span></span></span>CampusCurb</a><div><button class="icon-button" data-action="demo" aria-label="Start 90-second demo">${icon('play')}</button><button class="icon-button" data-action="theme" aria-label="Switch to ${state.theme==='light'?'dark':'light'} appearance">${icon(state.theme==='light'?'moon':'sun')}</button></div></header>${nav()}<main id="main-content" class="content-panel" tabindex="-1">${content}<div class="panel-bottom-brand">CampusCurb<span>A little less circling.</span></div></main>${mapPanel()}</div>`;
+  if (realMap) void discovery.mount(state.tab === 'parking' ? state.session : null);
+  if (focusId && (focusId !== 'geo-search' || root.querySelector('.search-open'))) document.getElementById(focusId)?.focus({ preventScroll: true });
   updateClock(false);
   const chat=$('#chat-messages'); if(chat && state.messages.length) chat.scrollTop=chat.scrollHeight;
+  if (draftState) {
+    const input = document.getElementById(focusedId);
+    if (input) {
+      input.value = draftState.value; input.focus({ preventScroll: true });
+      if (draftState.start !== null) input.setSelectionRange?.(draftState.start, draftState.end);
+      if (focusedId === 'destination-search') $('#destination-options').innerHTML = destinationOptions(input.value);
+    }
+  }
 }
 
 function showModal(content) {
   modal.innerHTML=`<div class="modal-body">${content}</div>`;
   if(!modal.open) modal.showModal();
+  (modal.querySelector('form select, form input, form textarea') || modal.querySelector('button, a[href]'))?.focus();
 }
 function modalHeader(title, text='') { return `<div class="modal-heading"><div><h2 id="modal-title">${title}</h2>${text?`<p>${text}</p>`:''}</div><button class="icon-button" data-action="close-modal" aria-label="Close dialog">${icon('close')}</button></div>`; }
 function startDialog() {
@@ -229,6 +266,7 @@ function reportDialog() {
 }
 
 function startDemo() {
+  state.mode = 'demo';
   const a=AREAS.find(a=>a.id===state.selectedId)||AREAS[0];
   const s=createSession({area:a,destinationId:state.destinationId,durationMinutes:1.5,bufferMinutes:.5,demo:true,note:'90-second demo · Simulated location'});
   s.walkMinutes=.5;
@@ -237,7 +275,7 @@ function startDemo() {
 }
 
 function syncSessionWalk() {
-  if(!state.session || state.session.demo) return false;
+  if(!state.session || state.session.demo || state.session.manual) return false;
   const s=state.session;
   const a=AREAS.find(a=>a.id===s.areaId);
   const minutes=getWalkMinutes(a,s.destinationId,state.reports);
@@ -247,6 +285,7 @@ function syncSessionWalk() {
   return true;
 }
 function updateClock(allowRender=true) {
+  if (allowRender && reportSignature() !== lastReportSignature) { render({ preserveDrafts: true }); return; }
   if(!state.session) return;
   const changed=syncSessionWalk();
   const s=state.session;
@@ -255,24 +294,25 @@ function updateClock(allowRender=true) {
   const progress=$('[data-session-progress]'); if(progress) progress.style.width=`${Math.max(0,Math.min(100,(Date.now()-s.startedAt)/(s.deadlineAt-s.startedAt)*100))}%`;
   if((phase!==lastPhase || changed) && allowRender) {
     const phaseChanged=phase!==lastPhase;
-    lastPhase=phase; render();
+    lastPhase=phase; render({ preserveDrafts: true });
     if(phaseChanged && phase==='head-back') toast('Time to head back. Your return walk and buffer are included.');
-    if(phaseChanged && phase==='expired') toast('Your parking time has ended.');
+    if(phaseChanged && phase==='expired') toast(state.session.manual ? 'Your manual reminder time has arrived.' : 'Your parking time has ended.');
   }
 }
 
 document.addEventListener('click', event => {
   const target=event.target.closest('button, a[data-tab], [data-select-area]');
-  if(!event.target.closest('.search-wrap')) { const options=$('#destination-options'); if(options) options.hidden=true; }
+  if(!event.target.closest('.search-wrap')) closeDestinationOptions();
   if(!target) return;
   if(target.disabled) return;
   if(target.dataset.tab) { event.preventDefault(); state.tab=target.dataset.tab; state.detail=false; state.reminderPreview=false; render(); return; }
-  if(target.dataset.destination) { state.destinationId=target.dataset.destination; persist(); render(); return; }
+  if(target.dataset.destination) { state.destinationId=target.dataset.destination; persist(); render(); $('#destination-search')?.focus(); closeDestinationOptions(); return; }
   if(target.dataset.sort) { state.sort=target.dataset.sort; render(); return; }
   if(target.dataset.selectArea) { state.selectedId=target.dataset.selectArea; state.tab='explore'; state.detail=true; render(); return; }
   if(target.dataset.question) { const q=target.dataset.question; state.messages.push({role:'user',text:q},{role:'assistant',text:answerQuestion(q)}); render(); return; }
   if(target.dataset.resolveReport) { const r=state.reports.find(r=>r.id===target.dataset.resolveReport); if(r) r.active=false; persist(); render(); toast('Report marked resolved. Parking suggestions have been updated.'); return; }
   switch(target.dataset.action) {
+    case 'real-map': state.mode='real'; state.tab='explore'; persist(); render(); break;
     case 'theme': state.theme=state.theme==='light'?'dark':'light'; persist(); render(); break;
     case 'details': if(target.dataset.id) state.selectedId=target.dataset.id; state.tab='explore'; state.detail=true; render(); break;
     case 'back': state.detail=false; render(); break;
@@ -306,12 +346,39 @@ document.addEventListener('focusin', event => {
   if(event.target.id==='destination-search') { $('#destination-options').hidden=false; event.target.setAttribute('aria-expanded','true'); event.target.select(); }
 });
 document.addEventListener('input', event => {
-  if(event.target.id==='destination-search') { $('#destination-options').innerHTML=destinationOptions(event.target.value); $('#destination-options').hidden=false; }
+  if(event.target.id==='destination-search') { $('#destination-options').innerHTML=destinationOptions(event.target.value); $('#destination-options').hidden=false; event.target.setAttribute('aria-expanded','true'); }
+  if(event.target.id==='report-description') event.target.setCustomValidity('');
 });
 document.addEventListener('keydown', event => {
+  const options = $('#destination-options');
+  if (event.target.id === 'destination-search' && ['ArrowDown', 'ArrowUp', 'Enter'].includes(event.key)) {
+    const choices = options ? [...options.querySelectorAll('button')] : [];
+    if (choices.length) {
+      event.preventDefault(); options.hidden = false;
+      event.target.setAttribute('aria-expanded', 'true');
+      if (event.key === 'Enter') choices[0].click();
+      else choices[event.key === 'ArrowUp' ? choices.length - 1 : 0].focus();
+    }
+  } else if (event.target.matches('.destination-option') && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    event.preventDefault();
+    const choices = [...options.querySelectorAll('button')];
+    const index = choices.indexOf(event.target);
+    choices[(index + (event.key === 'ArrowDown' ? 1 : -1) + choices.length) % choices.length].focus();
+  }
   const marker=event.target.closest('[data-select-area]');
   if(marker && ['Enter',' '].includes(event.key)) { event.preventDefault(); marker.dispatchEvent(new MouseEvent('click',{bubbles:true})); }
-  if(event.key==='Escape') { const options=$('#destination-options'); if(options) { options.hidden=true; $('#destination-search')?.setAttribute('aria-expanded','false'); } }
+  if(event.key==='Escape' && options && !options.hidden) {
+    event.preventDefault();
+    $('#destination-search')?.focus(); closeDestinationOptions();
+  }
+});
+function closeDestinationOptions() {
+  const options = $('#destination-options');
+  if (options) options.hidden = true;
+  $('#destination-search')?.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('focusout', event => {
+  if (event.target.closest('.search-wrap') && !event.relatedTarget?.closest('.search-wrap')) closeDestinationOptions();
 });
 document.addEventListener('submit', event => {
   const form=event.target;
@@ -327,7 +394,12 @@ document.addEventListener('submit', event => {
   if(form.id==='report-form') {
     const type=data.get('type'), areaId=data.get('area');
     const description=String(data.get('description')).trim().slice(0,500);
-    if(!REPORT_TYPES[type]||!AREAS.some(a=>a.id===areaId)||description.length<5) return;
+    if(!Object.hasOwn(REPORT_TYPES,type)||!AREAS.some(a=>a.id===areaId)) return;
+    if(description.length<5) {
+      const input = $('#report-description');
+      input.setCustomValidity('Add at least 5 non-space characters describing the update.');
+      input.reportValidity(); return;
+    }
     state.reports.push({id:crypto.randomUUID(),areaId,type,title:REPORT_TYPES[type],description,extraWalkMinutes:type==='path'?3:0,createdAt:Date.now(),expiresAt:Date.now()+(type==='full'?15:180)*MINUTE,status:'Community report · Unverified',simulated:true,active:true});
     persist(); modal.close(); render(); toast('Update shared in this browser demo. Suggestions have been refreshed.');
   }
@@ -352,12 +424,21 @@ document.addEventListener('pointermove', event => {
 document.addEventListener('pointerup',()=>{drag=null;});
 document.addEventListener('pointercancel',()=>{drag=null;});
 window.addEventListener('storage', event => {
-  if(event.key!==KEY) return;
+  if(event.key!==KEY && event.key!==null) return;
   const other=readSaved();
-  state.session=isValidSession(other.session,AREAS.map(a=>a.id),DESTINATIONS.map(d=>d.id))?other.session:null;
-  if(Array.isArray(other.reports)) state.reports=other.reports.filter(r=>AREAS.some(a=>a.id===r.areaId)&&REPORT_TYPES[r.type]&&Number.isFinite(r.expiresAt)&&typeof r.description==='string');
-  render();
+  state.session=validStoredSession(other.session)?other.session:null;
+  state.reports=Array.isArray(other.reports)?normalizeReports(other.reports,AREAS.map(a=>a.id),REPORT_TYPES):INITIAL_REPORTS.map(r=>({ ...r }));
+  state.destinationId=DESTINATIONS.some(d=>d.id===other.destinationId)?other.destinationId:'library';
+  state.permit=PERMITS.some(p=>p.id===other.permit)?other.permit:'commuter';
+  state.durationMinutes=[60,90,120,180,240].includes(other.durationMinutes)?other.durationMinutes:90;
+  state.favorites=Array.isArray(other.favorites)?other.favorites.filter(id=>AREAS.some(a=>a.id===id)):[];
+  state.theme=other.theme==='dark'?'dark':'light';
+  state.mode=other.mode==='demo'?'demo':'real';
+  lastPhase=state.session?sessionPhase(state.session):null;
+  render({ preserveDrafts: true });
 });
+document.addEventListener('campuscurb:walkthrough', () => { state.mode='demo'; state.tab='explore'; state.detail=false; persist(); render(); });
+document.addEventListener('campuscurb:explore-real', () => { state.mode='real'; state.tab='explore'; persist(); render(); });
 render();
 setInterval(updateClock,1000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden) updateClock();});

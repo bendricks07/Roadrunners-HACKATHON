@@ -1,0 +1,87 @@
+{
+  "samples": [
+    {
+      "id": "cal-poly-g2-cdfw2022",
+      "area_id": "cal-poly-g2",
+      "file": "cal-poly-g2-cdfw2022.png",
+      "area_role": "surface-lot image-quality target; permit eligibility evaluated separately",
+      "bbox_epsg3857": [
+        -13431727.563314086,
+        4204118.782685929,
+        -13431433.507485947,
+        4204412.83851407
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "approx_ground_m_per_output_pixel": 0.46875,
+      "capture_time_verified": false,
+      "source_url": "https://gis.wildlife.ca.gov/images/rest/services/Base_Remote_Sensing/NAIP_2022/ImageServer/exportImage?bbox=-13431727.563314086%2C4204118.782685929%2C-13431433.507485947%2C4204412.83851407&bboxSR=3857&imageSR=3857&size=512%2C512&f=image&format=png&adjustAspectRatio=false&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B4065%5D%2C+%22ascending%22%3A+true%7D",
+      "provenance": {
+        "raster_names": [
+          "m_3512043_se_10_060_20220519_20220908"
+        ],
+        "acquisition_dates": [
+          "2022-05-19"
+        ],
+        "native_gsd_m": [
+          0.6
+        ],
+        "rights": "CC BY / no restrictions on public use in California catalog",
+        "rights_url": "https://publish.data.ca.gov/dataset/naip-2022-60cm-california",
+        "credit": "USDA NAIP 2022 / California Department of Fish and Wildlife"
+      },
+      "sha256": "b87b6f61033f69a76efc34156dbeb05fc324f7d3b4bcb7b189819c1935006a4a",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run."
+    },
+    {
+      "id": "cal-poly-g2-county2014",
+      "area_id": "cal-poly-g2",
+      "file": "cal-poly-g2-county2014.png",
+      "area_role": "surface-lot image-quality target; permit eligibility evaluated separately",
+      "bbox_epsg3857": [
+        -13431727.563314086,
+        4204118.782685929,
+        -13431433.507485947,
+        4204412.83851407
+      ],
+      "dimensions": [
+        985,
+        985
+      ],
+      "approx_ground_m_per_output_pixel": 0.2436548223350254,
+      "capture_time_verified": false,
+      "source_url": "https://gis.slocounty.ca.gov/arcgis/rest/services/AERIALS/2014_Combined_WGSWMAS/MapServer",
+      "provenance": {
+        "collection_year": 2014,
+        "acquisition_month": "2014-06",
+        "acquisition_date": null,
+        "rights": "County explicitly places its 2014 aerial imagery in the public domain",
+        "rights_url": "https://www.slocounty.ca.gov/departments/information-technology/services/gis-services/gis-aerial-imagery",
+        "credit": "San Luis Obispo County / SLOCOG / Sanborn, 2014",
+        "method": "County published tile cache; no sharpening or upscaling",
+        "cache_level": 19,
+        "cache_tile_count": 20,
+        "cache_bounds": {
+          "row_min": 207139,
+          "row_max": 207142,
+          "col_min": 86421,
+          "col_max": 86425
+        },
+        "web_mercator_m_per_pixel": 0.29858214164761665,
+        "native_resolution_note": "Service contains 6-inch and 1-foot sources; cache pixel size is not verified native image resolution."
+      },
+      "sha256": "80bda0ea291d063f18d53766b993253e622d672b0d65eca72f53fd52f624dafa",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run.",
+      "reused_cached_sample": true
+    }
+  ],
+  "source_errors": [],
+  "pilot_note": "Selected records copied from the initial imagery milestone. Original per-sample no-detector note describes that earlier download; later candidate boxes are in baseline/ and scale-adapted/. Whole-lot counts remain unknown.",
+  "original_manifest_sha256": "f583ec521dd54c7d83bded4aa4677f04f8b5ccbc63a16e4082438e772969b06f"
+}

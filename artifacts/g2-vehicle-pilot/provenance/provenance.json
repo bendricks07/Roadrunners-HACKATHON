@@ -1,0 +1,54 @@
+{
+  "model": {
+    "repository": "geobase/car-detection",
+    "revision": "a3706aca0bce126fce8fa86061c09582a6562f62",
+    "file": "onnx/model_quantized.onnx",
+    "url": "https://huggingface.co/geobase/car-detection/resolve/a3706aca0bce126fce8fa86061c09582a6562f62/onnx/model_quantized.onnx",
+    "bytes": 45456423,
+    "sha256": "fc850ef4fbc16dfbe6272b69699ef91945aa0855e36d0f705cf475429d3eca04",
+    "declared_license": "MIT",
+    "source_model": "https://opengeoai.org/examples/car_detection/",
+    "license_scope_note": "Publisher declaration retained; complete training-data lineage not independently audited."
+  },
+  "positive_control": {
+    "repository": "giswqs/geospatial",
+    "revision": "2a8d43dc22aeaa28b87780f4367368762ff1c9d0",
+    "original_file": "cars_test_7cm.tif",
+    "original_url": "https://huggingface.co/datasets/giswqs/geospatial/resolve/2a8d43dc22aeaa28b87780f4367368762ff1c9d0/cars_test_7cm.tif",
+    "original_bytes": 48004341,
+    "original_sha256": "3eeffeba803208ea521b36b1429bf8edb628daf6a6b41db9dc63b0c8095a3497",
+    "original_dimensions": [
+      7158,
+      2575
+    ],
+    "crop_xyxy": [
+      800,
+      0,
+      1312,
+      512
+    ],
+    "crop_sha256": "a11b615493310e65b7c1f9ee403e83674ea1e71d46c79bc2e970932057c975b2",
+    "declared_license": "MIT",
+    "purpose": "Runtime smoke test; unknown training overlap, not an accuracy benchmark."
+  },
+  "reference": {
+    "file": "prototype/g2-reference.json",
+    "sha256": "1a75b4eec06a1ffaba8bf2d7b8bebba3c89806c65e2ba6b2e8b11304409de6aa",
+    "labeler": "assistant",
+    "human_verified": false,
+    "created_before_inference": true
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "onnxruntime": "1.32.0",
+    "numpy": "2.3.5",
+    "Pillow": "13.0.0",
+    "provider": "CPUExecutionProvider",
+    "intra_op_threads": 2
+  },
+  "application_integration": {
+    "vehicle_counts_published": false,
+    "forecast_validated": false,
+    "parking_permission_inferred": false
+  }
+}

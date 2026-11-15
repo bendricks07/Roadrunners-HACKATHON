@@ -7,9 +7,10 @@ The demo is public and does not require ChatGPT or GitHub sign-in. The GitHub re
 ## Current publication
 
 - Site project: `appgprj_6af8d642a48c8191a783c991f417a5a0`
-- Version: 1
-- Source app commit: `57e45bfa9b2edf919636816194075f2446e02eb3`
-- Published source commit: `f2c021cada18805d0c04951a166b8dcb68d5c527`
+- Version: 5
+- Source app branch: `main`
+- Source app commit: `fd63c2ad643271bf590e0ae9f28f93a6cee03576`
+- Published source commit: `d9675b3005268988264aec2301cc3c230caace1e`
 - Publication checkout on Matthew's Mac: the sibling `campuscurb-site` directory, with its tracked `.openai/hosting.json` identity.
 
 ## Updating the same link
@@ -23,4 +24,14 @@ Changes in this GitHub repository are not automatically deployed. After changing
 5. Check changed code, use the supported Site workflow to push/package the exact source, save the version, and deploy to the existing public Site.
 6. Confirm deployment success and share the same public URL.
 
-Only the browser app is hosted. Team research files, repository history, local logs, and credentials are not served. Rules, prices, routes, and community reports remain explicitly illustrative.
+Only the browser app is hosted. Team research files, repository history, local logs, and credentials are not served. The geographic map uses real campus GIS geometry and separately reviewed research records; incomplete policies and occupancy remain unknown. The separate walkthrough's rules, prices, routes, and community reports remain explicitly illustrative.
+
+Version 5 publishes the approved satellite/dark map redesign, 40 source-backed neighborhood street segments, compact place cards, sharper NAIP imagery, OpenFreeMap vector styling, and the returning-visitor migration. The new map opens on launch; an old sample session is preserved separately and remains accessible through the walkthrough. All 32 Node checks and the updated DOM integration check passed. A later rendered local/public review and its open visual defects are recorded in the [app review and screenshots](../artifacts/campuscurb-design-test-review.md).
+
+Google remains unconfigured for the shared deployment. **Layers → Map connection** connects a key for the current browser only. Actual occupancy remains unknown; chance colors are explicitly illustrative demo fixtures. See [map configuration](maps.md).
+
+## GitHub sync status for this publication
+
+**GitHub synchronization completed November 14, 2026 local time.** The signed-in GitHub Desktop connection successfully published `main` and `codex/free-parking-research`; Git's remote query independently confirmed both at `1b8fe1353fa6aaac2bddc81fcf8202acaf43dccb` before this status update. The previously unpublished redesign commits, free-data study, local detector pilot, and all 99 copied design/research deliverables are included. See the [artifact index](../artifacts/README.md). These status notes follow that verified publication.
+
+The original Matthew checkout and teammates' branches were preserved. No history was rewritten. Archived handoffs and evidence snapshots retain creation-time pending-push notes; those are historical records. This GitHub synchronization did not create a new Site deployment; the public app remains version 5.

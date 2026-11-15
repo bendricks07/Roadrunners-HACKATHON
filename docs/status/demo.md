@@ -1,5 +1,9 @@
 # CampusCurb browser demo handoff
 
+## Verity follow-up
+
+The `Verity` changes, now integrated on `main`, add keyboard-accessible search/map controls, focused dialog transitions, clearer unsupported guide answers, resilient saved-report restoration, report-expiry refreshes, draft preservation during timers, and preference synchronization between tabs. See [the run report](../verity/Verity.md) for observed coverage, regression checks, screenshots, and limitations. The original branch publication did not update the judge Site; see current `docs/deployment.md` for subsequent integrated publications.
+
 Branch: `codex/campuscurb-demo`
 
 ## Completed
@@ -12,6 +16,7 @@ Branch: `codex/campuscurb-demo`
 - Local report submission, expiry/resolution, and a walkway-closure demonstration that updates head-back time.
 - No package dependencies or service credentials.
 - Unit coverage of unknown eligibility, time-limit boundaries, active/expired closures, earliest deadlines, walking buffers, persisted sessions, and corrupt saved state.
+- Destination-first parking planning: users can type destinations such as Kennedy Library, Engineering buildings, or residence halls; choose a ranking preference; toggle student permit products; and review blue-highlighted candidate areas. These highlights only suppress known conflicts and remain explicitly subject to sign, space-type, and official-policy checks.
 
 ## Run
 
