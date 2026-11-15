@@ -7,7 +7,7 @@
     "start": "node server.mjs",
     "dev": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check src/app.js && node --check src/rules.js && node --check src/data.js && node --check src/map.js && node --check src/map-model.js && node --check src/geographic-map.js && node --check src/discovery.js && node --check src/runtime-config.js && node --check src/street-model.js && node --check src/map-style.js && node --check src/trip-model.js && node --check src/campus-permit-policy.js && node --test tests/*.test.mjs"
+    "check": "node --check src/app.js && node --check src/rules.js && node --check src/data.js && node --check src/map.js && node --check src/map-model.js && node --check src/geographic-map.js && node --check src/discovery.js && node --check src/runtime-config.js && node --check src/street-model.js && node --check src/map-style.js && node --check src/trip-model.js && node --check src/campus-permit-policy.js && node --check src/city-street-policy.js && node --check src/parking-reviews.js && node --test tests/*.test.mjs"
   },
   "engines": {
     "node": ">=20"

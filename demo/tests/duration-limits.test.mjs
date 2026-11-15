@@ -7,17 +7,17 @@ const abbott = STREET_AREAS.filter(a => a.gisName === 'ABBOTT ST');
 const start = parseCampusDateInput('2026-11-16T08:00');
 const plan = (minutes, permit = 'none') => ({ permit, arrivalAt: start, departureAt: start + minutes * MINUTE });
 
-test('both Abbott segments flag an eleven-hour trip red with reported ten-hour maximum', () => {
+test('both Abbott segments flag an eleven-hour trip red with City-mapped ten-hour maximum', () => {
   assert.equal(abbott.length, 2);
   for (const area of abbott) for (const permit of ['none', 'unknown', 'commuter', 'staff']) {
     const r = evaluateParking(area, plan(660, permit));
     assert.equal(r.status, 'ineligible');
     assert.equal(r.durationConflict, true);
     assert.equal(r.maxStayMinutes, 600);
-    assert.equal(r.limitProvenance, 'user-reported');
+    assert.equal(r.limitProvenance, 'city-gis');
     assert.equal(r.nextRestrictionAt, start + 600 * MINUTE);
     assert.match(r.reason, /planned stay is 11 hours; allowed parking time is 10 hours/);
-    assert.match(r.reason, /Reported limit.*check the signs/);
+    assert.match(r.reason, /City-mapped signed portions/);
     for (const estimates of [true, false]) {
       const d = parkingDisplay(area, r, estimates);
       assert.equal(d.color, '#ff626b');
@@ -32,7 +32,7 @@ test('exactly ten hours fits only the duration check; longer trips fail and shor
     assert.equal(r.status, 'unknown');
     assert.notEqual(r.durationConflict, true);
     assert.equal(r.occupancy, 'unknown');
-    assert.match(parkingDisplay(abbott[0], r).label, /Maximum 10 hours.*reported/);
+    assert.match(parkingDisplay(abbott[0], r).label, /Signed 10-hour zone/);
   }
   assert.equal(evaluateParking(abbott[0], plan(601)).durationConflict, true);
   assert.equal(bestParkingResult(abbott[0], [plan(660, 'commuter'), plan(660, 'staff')]).durationConflict, true);

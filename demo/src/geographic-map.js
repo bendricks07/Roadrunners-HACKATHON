@@ -13,7 +13,7 @@ function pinElement(area, display, selected) {
   const el = document.createElement('button');
   el.type = 'button'; el.className = `geo-pin ${area.kind} ${selected ? 'selected' : ''} ${display?.recommended ? 'recommended' : ''} ${display?.locked ? 'locked' : ''}`;
   el.style.setProperty('--pin-color', display?.color || '#8a98a9');
-  el.setAttribute('aria-label', `${area.name} · ${display?.label || 'Availability unknown'}${display?.illustrative ? ' · demo estimate' : ''}`);
+  el.setAttribute('aria-label', `${area.name}${area.blockLabel ? ' · ' + area.blockLabel : ''} · ${display?.label || 'Availability unknown'}${display?.illustrative ? ' · demo estimate' : ''}`);
   el.title = display?.reason || 'Actual availability is unknown.';
   el.innerHTML = `<span class="geo-pin-symbol">${display?.locked ? lockIcon : area.kind === 'garage' ? garageIcon : parkingIcon}</span>${area.kind !== 'street' ? `<span class="geo-pin-name">${area.shortName}</span>` : ''}`;
   return el;

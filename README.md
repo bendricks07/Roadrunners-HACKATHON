@@ -10,7 +10,7 @@ Edit **Where are you headed?** and **Trip date & time** directly below map searc
 
 ## Run and check
 
-Trips longer than an area's parking time limit turn it red and show the allowed duration. Abbott Street uses a **reported 10-hour maximum**, with its exact sign/curb scope still unverified. [Details and checks](artifacts/trip-duration-limits/README.md).
+Trips longer than an area's parking time limit turn it red and show the allowed duration. City-mapped signed portions of Slack/Longview and Loomis have two-hour limits; Abbott has a mapped ten-hour zone. Exact curbs and timed-zone hours still need sign checks. All 42 street sections now show block-specific evidence, separate City permit settings, and red time/permit warnings. Unknown local rules remain yellow and are excluded from street suggestions. [Sources and coverage](docs/research/city-street-rules-2026-11-15.md).
 
 The map now distinguishes reviewed **permit requirements** from unknown **empty-space availability**. Grand Avenue and 17 other reviewed ordinary-space facilities use time-based permit-rule labels, including the regular Friday 5 PM-Monday 7 AM exemption with signed exceptions. [Sources and limits](docs/research/permit-status-2026-11-15.md).
 
@@ -26,7 +26,7 @@ Open **http://localhost:5173**. To validate the app:
 npm --prefix demo run check
 ```
 
-The integrated source passes 37 app tests. The separate research tools pass 28 Python tests; dependency and reproduction instructions are in [tools/parking-research](tools/parking-research/README.md).
+The integrated source passes 64 app tests. The separate research tools pass 28 Python tests; dependency and reproduction instructions are in [tools/parking-research](tools/parking-research/README.md).
 
 ## What is implemented
 

@@ -1,3 +1,4 @@
+import { evaluateCityStreet } from './city-street-policy.js';
 import { researchedPermitRule } from './campus-permit-policy.js';
 export const MINUTE = 60_000;
 
@@ -84,7 +85,7 @@ export function bestParkingResult(area, plans) {
 export function evaluateCampusParking(area, plan) {
   const rules = area.rules || {};
   const limitApplies = Number.isFinite(rules.maxStayMinutes) && rules.maxStayMinutes > 0 && !rules.limitExemptPermits?.includes(plan.permit);
-  const limit = limitApplies ? { maxStayMinutes: rules.maxStayMinutes, plannedStayMinutes: (plan.departureAt - plan.arrivalAt) / MINUTE, limitProvenance: rules.limitProvenance || 'published', limitScope: rules.limitScope || 'Spaces covered by the published time limit', limitReportedOn: rules.limitReportedOn || null } : {};
+  const limit = limitApplies ? { maxStayMinutes: rules.maxStayMinutes, plannedStayMinutes: (plan.departureAt - plan.arrivalAt) / MINUTE, limitProvenance: rules.limitProvenance || 'published', limitIsCeiling: rules.limitIsCeiling === true, limitSource: rules.sourceUrl || area.sourceUrl, limitScope: rules.limitScope || 'Spaces covered by the published time limit', limitReportedOn: rules.limitReportedOn || null } : {};
   const result = (status, reason, nextRestrictionAt = null) => ({ status, reason, nextRestrictionAt, occupancy: 'unknown', ...limit });
   if (rules.closed) return result('ineligible', 'Campus closure notice: this lot is permanently closed.');
   if (!Number.isFinite(plan.arrivalAt) || !Number.isFinite(plan.departureAt) || plan.departureAt <= plan.arrivalAt) return result('unknown', 'Choose a valid arrival and departure in campus time.');
@@ -92,12 +93,14 @@ export function evaluateCampusParking(area, plan) {
   for (const restriction of rules.closures || []) {
     if (restriction.scope === 'whole-area' && plan.arrivalAt < restriction.endsAt && plan.departureAt > restriction.startsAt) return result('ineligible', restriction.reason || 'A closure overlaps your planned stay.', restriction.startsAt);
   }
+  const streetResult = area.kind === 'street' ? evaluateCityStreet(area, plan) : null;
   // Time limits are independent of permit selection and apply before any
   // general permit-hours exemption. Elapsed time includes daylight-saving shifts.
   if (limitApplies && plan.departureAt - plan.arrivalAt > rules.maxStayMinutes * MINUTE) {
-    const provenance = rules.limitProvenance === 'user-reported' ? 'Reported limit - check the signs for exact curbs, hours and exceptions.' : 'Published limit; check the signed space and applicable exceptions.';
-    return { ...result('ineligible', `Trip too long: your planned stay is ${formatParkingDuration(limit.plannedStayMinutes)}; allowed parking time is ${formatParkingDuration(rules.maxStayMinutes)}. ${provenance}`, plan.arrivalAt + rules.maxStayMinutes * MINUTE), durationConflict: true };
+    const provenance = rules.limitProvenance === 'user-reported' ? 'Reported limit - check the signs for exact curbs, hours and exceptions.' : rules.limitIsCeiling ? 'City public-street same-space ceiling; shorter signed limits and other restrictions may apply.' : area.kind === 'street' ? 'City-mapped signed portions only; check exact curbs, hours and exceptions.' : 'Published limit; check the signed space and applicable exceptions.';
+    return { ...result('ineligible', `Trip too long: your planned stay is ${formatParkingDuration(limit.plannedStayMinutes)}; allowed parking time is ${formatParkingDuration(rules.maxStayMinutes)}. ${provenance}${streetResult?.permitConflict ? ' ' + streetResult.ruleSummary : ''}`, plan.arrivalAt + rules.maxStayMinutes * MINUTE), durationConflict: true };
   }
+  if (streetResult) return { ...result(streetResult.status, streetResult.reason), ...streetResult };
   const researched = researchedPermitRule(area, plan);
   if (researched && !C_LOTS.has(area.id)) return researched;
   if (researched?.permitExempt || researched?.permitConflict) return researched;

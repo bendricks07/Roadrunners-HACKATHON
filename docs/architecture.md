@@ -12,7 +12,9 @@
 | `demo/src/map-model.js` | Real campus IDs, GIS queries, source identity checks, and campus-time conversion |
 | `demo/src/campus-permit-policy.js` | Scoped researched permit schedules, trip-wide enforcement checks, and published commuter-product distinctions; separate from occupancy/full policy |
 | `demo/src/geographic-map.js` | Google, MapLibre, and non-WebGL Leaflet adapters; retained geographic map |
-| `demo/src/street-model.js` | Stable City segment IDs, source identity checks, and separate illustrative chance fixtures |
+| `demo/src/street-model.js` | Stable City segment IDs, source identity checks, and street rule colors independent of campus chance fixtures |
+| `demo/src/city-street-policy.js` | Reviewed source/address/zone evidence, independent City permits, trip-wide district windows and explicit curb uncertainty |
+| `demo/src/parking-reviews.js` | Candidate filtering by type, time and permit conflicts; excludes unknown local street limits |
 | `demo/src/map-style.js` | Original satellite/dark/standard/terrain styling and parking overlay layers |
 | `demo/src/discovery.js` | Geographic parking search, details, provider connection, and manual reminders |
 | `demo/src/app.js` | Minimal geographic shell integration, walkthrough tabs, persistence, dialogs, and reminder clock |

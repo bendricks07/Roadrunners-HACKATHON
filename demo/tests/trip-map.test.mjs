@@ -17,8 +17,8 @@ test('colors explain estimates and preserve the actual permit conflict', () => {
   assert.equal(display.reason, eligibility.reason);
   assert.equal(display.color, '#ff626b');
   assert.equal(display.illustrative, false);
-  assert.match(parkingDisplay(STREET_AREAS.find(a => a.demoChance === 'limited'), {}).reason, /Yellow.*not a measured/);
-  assert.match(parkingDisplay(STREET_AREAS.find(a => a.demoChance === 'low'), {}).reason, /not.*confirmed full/);
+  assert.match(parkingDisplay(PARKING_AREAS.find(a => a.id === 'cal-poly-slo-grand-structure'), {}).reason, /Yellow.*not a measured/);
+  assert.match(parkingDisplay(PARKING_AREAS.find(a => a.id === 'cal-poly-slo-h14'), {}).reason, /not.*confirmed full/);
   assert.match(parkingDisplay(area, { status: 'unknown' }, false).reason, /unknown/);
 });
 

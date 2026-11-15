@@ -16,7 +16,7 @@ export const RESIDENTIAL_DISTRICTS = [
 
 const TIMED_REPORT = 'https://www.slocity.org/home/showpublisheddocument/19537/636607024839670000';
 export const STREET_GUIDANCE = {
-  'HATHWAY AVE': { districts: ['Alta Vista'] },
+  'HATHWAY AVE': { districts: ['Alta Vista'], timed: 'ASI lists free two-hour parking along Hathway Avenue, but does not identify the exact signed block faces. Do not apply that limit or a permit exemption to the entire street.', timedSource: 'https://www.asi.calpoly.edu/facilities/recreation-center/' },
   'FREDERICKS ST': { districts: ['Alta Vista', 'Monterey Heights'] },
   'MURRAY AVE': { districts: ['Murray'] },
   'GRAND AVE': { districts: ['Alta Vista', 'Monterey Heights'] },
