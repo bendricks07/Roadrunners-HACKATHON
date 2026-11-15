@@ -81,6 +81,23 @@
 .geo-result-copy strong { display: block; font-size: 15px; font-weight: 550; color: var(--map-ink); letter-spacing: -.2px; }
 .geo-result-copy small { display: block; font-size: 11px; color: var(--map-muted); margin-top: 5px; }
 .geo-result>.icon { width: 14px; height: 14px; color: var(--map-muted); }
+.geo-trip-summary { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 12px; padding: 11px 13px; text-align: left; border-radius: 14px; background: var(--blue-soft); color: var(--blue); }
+.geo-trip-summary>span { display: grid; grid-template-columns: 18px 1fr; column-gap: 8px; align-items: center; }
+.geo-trip-summary strong { font-size: 13px; font-weight: 650; }
+.geo-trip-summary small { grid-column: 2; margin-top: 3px; color: var(--map-muted); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.geo-trip-summary>.icon { width: 15px; height: 15px; color: var(--map-muted); }
+.geo-trip-summary span>.icon { grid-row: 1 / 3; width: 17px; height: 17px; }
+.geo-recommendations { padding: 13px 0 3px; }
+.geo-recommendations>p { color: var(--map-muted); font-size: 11px; margin: -2px 0 7px; }
+.geo-recommendation { display: grid; grid-template-columns: 25px minmax(0,1fr) auto; gap: 9px; align-items: center; width: 100%; padding: 10px 2px; text-align: left; border-bottom: 1px solid #8392a41c; }
+.geo-recommendation:hover { background: #1685ff0c; }
+.geo-recommendation-number { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; background: #1685ff18; color: var(--blue); font-size: 11px; font-weight: 700; }
+.geo-recommendation strong { display: block; color: var(--map-ink); font-size: 13px; font-weight: 600; }
+.geo-recommendation small { display: block; margin-top: 3px; color: var(--map-muted); font-size: 10px; }
+.geo-recommendation-status { border-radius: 9px; padding: 5px 7px; background: #8794a41a; color: var(--map-muted); font-size: 10px; font-weight: 650; text-transform: uppercase; }
+.geo-recommendation-status.eligible { background: #259b6c1a; color: #16875a; }
+.geo-recommendation-status.conditional { background: #dba12c1c; color: #a67814; }
+.geo-recommendation-empty { padding: 15px 8px 8px; }
 .geo-empty { padding: 30px 12px; text-align: center; color: var(--map-muted); }
 .geo-empty>.icon { margin-bottom: 13px; }
 .geo-empty h3 { font-size: 16px; color: var(--map-ink); }
@@ -106,6 +123,7 @@
 .geo-pin.locked svg { width: 16px; height: 16px; }
 .geo-pin-name { display: none; position: absolute; top: calc(100% + 5px); left: 50%; transform: translateX(-50%); background: #ffffffed; color: #23313d; border-radius: 5px; padding: 3px 6px; font-size: 10px; font-weight: 550; white-space: nowrap; box-shadow: 0 1px 3px #0002; }
 .geo-pin.selected { background: #0b81ff; color: #fff; border-color: #fff; width: 38px; height: 38px; border-radius: 12px; box-shadow: 0 0 0 4px #1685ff30,0 4px 15px #001c4e40; z-index: 20; }
+.geo-pin.recommended:not(.selected) { border-color: #5da9ff; box-shadow: 0 0 0 3px #1685ff35,0 3px 10px #001c4e32; }
 .geo-pin.selected .geo-pin-name { display: block; }
 .geo-pin.street { border-radius: 50%; }
 .geo-marker-wrap .geo-pin { top: 0; left: 0; }
@@ -138,6 +156,15 @@
 .geo-plan { display: grid; gap: 18px; }
 .geo-plan label { display: grid; gap: 8px; font-size: 12px; color: var(--secondary); }
 .geo-plan select, .geo-plan input { height: 45px; width: 100%; }
+.geo-permit-picker { border: 0; padding: 0; margin: 0; min-width: 0; }
+.geo-permit-picker legend { font-size: 12px; color: var(--secondary); margin-bottom: 8px; }
+.geo-permit-picker p { font-size: 11px; line-height: 1.5; color: var(--secondary); margin: 0 0 10px; }
+.geo-permit-picker>div, .geo-permit-picker details>div { display: flex; flex-wrap: wrap; gap: 7px; }
+.geo-permit-picker details { margin-top: 10px; color: var(--secondary); font-size: 11px; }
+.geo-permit-picker details>div { margin-top: 9px; }
+.geo-permit-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; padding: 7px 10px; border-radius: 10px; color: var(--secondary); background: #8392a416; font-size: 11px; text-align: left; }
+.geo-permit-chip.active { background: var(--blue-soft); color: var(--blue); font-weight: 600; }
+.geo-permit-chip .icon { width: 14px; height: 14px; }
 .geo-checkbox { display: flex; align-items: flex-start; gap: 9px; font-size: 12px; line-height: 1.7; margin: 17px 0; }
 .geo-checkbox input { width: 17px; min-width: 17px; height: 17px; padding: 0; margin-top: 2px; accent-color: var(--blue); }
 .geo-decision { display: flex; gap: 11px; align-items: flex-start; padding: 15px; border-radius: 14px; background: var(--subtle); margin-bottom: 19px; }

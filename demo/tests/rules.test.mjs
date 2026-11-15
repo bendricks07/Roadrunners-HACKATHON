@@ -1,12 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { AREAS, DESTINATIONS } from '../src/data.js';
+import { AREAS, DESTINATIONS, permitPolicyId } from '../src/data.js';
 import { evaluateParking, calculateDeadline, createSession, headBackAt, sessionPhase, getWalkMinutes, isValidSession, parseSavedState, normalizeReports, MINUTE } from '../src/rules.js';
 import { REPORT_TYPES } from '../src/data.js';
 
 const now = Date.parse('2026-11-14T20:36:00Z');
 test('unknown permit is never a confident recommendation', () => {
   assert.equal(evaluateParking(AREAS[0], { permit: 'unknown', durationMinutes: 90 }, [], now).status, 'unknown');
+});
+
+test('student permit products retain their specific rule identifier', () => {
+  assert.equal(permitPolicyId('commuter'), 'commuter');
+  assert.equal(permitPolicyId('r3'), 'r3');
+  assert.equal(permitPolicyId('resident-r4'), 'resident-r4');
 });
 test('a stay crossing the time limit is excluded; an exact limit fits', () => {
   assert.equal(evaluateParking(AREAS[1], { permit: 'commuter', durationMinutes: 121 }, [], now).status, 'ineligible');

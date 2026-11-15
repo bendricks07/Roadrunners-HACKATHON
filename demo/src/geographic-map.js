@@ -11,14 +11,14 @@ const lockIcon = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect 
 
 function pinElement(area, display, selected) {
   const el = document.createElement('button');
-  el.type = 'button'; el.className = `geo-pin ${area.kind} ${selected ? 'selected' : ''} ${display?.locked ? 'locked' : ''}`;
+  el.type = 'button'; el.className = `geo-pin ${area.kind} ${selected ? 'selected' : ''} ${display?.recommended ? 'recommended' : ''} ${display?.locked ? 'locked' : ''}`;
   el.style.setProperty('--pin-color', display?.color || '#8a98a9');
   el.setAttribute('aria-label', `${area.name} · ${display?.label || 'Availability unknown'}${display?.illustrative ? ' · demo estimate' : ''}`);
   el.innerHTML = `<span class="geo-pin-symbol">${display?.locked ? lockIcon : area.kind === 'garage' ? garageIcon : parkingIcon}</span>${area.kind !== 'street' ? `<span class="geo-pin-name">${area.shortName}</span>` : ''}`;
   return el;
 }
 function paintFeatures(fc, displays, selectedId) {
-  return { ...fc, features: fc.features.map(f => ({ ...f, properties: { ...f.properties, color: displays[f.id]?.color || '#8a98a9', selected: f.id === selectedId, locked: displays[f.id]?.locked || false } })) };
+  return { ...fc, features: fc.features.map(f => ({ ...f, properties: { ...f.properties, color: displays[f.id]?.color || '#8a98a9', selected: f.id === selectedId, recommended: displays[f.id]?.recommended || false, locked: displays[f.id]?.locked || false } })) };
 }
 
 let googleLoad;
@@ -76,7 +76,7 @@ async function googleMap(host, opts) {
     update(fc, displays, selectedId) {
       pins.forEach(p => p.setMap(null)); pins = [];
       map.data.forEach(f => map.data.remove(f)); map.data.addGeoJson(paintFeatures(fc, displays, selectedId));
-      map.data.setStyle(f => ({ visible: f.getGeometry().getType() !== 'Point', fillColor: f.getProperty('color'), strokeColor: f.getProperty('selected') ? '#5da9ff' : f.getProperty('color'), fillOpacity: .24, strokeOpacity: .96, strokeWeight: f.getProperty('kind') === 'street' ? f.getProperty('selected') ? 8 : 5 : 2, zIndex: f.getProperty('selected') ? 3 : 1, clickable: true }));
+      map.data.setStyle(f => ({ visible: f.getGeometry().getType() !== 'Point', fillColor: f.getProperty('color'), strokeColor: f.getProperty('selected') || f.getProperty('recommended') ? '#5da9ff' : f.getProperty('color'), fillOpacity: f.getProperty('recommended') ? .34 : .24, strokeOpacity: .96, strokeWeight: f.getProperty('kind') === 'street' ? f.getProperty('selected') ? 8 : 5 : f.getProperty('recommended') ? 3 : 2, zIndex: f.getProperty('selected') ? 3 : f.getProperty('recommended') ? 2 : 1, clickable: true }));
       fc.features.forEach(f => { const a = areas.get(f.id); if (a && (a.kind !== 'street' || f.id === selectedId)) pins.push(new Pin(featureCenter(f.geometry), a, displays[f.id], f.id === selectedId)); });
     },
     fit() { const [sw, ne] = overviewBounds(); map.fitBounds({ west: sw[0], south: sw[1], east: ne[0], north: ne[1] }, { left: 30, right: 30, top: 40, bottom: window.innerWidth < 761 ? 125 : 65 }); },
@@ -163,7 +163,7 @@ function leafletMap(host, opts) {
     provider: 'leaflet',
     update(fc, displays, selectedId) {
       shapes.clearLayers(); pins.clearLayers();
-      shapes.options.style = f => ({ fillColor: displays[f.id]?.color || '#8a98a9', color: f.id === selectedId ? '#5da9ff' : displays[f.id]?.color || '#8a98a9', fillOpacity: .25, weight: f.properties.kind === 'street' ? f.id === selectedId ? 7 : 4 : f.id === selectedId ? 3 : 1.5 });
+      shapes.options.style = f => ({ fillColor: displays[f.id]?.color || '#8a98a9', color: f.id === selectedId || displays[f.id]?.recommended ? '#5da9ff' : displays[f.id]?.color || '#8a98a9', fillOpacity: displays[f.id]?.recommended ? .34 : .25, weight: f.properties.kind === 'street' ? f.id === selectedId ? 7 : 4 : f.id === selectedId || displays[f.id]?.recommended ? 3 : 1.5 });
       shapes.options.onEachFeature = (f, layer) => layer.on('click', e => { L.DomEvent.stopPropagation(e); opts.onSelect(f.id); });
       shapes.addData({ ...fc, features: fc.features.filter(f => f.geometry.type !== 'Point') });
       fc.features.forEach(f => { const a = areas.get(f.id); if (!a || (a.kind === 'street' && f.id !== selectedId)) return; const el = pinElement(a, displays[f.id], f.id === selectedId);

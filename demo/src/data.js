@@ -3,6 +3,8 @@
 export const DATA_NOTICE = 'Illustrative parking rules and map. Check official information and posted signs before parking.';
 export const DESTINATIONS = [
   { id: 'library', name: 'Kennedy Library', subtitle: 'Study, meet, get things done', x: 690, y: 425, query: 'Robert E. Kennedy Library Cal Poly San Luis Obispo' },
+  { id: 'engineering', name: 'Engineering buildings', subtitle: 'Engineering West, labs, and classrooms', x: 610, y: 360, query: 'Engineering West Cal Poly San Luis Obispo' },
+  { id: 'dorms', name: 'Residence halls / dorms', subtitle: 'On-campus housing and move-in visits', x: 880, y: 400, query: 'Cal Poly residence halls San Luis Obispo' },
   { id: 'union', name: 'University Union', subtitle: 'The heart of campus', x: 808, y: 639, query: 'University Union Cal Poly San Luis Obispo' },
   { id: 'rec', name: 'Recreation Center', subtitle: 'A little room to recharge', x: 598, y: 755, query: 'Recreation Center Cal Poly San Luis Obispo' },
   { id: 'pac', name: 'Performing Arts Center', subtitle: 'Find your way to the show', x: 950, y: 675, query: 'Performing Arts Center San Luis Obispo' },
@@ -13,11 +15,25 @@ export const AREAS = [
   { id: 'grand', name: 'Grand Avenue', detail: 'East campus · Parking structure', label: 'GRAND AVENUE', x: 1009, y: 780, capacity: 'Unknown', drive: 6, walk: { library: 12, union: 6, rec: 10, pac: 4 }, permits: ['commuter', 'staff', 'visitor'], maxStayMinutes: 480, price: 6, tags: ['Covered parking', 'Good for a longer stay'], source: 'Demo fixture', photo: 'grand' },
 ];
 export const PERMITS = [
-  { id: 'commuter', label: 'Commuter permit' },
-  { id: 'visitor', label: 'Visitor · no permit' },
+  // These are the student-facing products identified in the project research handoff.
+  // A product selection is not a complete eligibility decision for any individual stall.
+  { id: 'commuter-grand', label: 'Commuter Grand annual', policyId: 'commuter-grand', student: true },
+  { id: 'commuter', label: 'Commuter annual', policyId: 'commuter', student: true },
+  { id: 'r3', label: 'Commuter R3 semester', policyId: 'r3', student: true },
+  { id: 'r4', label: 'Commuter R4 semester', policyId: 'r4', student: true },
+  { id: 'resident-r3', label: 'Resident R3 annual', policyId: 'resident-r3', student: true },
+  { id: 'resident-r4', label: 'Resident R4 annual', policyId: 'resident-r4', student: true },
+  { id: 'ag-resident', label: 'AG resident · exception', policyId: 'ag-resident', student: true },
+  { id: 'ag-commuter', label: 'AG commuter · exception', policyId: 'ag-commuter', student: true },
+  { id: 'first-year-gap', label: 'First-year GAP · seasonal', policyId: 'first-year-gap', student: true },
+  { id: 'motorcycle', label: 'Motorcycle permit', policyId: 'motorcycle', student: true },
+  { id: 'evening', label: 'Evening permit', policyId: 'evening', student: true },
+  { id: 'visitor', label: 'Visitor / paid parking', policyId: 'visitor' },
   { id: 'staff', label: 'Staff permit' },
   { id: 'unknown', label: 'Not sure yet' },
 ];
+
+export const permitPolicyId = id => PERMITS.find(permit => permit.id === id)?.policyId || id;
 export const INITIAL_REPORTS = [
   { id: 'seed-path', areaId: 'north', type: 'path', title: 'East walkway maintenance', description: 'A section of the east walkway is closed in this demonstration. Allow an extra 3 minutes on the return walk.', extraWalkMinutes: 3, createdAt: Date.now() - 18 * 60_000, expiresAt: Date.now() + 6 * 60 * 60_000, status: 'Community report · Unverified', simulated: true, active: false },
 ];
