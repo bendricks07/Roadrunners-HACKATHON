@@ -55,8 +55,10 @@ function validStoredSession(value) {
 }
 const restoredSession = validStoredSession(saved.session) ? saved.session : null;
 const state = {
-  mode: saved.mode === 'demo' ? 'demo' : 'real',
-  tab: restoredSession ? 'parking' : 'explore', detail: false, selectedId: restoredSession?.areaId || 'north', destinationId: DESTINATIONS.some(d => d.id === saved.destinationId) ? saved.destinationId : 'library',
+  // Every launch opens the map. A previous walkthrough remains available in
+  // Layers, with its saved session preserved separately from real parking.
+  mode: 'real',
+  tab: restoredSession?.manual ? 'parking' : 'explore', detail: false, selectedId: restoredSession?.areaId || 'north', destinationId: DESTINATIONS.some(d => d.id === saved.destinationId) ? saved.destinationId : 'library',
   permit: PERMITS.some(p => p.id === saved.permit) ? saved.permit : 'commuter', durationMinutes: [60,90,120,180,240].includes(saved.durationMinutes) ? saved.durationMinutes : 90,
   sort: 'best', favorites: Array.isArray(saved.favorites) ? saved.favorites.filter(id => AREAS.some(a => a.id === id)) : [],
   reports: Array.isArray(saved.reports) ? normalizeReports(saved.reports, AREAS.map(a => a.id), REPORT_TYPES) : INITIAL_REPORTS.map(r => ({ ...r })),
