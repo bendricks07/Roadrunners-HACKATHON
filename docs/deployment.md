@@ -7,14 +7,16 @@ The new public Site was created at the user's request on November 15, 2026 becau
 ## Current publication
 
 - Site project: `appgprj_6af9ebd565e0819191160fadd87c9a66`
-- Version: 4
-- GitHub app source: `main`, `e18066c3a58c4d211dca177d3ccebedb74a58459`
-- Sites source commit: `0a9c560b7913c495b9962d4b7a4e01919ff510ca`
-- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_c604aa6e67b4819196ced23f7842a26b`
-- Successful deployment: `appgdep_6af9fc3d27d081918fd2d6e6aae87fea`, November 15, 2026 at 18:38:57 UTC (10:38 AM Pacific)
+- Version: 5
+- GitHub app source: `main`, `dd79fa2e084f0b18eee8a8cdbb185448faa4002d`
+- Sites source commit: `08eda4df4b9df3077b37b1cf7d007933d02c6266`
+- Saved version: `appgprj_6af9ebd565e0819191160fadd87c9a66~appgver_a653768d773c8191bf456792569470a4`
+- Successful deployment: `appgdep_6af9ffcda0508191b5871f5e5d096b8c`, November 15, 2026 at 18:54:09 UTC (10:54 AM Pacific)
 - Local publication checkout: `C:/Users/bhend/.codex/visualizations/2026/11/14/01a1dbb4-8b2b-7f32-a933-ed9fe30ee6a7/campuscurb-current-site`
 
 The static app is an exact copy of `demo/index.html`, `demo/favicon.svg`, `demo/manifest.webmanifest`, and `demo/src/`. Its checked-in `SOURCE.json` records the GitHub source. All 24 files under `src/` matched by SHA-256; all 64 tests and source syntax checks passed. The new hosted map and current destination/trip UI loaded in the browser. No Google key or user browser data was copied. Saved sessions/preferences belong to each browser origin, so they do not migrate from the old URL automatically. Live occupancy remains unconnected.
+
+Version 5 publishes the Verity(1) address-range search fix after its fast-forward merge into main. The exact tested app source dd79fa2 was copied and all 24 src files hash-matched before the Sites helper committed, pushed and packaged its new source revision. The native deployment succeeded at the existing public URL. The prior smoke test and 64 passing tests apply to these unchanged app assets; no additional live browser test was performed for this publication. [Verity report](verity/Verity(1).md).
 
 Version 4 publishes reviewed rule evidence for all 42 mapped street sections, address-range selection, separate City neighborhood permits, red trip/permit warnings and filtered street suggestions. The live Slack 1600-1799 card was verified for a three-hour Monday trip: red with a two-hour maximum. City permit controls also loaded; no browser errors were captured. [Research](research/city-street-rules-2026-11-15.md) and [browser evidence](../artifacts/city-street-rules/README.md). Unknown local rules remain yellow, not parking permission.
 

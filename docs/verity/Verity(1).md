@@ -27,3 +27,7 @@ Not covered in this shortened pass: full session/reminder lifecycle, every permi
 ![Address-range matches after the fix](evidence/Verity-1-address-search.png)
 
 Publication scope: commit and push this branch only. No main merge or production deployment in this Verity run.
+
+## Subsequent authorized publication
+
+At the user's request after this run, Verity(1) was fast-forward merged and pushed to main at dd79fa2e084f0b18eee8a8cdbb185448faa4002d. Its tested app assets were deployed successfully as Site version 5 on November 15 at 18:54:09 UTC. The same public URL and audience were retained. See [deployment provenance](../deployment.md).
