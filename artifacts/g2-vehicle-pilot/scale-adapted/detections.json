@@ -1,0 +1,907 @@
+{
+  "created_at_utc": "2026-11-15T02:07:50.687689+00:00",
+  "model": {
+    "repository": "geobase/car-detection",
+    "revision": "a3706aca0bce126fce8fa86061c09582a6562f62",
+    "sha256": "fc850ef4fbc16dfbe6272b69699ef91945aa0855e36d0f705cf475429d3eca04",
+    "model_card": "https://huggingface.co/geobase/car-detection",
+    "declared_license": "MIT",
+    "upstream_model_card": "https://huggingface.co/giswqs/geoai",
+    "onnxruntime_version": "1.32.0",
+    "numpy_version": "2.3.5"
+  },
+  "reference_sha256": "1a75b4eec06a1ffaba8bf2d7b8bebba3c89806c65e2ba6b2e8b11304409de6aa",
+  "reference_status": "provisional assistant visual labels; not human ground truth",
+  "reference_frozen_at_utc": "2026-11-15T02:01:24.581322+00:00",
+  "human_verified": false,
+  "confidence_threshold": 0.3,
+  "run_kind": "exploratory_scale_adaptation",
+  "approx_ground_tile_m": 36.0,
+  "duplicate_suppression_iou": 0.3,
+  "tile_edge_exclusion_fraction": 0.08,
+  "selection_note": "Scale adaptation followed inspection of baseline output; this is not a held-out validation.",
+  "match_radius_ground_m": 2.5,
+  "scope": "Small fixed windows at one lot. Not a validation of occupancy, parking legality or a forecast.",
+  "windows": [
+    {
+      "id": "county2014-north",
+      "sample_id": "cal-poly-g2-county2014",
+      "scoreable": true,
+      "window_xyxy": [
+        384,
+        246,
+        601,
+        492
+      ],
+      "context_origins": [
+        [
+          310,
+          172
+        ],
+        [
+          384,
+          172
+        ],
+        [
+          458,
+          172
+        ],
+        [
+          532,
+          172
+        ],
+        [
+          601,
+          172
+        ],
+        [
+          310,
+          246
+        ],
+        [
+          384,
+          246
+        ],
+        [
+          458,
+          246
+        ],
+        [
+          532,
+          246
+        ],
+        [
+          601,
+          246
+        ],
+        [
+          310,
+          320
+        ],
+        [
+          384,
+          320
+        ],
+        [
+          458,
+          320
+        ],
+        [
+          532,
+          320
+        ],
+        [
+          601,
+          320
+        ],
+        [
+          310,
+          394
+        ],
+        [
+          384,
+          394
+        ],
+        [
+          458,
+          394
+        ],
+        [
+          532,
+          394
+        ],
+        [
+          601,
+          394
+        ],
+        [
+          310,
+          468
+        ],
+        [
+          384,
+          468
+        ],
+        [
+          458,
+          468
+        ],
+        [
+          532,
+          468
+        ],
+        [
+          601,
+          468
+        ],
+        [
+          310,
+          492
+        ],
+        [
+          384,
+          492
+        ],
+        [
+          458,
+          492
+        ],
+        [
+          532,
+          492
+        ],
+        [
+          601,
+          492
+        ]
+      ],
+      "tile_size_px": 148,
+      "scored_detections": [
+        {
+          "box_xyxy": [
+            426.50894927978516,
+            387.61800384521484,
+            453.28504943847656,
+            398.1974105834961
+          ],
+          "class_id": 1,
+          "score": 0.9999818801879883,
+          "center_local": [
+            55.89699935913086,
+            146.90770721435547
+          ]
+        },
+        {
+          "box_xyxy": [
+            464.54200744628906,
+            441.46800231933594,
+            488.3277587890625,
+            452.42437744140625
+          ],
+          "class_id": 1,
+          "score": 0.9787853956222534,
+          "center_local": [
+            92.43488311767578,
+            200.9461898803711
+          ]
+        },
+        {
+          "box_xyxy": [
+            442.2877731323242,
+            409.6769256591797,
+            467.0117645263672,
+            420.17603302001953
+          ],
+          "class_id": 1,
+          "score": 0.952031135559082,
+          "center_local": [
+            70.6497688293457,
+            168.9264793395996
+          ]
+        }
+      ],
+      "ignored_detections": [],
+      "scored_reference_points": [
+        [
+          42,
+          16
+        ],
+        [
+          106,
+          132
+        ],
+        [
+          111,
+          145
+        ],
+        [
+          111,
+          157
+        ],
+        [
+          60,
+          146
+        ],
+        [
+          75,
+          170
+        ],
+        [
+          80,
+          182
+        ],
+        [
+          95,
+          202
+        ],
+        [
+          96,
+          212
+        ],
+        [
+          96,
+          222
+        ],
+        [
+          88,
+          233
+        ]
+      ],
+      "candidate_count_in_evaluation_region": 3,
+      "provisional_reference_count": 11,
+      "agreement": {
+        "matched": 3,
+        "unmatched_predictions": 0,
+        "unmatched_reference": 8,
+        "precision_vs_provisional_reference": 1.0,
+        "recall_vs_provisional_reference": 0.2727272727272727,
+        "matches": [
+          {
+            "prediction_index": 0,
+            "reference_index": 4,
+            "distance_px": 4.202207353994511
+          },
+          {
+            "prediction_index": 1,
+            "reference_index": 7,
+            "distance_px": 2.7731462976584935
+          },
+          {
+            "prediction_index": 2,
+            "reference_index": 5,
+            "distance_px": 4.4807318427282326
+          }
+        ]
+      }
+    },
+    {
+      "id": "county2014-south",
+      "sample_id": "cal-poly-g2-county2014",
+      "scoreable": true,
+      "window_xyxy": [
+        404,
+        492,
+        699,
+        729
+      ],
+      "context_origins": [
+        [
+          330,
+          418
+        ],
+        [
+          404,
+          418
+        ],
+        [
+          478,
+          418
+        ],
+        [
+          552,
+          418
+        ],
+        [
+          626,
+          418
+        ],
+        [
+          699,
+          418
+        ],
+        [
+          330,
+          492
+        ],
+        [
+          404,
+          492
+        ],
+        [
+          478,
+          492
+        ],
+        [
+          552,
+          492
+        ],
+        [
+          626,
+          492
+        ],
+        [
+          699,
+          492
+        ],
+        [
+          330,
+          566
+        ],
+        [
+          404,
+          566
+        ],
+        [
+          478,
+          566
+        ],
+        [
+          552,
+          566
+        ],
+        [
+          626,
+          566
+        ],
+        [
+          699,
+          566
+        ],
+        [
+          330,
+          640
+        ],
+        [
+          404,
+          640
+        ],
+        [
+          478,
+          640
+        ],
+        [
+          552,
+          640
+        ],
+        [
+          626,
+          640
+        ],
+        [
+          699,
+          640
+        ],
+        [
+          330,
+          714
+        ],
+        [
+          404,
+          714
+        ],
+        [
+          478,
+          714
+        ],
+        [
+          552,
+          714
+        ],
+        [
+          626,
+          714
+        ],
+        [
+          699,
+          714
+        ],
+        [
+          330,
+          729
+        ],
+        [
+          404,
+          729
+        ],
+        [
+          478,
+          729
+        ],
+        [
+          552,
+          729
+        ],
+        [
+          626,
+          729
+        ],
+        [
+          699,
+          729
+        ]
+      ],
+      "tile_size_px": 148,
+      "scored_detections": [
+        {
+          "box_xyxy": [
+            410.51304626464844,
+            708.0936050415039,
+            440.0507507324219,
+            725.149528503418
+          ],
+          "class_id": 1,
+          "score": 0.9999994039535522,
+          "center_local": [
+            21.281898498535156,
+            224.62156677246094
+          ]
+        },
+        {
+          "box_xyxy": [
+            491.23600006103516,
+            713.9737167358398,
+            513.413688659668,
+            724.0413360595703
+          ],
+          "class_id": 1,
+          "score": 0.9999865293502808,
+          "center_local": [
+            98.32484436035156,
+            227.00752639770508
+          ]
+        },
+        {
+          "box_xyxy": [
+            413.7441873550415,
+            499.462993144989,
+            434.7140884399414,
+            516.5917587280273
+          ],
+          "class_id": 1,
+          "score": 0.9940322041511536,
+          "center_local": [
+            20.229137897491455,
+            16.02737593650818
+          ]
+        },
+        {
+          "box_xyxy": [
+            440.9854278564453,
+            545.9438667297363,
+            465.39781951904297,
+            571.6799926757812
+          ],
+          "class_id": 1,
+          "score": 0.8524547219276428,
+          "center_local": [
+            49.19162368774414,
+            66.81192970275879
+          ]
+        }
+      ],
+      "ignored_detections": [],
+      "scored_reference_points": [
+        [
+          20,
+          14
+        ],
+        [
+          29,
+          34
+        ],
+        [
+          49,
+          65
+        ],
+        [
+          112,
+          19
+        ],
+        [
+          201,
+          186
+        ],
+        [
+          100,
+          224
+        ],
+        [
+          20,
+          224
+        ]
+      ],
+      "candidate_count_in_evaluation_region": 4,
+      "provisional_reference_count": 7,
+      "agreement": {
+        "matched": 4,
+        "unmatched_predictions": 0,
+        "unmatched_reference": 3,
+        "precision_vs_provisional_reference": 1.0,
+        "recall_vs_provisional_reference": 0.5714285714285714,
+        "matches": [
+          {
+            "prediction_index": 0,
+            "reference_index": 6,
+            "distance_px": 1.4246434687928748
+          },
+          {
+            "prediction_index": 1,
+            "reference_index": 5,
+            "distance_px": 3.442580638117116
+          },
+          {
+            "prediction_index": 2,
+            "reference_index": 0,
+            "distance_px": 2.0402836479272235
+          },
+          {
+            "prediction_index": 3,
+            "reference_index": 2,
+            "distance_px": 1.8220342712046382
+          }
+        ]
+      }
+    },
+    {
+      "id": "cdfw2022-north",
+      "sample_id": "cal-poly-g2-cdfw2022",
+      "scoreable": false,
+      "window_xyxy": [
+        200,
+        128,
+        312,
+        256
+      ],
+      "context_origins": [
+        [
+          161,
+          89
+        ],
+        [
+          199,
+          89
+        ],
+        [
+          237,
+          89
+        ],
+        [
+          275,
+          89
+        ],
+        [
+          312,
+          89
+        ],
+        [
+          161,
+          127
+        ],
+        [
+          199,
+          127
+        ],
+        [
+          237,
+          127
+        ],
+        [
+          275,
+          127
+        ],
+        [
+          312,
+          127
+        ],
+        [
+          161,
+          165
+        ],
+        [
+          199,
+          165
+        ],
+        [
+          237,
+          165
+        ],
+        [
+          275,
+          165
+        ],
+        [
+          312,
+          165
+        ],
+        [
+          161,
+          203
+        ],
+        [
+          199,
+          203
+        ],
+        [
+          237,
+          203
+        ],
+        [
+          275,
+          203
+        ],
+        [
+          312,
+          203
+        ],
+        [
+          161,
+          241
+        ],
+        [
+          199,
+          241
+        ],
+        [
+          237,
+          241
+        ],
+        [
+          275,
+          241
+        ],
+        [
+          312,
+          241
+        ],
+        [
+          161,
+          256
+        ],
+        [
+          199,
+          256
+        ],
+        [
+          237,
+          256
+        ],
+        [
+          275,
+          256
+        ],
+        [
+          312,
+          256
+        ]
+      ],
+      "tile_size_px": 77,
+      "scored_detections": [],
+      "ignored_detections": [],
+      "scored_reference_points": null,
+      "candidate_count_in_evaluation_region": 0,
+      "provisional_reference_count": null,
+      "agreement": null,
+      "unscored_reason": "Vehicle separation and shadow boundaries are too ambiguous for a defensible assistant reference at this resolution. Requires human review."
+    },
+    {
+      "id": "cdfw2022-south",
+      "sample_id": "cal-poly-g2-cdfw2022",
+      "scoreable": false,
+      "window_xyxy": [
+        210,
+        256,
+        364,
+        379
+      ],
+      "context_origins": [
+        [
+          171,
+          217
+        ],
+        [
+          209,
+          217
+        ],
+        [
+          247,
+          217
+        ],
+        [
+          285,
+          217
+        ],
+        [
+          323,
+          217
+        ],
+        [
+          361,
+          217
+        ],
+        [
+          364,
+          217
+        ],
+        [
+          171,
+          255
+        ],
+        [
+          209,
+          255
+        ],
+        [
+          247,
+          255
+        ],
+        [
+          285,
+          255
+        ],
+        [
+          323,
+          255
+        ],
+        [
+          361,
+          255
+        ],
+        [
+          364,
+          255
+        ],
+        [
+          171,
+          293
+        ],
+        [
+          209,
+          293
+        ],
+        [
+          247,
+          293
+        ],
+        [
+          285,
+          293
+        ],
+        [
+          323,
+          293
+        ],
+        [
+          361,
+          293
+        ],
+        [
+          364,
+          293
+        ],
+        [
+          171,
+          331
+        ],
+        [
+          209,
+          331
+        ],
+        [
+          247,
+          331
+        ],
+        [
+          285,
+          331
+        ],
+        [
+          323,
+          331
+        ],
+        [
+          361,
+          331
+        ],
+        [
+          364,
+          331
+        ],
+        [
+          171,
+          369
+        ],
+        [
+          209,
+          369
+        ],
+        [
+          247,
+          369
+        ],
+        [
+          285,
+          369
+        ],
+        [
+          323,
+          369
+        ],
+        [
+          361,
+          369
+        ],
+        [
+          364,
+          369
+        ],
+        [
+          171,
+          379
+        ],
+        [
+          209,
+          379
+        ],
+        [
+          247,
+          379
+        ],
+        [
+          285,
+          379
+        ],
+        [
+          323,
+          379
+        ],
+        [
+          361,
+          379
+        ],
+        [
+          364,
+          379
+        ]
+      ],
+      "tile_size_px": 77,
+      "scored_detections": [],
+      "ignored_detections": [],
+      "scored_reference_points": null,
+      "candidate_count_in_evaluation_region": 0,
+      "provisional_reference_count": null,
+      "agreement": null,
+      "unscored_reason": "Vehicle separation and shadow boundaries are too ambiguous for a defensible assistant reference at this resolution. Requires human review."
+    }
+  ],
+  "inference_seconds": 62.63079432933591,
+  "pooled_provisional_agreement": {
+    "matched": 7,
+    "unmatched_predictions": 0,
+    "unmatched_reference": 11,
+    "precision": 1.0,
+    "recall": 0.3888888888888889,
+    "scored_windows": 2,
+    "not_human_ground_truth": true,
+    "scored_lots": 1,
+    "scored_source_vintages": 1
+  },
+  "forecast": {
+    "status": "not_available",
+    "probability": null
+  },
+  "permission": {
+    "status": "unknown"
+  },
+  "preprocessing": "RGB float32 NCHW /255; original source pixels in each crop; model performs internal resize/normalization; no external sharpening or super-resolution.",
+  "inference_tile_count": 138
+}

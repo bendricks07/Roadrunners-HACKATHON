@@ -1,0 +1,500 @@
+{
+  "scope": "All user-facing outputs from this CampusCurb chat plus the eight earlier generated CampusCurb design concepts. Runtime environments, scratch downloads and hosting credentials are not project deliverables.",
+  "files": [
+    {
+      "file": "campuscurb-concept-01-satellite-streets.png",
+      "bytes": 3409043,
+      "sha256": "99f8304e5585cc31715488109b7444341540dc9d480450ec4ee2fddf2dd53043"
+    },
+    {
+      "file": "campuscurb-concept-02-dark-selected-street-v2.png",
+      "bytes": 1741621,
+      "sha256": "7eee8a6c2c89040dd30945be7eddb9c7df20f2f131253d8e4c5742abfd87df48"
+    },
+    {
+      "file": "campuscurb-concept-02-dark-selected-street.png",
+      "bytes": 1843618,
+      "sha256": "d9bcb4eb918edc6d659d50ce3f4a18a213420b4aae87cb514f2adc1d562ebaf4"
+    },
+    {
+      "file": "campuscurb-concept-03-campus-parking-areas.png",
+      "bytes": 3532382,
+      "sha256": "004c42fb53d6a3c7c28b5877bfbd62f5e6bebd51fb28e6e5150102ac80bc214d"
+    },
+    {
+      "file": "campuscurb-concept-prompts.md",
+      "bytes": 10895,
+      "sha256": "ac50ffb9e306e9f90b8cbed412ab250227385a7ddcee1a9125bed9f8cbaaa68b"
+    },
+    {
+      "file": "campuscurb-design-test-review.md",
+      "bytes": 4860,
+      "sha256": "76b6e4b4046b3a2c9715f0ad61973ff01b4acf73874b6e9eb08427ff1495638a"
+    },
+    {
+      "file": "campuscurb-desktop-satellite.jpg",
+      "bytes": 238393,
+      "sha256": "2415d2a7ea9a427aa1a15b9c948ccaf3772222735faa48369c61e1362330066b"
+    },
+    {
+      "file": "campuscurb-desktop-selection.jpg",
+      "bytes": 210127,
+      "sha256": "7cd94a33c9c2fd445ead045b81b2405d4d3880b297713c3a78697fbf70445002"
+    },
+    {
+      "file": "campuscurb-live-desktop-satellite.jpg",
+      "bytes": 239874,
+      "sha256": "0f1ea4e0d7159fd93147e500a50a8c67ea41cef88e7ae775be41b1c005646991"
+    },
+    {
+      "file": "campuscurb-live-phone-dark-after-reload.jpg",
+      "bytes": 44301,
+      "sha256": "32338a74bd27d038fa8986a1ac16e3eb051c07138c889af3be23ae7133f8bcb0"
+    },
+    {
+      "file": "campuscurb-live-phone-dark-after-switch.jpg",
+      "bytes": 39674,
+      "sha256": "c9a15b4e6b7a3c6dc1bf6c188db973671529786a3761a30361b14c85d643ccd8"
+    },
+    {
+      "file": "campuscurb-live-phone-satellite.jpg",
+      "bytes": 77758,
+      "sha256": "12612e2808a6457f0344ae4b28bcacf7655f222eac91ae6a6d5a70b46441ca35"
+    },
+    {
+      "file": "campuscurb-live-phone-search.jpg",
+      "bytes": 43526,
+      "sha256": "24388a9920888a007c13fa4e450d49b77544e30350cc85115053f807bddb5506"
+    },
+    {
+      "file": "campuscurb-phone-dark-after-switch.jpg",
+      "bytes": 35554,
+      "sha256": "2e1140e87a7238ae58c0fce02d30559d325986c744ced5236b93c71230923924"
+    },
+    {
+      "file": "campuscurb-phone-dark-home.jpg",
+      "bytes": 42273,
+      "sha256": "a001950bee2fd3aad1a111d8b06da6d3f75fde8f75724a7c7735fff4b65b4759"
+    },
+    {
+      "file": "campuscurb-phone-dark-selected.jpg",
+      "bytes": 42255,
+      "sha256": "c21f18d5b9eb5c41f9c31a657a23458fed624fbb87709ed22587deba32af285a"
+    },
+    {
+      "file": "campuscurb-phone-reminder.jpg",
+      "bytes": 43454,
+      "sha256": "84ff3f69d8b8fd068118f75bb585f952cf68ae5b55ea08edc772ce7a9c85bbe5"
+    },
+    {
+      "file": "campuscurb-phone-search.jpg",
+      "bytes": 43746,
+      "sha256": "941e1d6006b43e166baf33b89434fa1ce8ab5507fa66b34c8d7b5b4a5d5317fd"
+    },
+    {
+      "file": "campuscurb-refined-streets-v2-prompt.md",
+      "bytes": 4271,
+      "sha256": "be25162c3579d7ca5b8a5186db6eca03631c87539b874e5673e4cd6ef1dcfac9"
+    },
+    {
+      "file": "design-history/exec-3cb1d39e-e192-4236-8197-71868af216eb.png",
+      "bytes": 2184676,
+      "sha256": "aabb85fa505cd7187a3b838c10e1ac83d2e569c5f8a645e721799aa696f51d8e"
+    },
+    {
+      "file": "design-history/exec-69d475e7-c4bb-493b-9da4-2e9a5422b3e7.png",
+      "bytes": 2028954,
+      "sha256": "acf3d80f3a297b1cf0950797b859e25b37c0fc16606d7e4229ca9e7c7511504c"
+    },
+    {
+      "file": "design-history/exec-8bddcabd-790f-4c9a-aa2a-187f2ea3a590.png",
+      "bytes": 1562886,
+      "sha256": "3a7b5ecc88640a2d4805d135a0f14f81008b4c4f3495fa10337b4a2c81825c5f"
+    },
+    {
+      "file": "design-history/exec-aad0fd7a-bd9b-4c1a-b702-9615ed525912.png",
+      "bytes": 1623689,
+      "sha256": "28b6ef7c2439423d56bf3adaa261da909d7e8dbf3feb0490fdcdcdcae1004d11"
+    },
+    {
+      "file": "design-history/exec-ba3a0155-b2ec-493c-a48d-25844319c79d.png",
+      "bytes": 1521551,
+      "sha256": "67e3e4dc981649f0dce3715753a6dd0fc43fb114b6e8db532b36cbd313c773e9"
+    },
+    {
+      "file": "design-history/exec-c81cf616-8574-4b00-9072-1870be64fbc4.png",
+      "bytes": 1615294,
+      "sha256": "7c3ecf67b2ccee1a099a4ccfacd4acc3d1f3956f2a764539ded6e020d012b527"
+    },
+    {
+      "file": "design-history/exec-f1fa6530-00b6-42ba-8ae9-02f89ad1a9e7.png",
+      "bytes": 3807170,
+      "sha256": "ff7e317397442d68e9a182dc845f784bd88dd4eda3cc32941a14230f569f9dd9"
+    },
+    {
+      "file": "design-history/exec-fd3502cc-f57c-4dc7-90cc-3555f04df3c6.png",
+      "bytes": 1699690,
+      "sha256": "663c06859956002c9007bba7ce2f73c1447aab39ec0ff42d124b37ae4f9c1cbe"
+    },
+    {
+      "file": "g2-vehicle-pilot/README.md",
+      "bytes": 4492,
+      "sha256": "d0a5ac14e3cc66f660b0764ae96afe534778d3327107a1c7b937879b1b647ab2"
+    },
+    {
+      "file": "g2-vehicle-pilot/SHA256SUMS.txt",
+      "bytes": 4549,
+      "sha256": "a9543feb0cee15bbc7011d471463ca75e54d2f18b6588e00c28f8f861bd8b470"
+    },
+    {
+      "file": "g2-vehicle-pilot/SOURCE.json",
+      "bytes": 414,
+      "sha256": "d207fd1321947415d62991f8566c9c9cd3c023450aafec589f57116d108a49d8"
+    },
+    {
+      "file": "g2-vehicle-pilot/VALIDATION.md",
+      "bytes": 1976,
+      "sha256": "51ea8948ca0b61b94daa84181978d0bbe61005903e6f29502ffe9d65ca9c4b99"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/cdfw2022-north-overlay.png",
+      "bytes": 56552,
+      "sha256": "8e65a5df729ed3b0491822b2a17f6d1a0bbe3acbca1d3cb7f8bd2b33daaf36da"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/cdfw2022-north-source.png",
+      "bytes": 24472,
+      "sha256": "7035ebce51817f03617921efa914a22853f998c9b175b1593806929c3a6d9826"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/cdfw2022-south-overlay.png",
+      "bytes": 66193,
+      "sha256": "fde39f0c9ed1a8368425b5cf212ca59a156ab6de1b0b7637185aa0a1d488ff89"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/cdfw2022-south-source.png",
+      "bytes": 30963,
+      "sha256": "e9a14d111aa865d0732b0bd9cc3b5ef42e6426beccca0bbeabcd9b19a4613246"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/context-detections.json",
+      "bytes": 4671,
+      "sha256": "248482f453744185930f6e5a01877a3f2b54bde6bc396ddd80b690c4474f129e"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/county2014-north-overlay.png",
+      "bytes": 123830,
+      "sha256": "97b25c2a8e164ecb4127df10450c3a7edc7f06a2729750a8bf71ae76c3e9efa5"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/county2014-north-source.png",
+      "bytes": 71562,
+      "sha256": "c991a0477d7e0b6408ecb337eead188dd6b3b6f99dbf9968ca164097f0a70652"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/county2014-south-overlay.png",
+      "bytes": 133009,
+      "sha256": "b68e79277410e2da7e23ca674c2ab114062edd0d89f796745c030f1ed4afb21a"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/county2014-south-source.png",
+      "bytes": 89203,
+      "sha256": "a71802ba55eb2b351e53f87a78d5f4af0b9dff3764b17528200fafd41c3ac9ca"
+    },
+    {
+      "file": "g2-vehicle-pilot/baseline/detections.json",
+      "bytes": 5553,
+      "sha256": "733281516e2f7f5fbb090247d13ddfc8635532731ee476ab325ec0c553e6592f"
+    },
+    {
+      "file": "g2-vehicle-pilot/control/control-positive.png",
+      "bytes": 356413,
+      "sha256": "a11b615493310e65b7c1f9ee403e83674ea1e71d46c79bc2e970932057c975b2"
+    },
+    {
+      "file": "g2-vehicle-pilot/control/positive-control-overlay.png",
+      "bytes": 342617,
+      "sha256": "fa925c36145c2f693905596c42e418898b84de0b293ddf0702e2536263b7da06"
+    },
+    {
+      "file": "g2-vehicle-pilot/control/positive-control.json",
+      "bytes": 7986,
+      "sha256": "db2a07ca9fe3fb22c527ee74ee08a67669966a09c11527a39d2251c4b4f3f623"
+    },
+    {
+      "file": "g2-vehicle-pilot/diagnostics/ground-scale-diagnostic.json",
+      "bytes": 3358,
+      "sha256": "65f534b4adc8b34ec0c91af8b56a7bad378fba214f6dbbd97ba9babb236bf1ad"
+    },
+    {
+      "file": "g2-vehicle-pilot/diagnostics/scale-diagnostic.json",
+      "bytes": 1818,
+      "sha256": "87ff2a21d9301cb0eb0a7f4bd8a4ac5174928a727bf1347da1b5c4966c1acdee"
+    },
+    {
+      "file": "g2-vehicle-pilot/inputs/samples/cal-poly-g2-cdfw2022.png",
+      "bytes": 393653,
+      "sha256": "b87b6f61033f69a76efc34156dbeb05fc324f7d3b4bcb7b189819c1935006a4a"
+    },
+    {
+      "file": "g2-vehicle-pilot/inputs/samples/cal-poly-g2-county2014.png",
+      "bytes": 1285322,
+      "sha256": "80bda0ea291d063f18d53766b993253e622d672b0d65eca72f53fd52f624dafa"
+    },
+    {
+      "file": "g2-vehicle-pilot/inputs/samples/manifest.json",
+      "bytes": 4008,
+      "sha256": "4411e112758fa64de11fdbf73ac287960d86d99badf6e548127e91d8cd3f73a0"
+    },
+    {
+      "file": "g2-vehicle-pilot/pilot-report.md",
+      "bytes": 7705,
+      "sha256": "9cc936d9370da283ce8efdf4ac3c87cbcfac4ef219a2d7f030ac5894408ba686"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/areas.json",
+      "bytes": 1326,
+      "sha256": "6a4636c298505704e3c33b1e2efdd3ccbf96d56a8ad033a6ed656ecfa4e3088d"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/detect.py",
+      "bytes": 18195,
+      "sha256": "e1b5270950219f4794ca39116f62f4c55c7aeecd2f1331f6ad173fa69b2f0f50"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/g2-reference.json",
+      "bytes": 3988,
+      "sha256": "1a75b4eec06a1ffaba8bf2d7b8bebba3c89806c65e2ba6b2e8b11304409de6aa"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/requirements-detect.txt",
+      "bytes": 132,
+      "sha256": "1cd53f9e45444dc62f20d7430d044b7ee730a93b9c13c3466e584e64b2314f6e"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/research.py",
+      "bytes": 21065,
+      "sha256": "904ace7fcd70a85e142665ed9028dd7e76d09478996ae6ac69caed5a473dc6a1"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/test_detect.py",
+      "bytes": 5975,
+      "sha256": "b07786e8ba73972b4f1e5521e5d7ee88523d297767f65821d7f4ec3493a07b09"
+    },
+    {
+      "file": "g2-vehicle-pilot/prototype/test_research.py",
+      "bytes": 6625,
+      "sha256": "f68efbab6bb9d6fb5ffc415f3780132bc74fb54685b5a8fc9ac70e4aa97b39ea"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/control-dataset-metadata.json",
+      "bytes": 13091,
+      "sha256": "e5f8a593ebfcdde379f8f31ba5617b36b7df6c8f22735556491740abdec71f5d"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/geobase-model-card.md",
+      "bytes": 3269,
+      "sha256": "648ec6a97683cd09c9e9357f150724e63a8c0f79659e92a56c3b9536aafe24ae"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/model-repository.json",
+      "bytes": 1051,
+      "sha256": "b5621e3a1ec34e226d497c6f3b0648ccda14dcd0a52a3ad31d2ee6a0058241ec"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/opengeoai-code-LICENSE.txt",
+      "bytes": 1074,
+      "sha256": "4e5066f2646eb11541f7217635383e49371bef5bfaf7e5d968a68f76c86a3f62"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/provenance.json",
+      "bytes": 1966,
+      "sha256": "26c32f80752eaec2c47dbd65485ef4ef30a494158534d25049a64e35ef4f615f"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/upstream-weights-card.md",
+      "bytes": 1668,
+      "sha256": "4dab6a99d527be637ab86ca4879b91f2aa1d3b8572af1a1e4e633473fb1cd679"
+    },
+    {
+      "file": "g2-vehicle-pilot/provenance/upstream-weights-repository.json",
+      "bytes": 1298,
+      "sha256": "5d9b4deeb42d3e65ee13e96ac17816d9c70645bab1bed4663d13542c8aa925a4"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/cdfw2022-north-overlay.png",
+      "bytes": 56552,
+      "sha256": "8e65a5df729ed3b0491822b2a17f6d1a0bbe3acbca1d3cb7f8bd2b33daaf36da"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/cdfw2022-north-source.png",
+      "bytes": 24472,
+      "sha256": "7035ebce51817f03617921efa914a22853f998c9b175b1593806929c3a6d9826"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/cdfw2022-south-overlay.png",
+      "bytes": 66193,
+      "sha256": "fde39f0c9ed1a8368425b5cf212ca59a156ab6de1b0b7637185aa0a1d488ff89"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/cdfw2022-south-source.png",
+      "bytes": 30963,
+      "sha256": "e9a14d111aa865d0732b0bd9cc3b5ef42e6426beccca0bbeabcd9b19a4613246"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/context-detections.json",
+      "bytes": 154515,
+      "sha256": "f4ae33b3cc4b6376c6705c09a17b54612b2165a5ed3b92bf6d369d58b8496783"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/county2014-north-overlay.png",
+      "bytes": 124097,
+      "sha256": "4a88704fb9e4aba187141ea0170fc2577872c6c1d4aa130e3cc7017034418525"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/county2014-north-source.png",
+      "bytes": 71562,
+      "sha256": "c991a0477d7e0b6408ecb337eead188dd6b3b6f99dbf9968ca164097f0a70652"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/county2014-south-overlay.png",
+      "bytes": 133203,
+      "sha256": "56defdc9a17b19088fe7708400b301caaf4fa79a826aa0249c06c263755107a5"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/county2014-south-source.png",
+      "bytes": 89203,
+      "sha256": "a71802ba55eb2b351e53f87a78d5f4af0b9dff3764b17528200fafd41c3ac9ca"
+    },
+    {
+      "file": "g2-vehicle-pilot/scale-adapted/detections.json",
+      "bytes": 15802,
+      "sha256": "17074fe642f480c9c2d9a978e297d5cb78bb7f1be3e7bac6505d00c6347ce6ec"
+    },
+    {
+      "file": "g2-vehicle-pilot.zip",
+      "bytes": 3616770,
+      "sha256": "e268fc5e35b073c0a9300e0126d11a97f7693941041591892739f876f388daec"
+    },
+    {
+      "file": "slo-parking-research/README.md",
+      "bytes": 1543,
+      "sha256": "ca86df3d9038890574fd95ffa71c11e3dd7aad09cb2b589e5dcbf8a7879c2800"
+    },
+    {
+      "file": "slo-parking-research/SOURCE.json",
+      "bytes": 452,
+      "sha256": "50ba4298e399814efc20856b3db84f4264ac09b9925d2db0961c201d0102dc62"
+    },
+    {
+      "file": "slo-parking-research/VALIDATION.md",
+      "bytes": 1400,
+      "sha256": "ed5bc31eef23eaa90015556debfac51d93f42688be7d1ff3ba5e074b0627dd94"
+    },
+    {
+      "file": "slo-parking-research/evidence/assessment.json",
+      "bytes": 445,
+      "sha256": "75fdeac1b4b7279d15c1be4e49cbf8eea45d9737f417d14bfcf7cae83956b822"
+    },
+    {
+      "file": "slo-parking-research/evidence/audit/audit.json",
+      "bytes": 35731,
+      "sha256": "f3facbdfc9673ab7454c89b07bc12c265ea420af1e47317da2f79f4d234860c4"
+    },
+    {
+      "file": "slo-parking-research/evidence/audit/raw/naip.json",
+      "bytes": 270070,
+      "sha256": "0767ef0858e96dc387531e7ee5d87d01e7e6644a39aaa90ee1f782a0252d86d6"
+    },
+    {
+      "file": "slo-parking-research/evidence/audit/raw/naip_collection.json",
+      "bytes": 5988,
+      "sha256": "d794c8ceb88befabc9a5d840c362f3c6dbe259d838618d51ee4260e861fccddf"
+    },
+    {
+      "file": "slo-parking-research/evidence/audit/raw/openaerialmap.json",
+      "bytes": 197,
+      "sha256": "28da710f38a4d478eab274065a4a400c4a8e87194e99e0cf86c54afe02146e59"
+    },
+    {
+      "file": "slo-parking-research/evidence/observations.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/cal-poly-g2-cdfw2022.png",
+      "bytes": 393653,
+      "sha256": "b87b6f61033f69a76efc34156dbeb05fc324f7d3b4bcb7b189819c1935006a4a"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/cal-poly-g2-county2014.png",
+      "bytes": 1285322,
+      "sha256": "80bda0ea291d063f18d53766b993253e622d672b0d65eca72f53fd52f624dafa"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/cal-poly-h1-cdfw2022.png",
+      "bytes": 364260,
+      "sha256": "69f8cc20c42f3a38483f498ecc6aee31f3ff61c673a666e877f81f6b0c6587cc"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/cal-poly-h1-county2014.png",
+      "bytes": 1970650,
+      "sha256": "c3190fafcff77a9fa38ac57abb95550ba2ccff1424b51f493af056d48fc3f208"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/campus-neighborhood-cdfw2022.png",
+      "bytes": 430133,
+      "sha256": "b7bfc5e18b0bfb2b59a207feb466b4315778e17a1ac62c19625573367a3a85ae"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/campus-neighborhood-county2014.png",
+      "bytes": 2141515,
+      "sha256": "aa50739a5d189b284efe2d746c494e0de99ba049680974b259b5f0d026ae84fe"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/downtown-slo-cdfw2022.png",
+      "bytes": 437813,
+      "sha256": "e91948ee47e7d792f02feee31927c1830e82ee9f0639bde69903d8444a81bea4"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/downtown-slo-county2014.png",
+      "bytes": 2352520,
+      "sha256": "172a824c978b8254f84247db49afba2a7af542c7b9502804df6425e42ae92305"
+    },
+    {
+      "file": "slo-parking-research/evidence/samples/manifest.json",
+      "bytes": 14522,
+      "sha256": "f583ec521dd54c7d83bded4aa4677f04f8b5ccbc63a16e4082438e772969b06f"
+    },
+    {
+      "file": "slo-parking-research/feasibility-study.md",
+      "bytes": 10919,
+      "sha256": "64466ac89b97dd6ed447fce3ec6ae688fccb60304a5f6f0556d33017cf1027c4"
+    },
+    {
+      "file": "slo-parking-research/prototype/README.md",
+      "bytes": 5011,
+      "sha256": "179afcaebcd4dacf50d67d18942ac1d4446707478667b15e1d7937c719c73cb2"
+    },
+    {
+      "file": "slo-parking-research/prototype/areas.json",
+      "bytes": 1326,
+      "sha256": "6a4636c298505704e3c33b1e2efdd3ccbf96d56a8ad033a6ed656ecfa4e3088d"
+    },
+    {
+      "file": "slo-parking-research/prototype/research.py",
+      "bytes": 21065,
+      "sha256": "904ace7fcd70a85e142665ed9028dd7e76d09478996ae6ac69caed5a473dc6a1"
+    },
+    {
+      "file": "slo-parking-research/prototype/test_research.py",
+      "bytes": 6625,
+      "sha256": "f68efbab6bb9d6fb5ffc415f3780132bc74fb54685b5a8fc9ac70e4aa97b39ea"
+    },
+    {
+      "file": "slo-parking-research.zip",
+      "bytes": 9422273,
+      "sha256": "70465a9f49d6dcd40b40367c73d0338cebeb5b1f41e768d52cd41eb57f5c2fb1"
+    }
+  ]
+}

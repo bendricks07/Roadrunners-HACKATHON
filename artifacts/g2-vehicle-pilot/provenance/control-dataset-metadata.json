@@ -1,0 +1,670 @@
+{
+  "_id": "67c3d202fa4955473c8a1bb4",
+  "id": "giswqs/geospatial",
+  "author": "giswqs",
+  "sha": "2a8d43dc22aeaa28b87780f4367368762ff1c9d0",
+  "lastModified": "2026-03-11T14:33:21.000Z",
+  "private": false,
+  "gated": false,
+  "disabled": false,
+  "tags": [
+    "license:mit",
+    "size_categories:n<1K",
+    "format:imagefolder",
+    "modality:image",
+    "library:datasets",
+    "library:mlcroissant",
+    "region:us"
+  ],
+  "downloads": 5735,
+  "likes": 3,
+  "cardData": {
+    "license": "mit"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "2017_WLOU_1_NEON_D13_WLOU_DP3_419000_4416000_CHM.tif"
+    },
+    {
+      "rfilename": "2017_WLOU_1_NEON_D13_WLOU_DP3_419000_4416000_maxar.tif"
+    },
+    {
+      "rfilename": "2017_WLOU_1_NEON_D13_WLOU_DP3_420000_4415000_CHM.tif"
+    },
+    {
+      "rfilename": "2017_WLOU_1_NEON_D13_WLOU_DP3_420000_4415000_RGB.tif"
+    },
+    {
+      "rfilename": "2017_WLOU_1_NEON_D13_WLOU_DP3_420000_4418000_CHM.tif"
+    },
+    {
+      "rfilename": "2017_WLOU_1_NEON_D13_WLOU_DP3_420000_4418000_RGB.tif"
+    },
+    {
+      "rfilename": "MGRS_100km.pmtiles"
+    },
+    {
+      "rfilename": "Mexico_HLS_samples.zip"
+    },
+    {
+      "rfilename": "README.md"
+    },
+    {
+      "rfilename": "aerial.tif"
+    },
+    {
+      "rfilename": "aerial_features.json"
+    },
+    {
+      "rfilename": "autzen.laz"
+    },
+    {
+      "rfilename": "basketball.mp4"
+    },
+    {
+      "rfilename": "basketball_players_segmented.mp4"
+    },
+    {
+      "rfilename": "bpe_simple_vocab_16e6.txt.gz"
+    },
+    {
+      "rfilename": "buildings_africa.tif"
+    },
+    {
+      "rfilename": "buildings_china.tif"
+    },
+    {
+      "rfilename": "buildings_original.geojson"
+    },
+    {
+      "rfilename": "caption-building.webp"
+    },
+    {
+      "rfilename": "caption-traffic-sign.webp"
+    },
+    {
+      "rfilename": "caption-water.webp"
+    },
+    {
+      "rfilename": "car_detection.geojson"
+    },
+    {
+      "rfilename": "car_segmented.mp4"
+    },
+    {
+      "rfilename": "cars.mp4"
+    },
+    {
+      "rfilename": "cars_15cm.tif"
+    },
+    {
+      "rfilename": "cars_7cm.tif"
+    },
+    {
+      "rfilename": "cars_test_15cm.tif"
+    },
+    {
+      "rfilename": "cars_test_7cm.tif"
+    },
+    {
+      "rfilename": "dc_impervious_surfaces.geojson"
+    },
+    {
+      "rfilename": "dc_naip.tif"
+    },
+    {
+      "rfilename": "dset-s2.zip"
+    },
+    {
+      "rfilename": "knoxville_landsat_2022.tif"
+    },
+    {
+      "rfilename": "knoxville_landsat_2023.tif"
+    },
+    {
+      "rfilename": "knoxville_landsat_2024.tif"
+    },
+    {
+      "rfilename": "knoxville_ndvi_2022.tif"
+    },
+    {
+      "rfilename": "knoxville_ndvi_2023.tif"
+    },
+    {
+      "rfilename": "knoxville_ndvi_2024.tif"
+    },
+    {
+      "rfilename": "landcover-sample-data.zip"
+    },
+    {
+      "rfilename": "landsat/1984.tif"
+    },
+    {
+      "rfilename": "landsat/1985.tif"
+    },
+    {
+      "rfilename": "landsat/1986.tif"
+    },
+    {
+      "rfilename": "landsat/1987.tif"
+    },
+    {
+      "rfilename": "landsat/1988.tif"
+    },
+    {
+      "rfilename": "landsat/1989.tif"
+    },
+    {
+      "rfilename": "landsat/1990.tif"
+    },
+    {
+      "rfilename": "landsat/1991.tif"
+    },
+    {
+      "rfilename": "landsat/1992.tif"
+    },
+    {
+      "rfilename": "landsat/1993.tif"
+    },
+    {
+      "rfilename": "landsat/1994.tif"
+    },
+    {
+      "rfilename": "landsat/1995.tif"
+    },
+    {
+      "rfilename": "landsat/1996.tif"
+    },
+    {
+      "rfilename": "landsat/1997.tif"
+    },
+    {
+      "rfilename": "landsat/1998.tif"
+    },
+    {
+      "rfilename": "landsat/1999.tif"
+    },
+    {
+      "rfilename": "landsat/2000.tif"
+    },
+    {
+      "rfilename": "landsat/2001.tif"
+    },
+    {
+      "rfilename": "landsat/2002.tif"
+    },
+    {
+      "rfilename": "landsat/2003.tif"
+    },
+    {
+      "rfilename": "landsat/2004.tif"
+    },
+    {
+      "rfilename": "landsat/2005.tif"
+    },
+    {
+      "rfilename": "landsat/2006.tif"
+    },
+    {
+      "rfilename": "landsat/2007.tif"
+    },
+    {
+      "rfilename": "landsat/2008.tif"
+    },
+    {
+      "rfilename": "landsat/2009.tif"
+    },
+    {
+      "rfilename": "landsat/2010.tif"
+    },
+    {
+      "rfilename": "landsat/2011.tif"
+    },
+    {
+      "rfilename": "landsat/2012.tif"
+    },
+    {
+      "rfilename": "landsat/2013.tif"
+    },
+    {
+      "rfilename": "landsat/README.md"
+    },
+    {
+      "rfilename": "landsat/filenames.csv"
+    },
+    {
+      "rfilename": "landsat/files.csv"
+    },
+    {
+      "rfilename": "landsat/test.ipynb"
+    },
+    {
+      "rfilename": "las_vegas_building_test.tif"
+    },
+    {
+      "rfilename": "las_vegas_buildings_train.geojson"
+    },
+    {
+      "rfilename": "las_vegas_naip_2019_a.tif"
+    },
+    {
+      "rfilename": "las_vegas_naip_2019_b.tif"
+    },
+    {
+      "rfilename": "las_vegas_naip_2022_a.tif"
+    },
+    {
+      "rfilename": "las_vegas_naip_2022_b.tif"
+    },
+    {
+      "rfilename": "las_vegas_test_hag.tif"
+    },
+    {
+      "rfilename": "las_vegas_test_naip.tif"
+    },
+    {
+      "rfilename": "las_vegas_test_naip_hag.tif"
+    },
+    {
+      "rfilename": "las_vegas_train_hag.tif"
+    },
+    {
+      "rfilename": "las_vegas_train_naip.tif"
+    },
+    {
+      "rfilename": "las_vegas_train_naip_hag.tif"
+    },
+    {
+      "rfilename": "m_3807511_ne_18_060_20181104.geojson"
+    },
+    {
+      "rfilename": "m_3807511_ne_18_060_20181104.tif"
+    },
+    {
+      "rfilename": "m_3807511_ne_18_060_20181104_landcover.tif"
+    },
+    {
+      "rfilename": "m_3807511_se_18_060_20181104.geojson"
+    },
+    {
+      "rfilename": "m_3807511_se_18_060_20181104.tif"
+    },
+    {
+      "rfilename": "m_3807511_se_18_060_20181104_landcover.tif"
+    },
+    {
+      "rfilename": "m_3807512_nw_18_060_20180815.geojson"
+    },
+    {
+      "rfilename": "m_3807512_nw_18_060_20180815.tif"
+    },
+    {
+      "rfilename": "m_3807512_nw_18_060_20180815_landcover.tif"
+    },
+    {
+      "rfilename": "m_3807512_sw_18_060_20180815.geojson"
+    },
+    {
+      "rfilename": "m_3807512_sw_18_060_20180815.tif"
+    },
+    {
+      "rfilename": "m_3807512_sw_18_060_20180815_landcover.tif"
+    },
+    {
+      "rfilename": "m_4711720_sw_11_060_20230701_20230911.tif"
+    },
+    {
+      "rfilename": "maxar_all_events.geojson"
+    },
+    {
+      "rfilename": "maxar_all_events.pmtiles"
+    },
+    {
+      "rfilename": "naip/README.md"
+    },
+    {
+      "rfilename": "naip/las_vegas_buildings_train.geojson"
+    },
+    {
+      "rfilename": "naip/m_4609825_nw_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609825_sw_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609931_ne_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609931_ne_14_1_20100629_subset.tif"
+    },
+    {
+      "rfilename": "naip/m_4609931_se_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609932_ne_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609932_nw_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609932_se_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/m_4609932_sw_14_1_20100629.tif"
+    },
+    {
+      "rfilename": "naip/ma_water.geojson"
+    },
+    {
+      "rfilename": "naip/ma_water_train.geojson"
+    },
+    {
+      "rfilename": "naip/naip_water_masks.tif"
+    },
+    {
+      "rfilename": "naip/naip_water_test.tif"
+    },
+    {
+      "rfilename": "naip/naip_water_train.tif"
+    },
+    {
+      "rfilename": "naip/nd_water.geojson"
+    },
+    {
+      "rfilename": "naip/nd_water_test.tif"
+    },
+    {
+      "rfilename": "naip/nd_water_train.geojson"
+    },
+    {
+      "rfilename": "naip/nv_m_3611546_ne_11_060_20220703_image.tif"
+    },
+    {
+      "rfilename": "naip/nv_m_3611546_nw_11_060_20220703_image.tif"
+    },
+    {
+      "rfilename": "naip/nv_m_3611546_se_11_060_20220611_image.tif"
+    },
+    {
+      "rfilename": "naip/nv_m_3611546_sw_11_060_20220611_image.tif"
+    },
+    {
+      "rfilename": "naip_building_masks.tif"
+    },
+    {
+      "rfilename": "naip_buildings_masks.geojson"
+    },
+    {
+      "rfilename": "naip_rgb_train.jp2"
+    },
+    {
+      "rfilename": "naip_rgb_train.tif"
+    },
+    {
+      "rfilename": "naip_rgb_train_3857.tif"
+    },
+    {
+      "rfilename": "naip_rgb_train_tiles.zip"
+    },
+    {
+      "rfilename": "naip_test.jp2"
+    },
+    {
+      "rfilename": "naip_test.tif"
+    },
+    {
+      "rfilename": "naip_test_buildings.geojson"
+    },
+    {
+      "rfilename": "naip_test_buildings.tif"
+    },
+    {
+      "rfilename": "naip_train.tif"
+    },
+    {
+      "rfilename": "naip_train_buildings.geojson"
+    },
+    {
+      "rfilename": "naip_train_buildings.tif"
+    },
+    {
+      "rfilename": "naip_train_buildings_v0.geojson"
+    },
+    {
+      "rfilename": "parking_lot.tif"
+    },
+    {
+      "rfilename": "parking_spots.tif"
+    },
+    {
+      "rfilename": "s2-minnesota-2025-08-31-subset.tif"
+    },
+    {
+      "rfilename": "s2-minnesota-2025-08-31.tif"
+    },
+    {
+      "rfilename": "sam_demo_image.tif"
+    },
+    {
+      "rfilename": "sentinel2a_kansas.tif"
+    },
+    {
+      "rfilename": "ship_detection.geojson"
+    },
+    {
+      "rfilename": "ship_detection_raw.geojson"
+    },
+    {
+      "rfilename": "ships_dubai.tif"
+    },
+    {
+      "rfilename": "ships_sfo_15cm.tif"
+    },
+    {
+      "rfilename": "ships_sfo_7cm.tif"
+    },
+    {
+      "rfilename": "ships_sfo_test_15cm.tif"
+    },
+    {
+      "rfilename": "ships_sfo_test_7cm.tif"
+    },
+    {
+      "rfilename": "solar_panels_davis_ca.geojson"
+    },
+    {
+      "rfilename": "solar_panels_davis_ca.tif"
+    },
+    {
+      "rfilename": "solar_panels_davis_ca_3857.geojson"
+    },
+    {
+      "rfilename": "solar_panels_test_davis_ca.tif"
+    },
+    {
+      "rfilename": "trees_brazil.tif"
+    },
+    {
+      "rfilename": "uc_berkeley.tif"
+    },
+    {
+      "rfilename": "uc_berkeley_1.tif"
+    },
+    {
+      "rfilename": "uc_berkeley_2.tif"
+    },
+    {
+      "rfilename": "uc_berkeley_3.tif"
+    },
+    {
+      "rfilename": "uc_berkeley_4.tif"
+    },
+    {
+      "rfilename": "waterbody-dataset-sample.zip"
+    },
+    {
+      "rfilename": "waterbody-dataset.zip"
+    },
+    {
+      "rfilename": "wetland_prediction.geojson"
+    },
+    {
+      "rfilename": "wetland_prediction.tif"
+    },
+    {
+      "rfilename": "wetland_prediction_smoothed.geojson"
+    },
+    {
+      "rfilename": "wetlands/2003.png"
+    },
+    {
+      "rfilename": "wetlands/2003.tif"
+    },
+    {
+      "rfilename": "wetlands/2004.png"
+    },
+    {
+      "rfilename": "wetlands/2004.tif"
+    },
+    {
+      "rfilename": "wetlands/2005.png"
+    },
+    {
+      "rfilename": "wetlands/2005.tif"
+    },
+    {
+      "rfilename": "wetlands/2006.png"
+    },
+    {
+      "rfilename": "wetlands/2006.tif"
+    },
+    {
+      "rfilename": "wetlands/2009.png"
+    },
+    {
+      "rfilename": "wetlands/2009.tif"
+    },
+    {
+      "rfilename": "wetlands/2010.png"
+    },
+    {
+      "rfilename": "wetlands/2010.tif"
+    },
+    {
+      "rfilename": "wetlands/2012.png"
+    },
+    {
+      "rfilename": "wetlands/2012.tif"
+    },
+    {
+      "rfilename": "wetlands/2014.png"
+    },
+    {
+      "rfilename": "wetlands/2014.tif"
+    },
+    {
+      "rfilename": "wetlands/2015.png"
+    },
+    {
+      "rfilename": "wetlands/2015.tif"
+    },
+    {
+      "rfilename": "wetlands/2016.png"
+    },
+    {
+      "rfilename": "wetlands/2016.tif"
+    },
+    {
+      "rfilename": "wetlands/2017.png"
+    },
+    {
+      "rfilename": "wetlands/2017.tif"
+    },
+    {
+      "rfilename": "wetlands/2018.png"
+    },
+    {
+      "rfilename": "wetlands/2018.tif"
+    },
+    {
+      "rfilename": "wetlands/2019.png"
+    },
+    {
+      "rfilename": "wetlands/2019.tif"
+    },
+    {
+      "rfilename": "wetlands/2020.png"
+    },
+    {
+      "rfilename": "wetlands/2020.tif"
+    },
+    {
+      "rfilename": "wetlands/2021.png"
+    },
+    {
+      "rfilename": "wetlands/2021.tif"
+    },
+    {
+      "rfilename": "wetlands/2022.png"
+    },
+    {
+      "rfilename": "wetlands/2022.tif"
+    },
+    {
+      "rfilename": "wetlands/2023.png"
+    },
+    {
+      "rfilename": "wetlands/2023.tif"
+    },
+    {
+      "rfilename": "wetlands/NAIP_NIR.gif"
+    },
+    {
+      "rfilename": "wetlands/NAIP_NIR.mp4"
+    },
+    {
+      "rfilename": "wetlands/NAIP_NIR_overlay.gif"
+    },
+    {
+      "rfilename": "wetlands/NAIP_NIR_overlay.mp4"
+    },
+    {
+      "rfilename": "wetlands/NAIP_RGB.gif"
+    },
+    {
+      "rfilename": "wetlands/NAIP_RGB.mp4"
+    },
+    {
+      "rfilename": "wetlands/NAIP_RGB_overlay.gif"
+    },
+    {
+      "rfilename": "wetlands/NAIP_RGB_overlay.mp4"
+    },
+    {
+      "rfilename": "wetlands/README.md"
+    },
+    {
+      "rfilename": "wetlands/bbox.geojson"
+    },
+    {
+      "rfilename": "wetlands/nwi_wetlands.geojson"
+    },
+    {
+      "rfilename": "wetlands/nwi_wetlands_4326.geojson"
+    },
+    {
+      "rfilename": "wetlands/nwi_wetlands_dissolved.geojson"
+    },
+    {
+      "rfilename": "wetlands/nwi_wetlands_dissolved_4326.geojson"
+    },
+    {
+      "rfilename": "whu_building_test.tif"
+    }
+  ],
+  "createdAt": "2025-03-02T03:35:30.000Z",
+  "usedStorage": 17108075097
+}

@@ -1,0 +1,211 @@
+{
+  "created_before_inference": true,
+  "labeler": "assistant visual review; human verification pending",
+  "rule": "vehicle center inside window; ambiguous objects separately marked; no claim vehicles are legally parked",
+  "windows": [
+    {
+      "id": "county2014-north",
+      "sample_id": "cal-poly-g2-county2014",
+      "window_xyxy": [
+        384,
+        246,
+        601,
+        492
+      ],
+      "chip_dimensions": [
+        217,
+        246
+      ],
+      "reference_points": [
+        [
+          42,
+          16
+        ],
+        [
+          106,
+          132
+        ],
+        [
+          111,
+          145
+        ],
+        [
+          111,
+          157
+        ],
+        [
+          60,
+          146
+        ],
+        [
+          75,
+          170
+        ],
+        [
+          80,
+          182
+        ],
+        [
+          95,
+          202
+        ],
+        [
+          96,
+          212
+        ],
+        [
+          96,
+          222
+        ],
+        [
+          88,
+          233
+        ]
+      ],
+      "uncertain_regions_xyxy": [
+        [
+          0,
+          30,
+          75,
+          132
+        ],
+        [
+          112,
+          160,
+          175,
+          199
+        ],
+        [
+          96,
+          230,
+          130,
+          246
+        ]
+      ],
+      "scoreable": true
+    },
+    {
+      "id": "county2014-south",
+      "sample_id": "cal-poly-g2-county2014",
+      "window_xyxy": [
+        404,
+        492,
+        699,
+        729
+      ],
+      "chip_dimensions": [
+        295,
+        237
+      ],
+      "reference_points": [
+        [
+          20,
+          14
+        ],
+        [
+          29,
+          34
+        ],
+        [
+          49,
+          65
+        ],
+        [
+          112,
+          19
+        ],
+        [
+          201,
+          186
+        ],
+        [
+          100,
+          224
+        ],
+        [
+          20,
+          224
+        ]
+      ],
+      "uncertain_regions_xyxy": [
+        [
+          75,
+          150,
+          145,
+          210
+        ],
+        [
+          197,
+          195,
+          238,
+          214
+        ],
+        [
+          130,
+          213,
+          190,
+          237
+        ]
+      ],
+      "scoreable": true
+    },
+    {
+      "id": "cdfw2022-north",
+      "sample_id": "cal-poly-g2-cdfw2022",
+      "window_xyxy": [
+        200,
+        128,
+        312,
+        256
+      ],
+      "chip_dimensions": [
+        112,
+        128
+      ],
+      "reference_points": null,
+      "uncertain_regions_xyxy": [],
+      "scoreable": false,
+      "unscored_reason": "Vehicle separation and shadow boundaries are too ambiguous for a defensible assistant reference at this resolution. Requires human review."
+    },
+    {
+      "id": "cdfw2022-south",
+      "sample_id": "cal-poly-g2-cdfw2022",
+      "window_xyxy": [
+        210,
+        256,
+        364,
+        379
+      ],
+      "chip_dimensions": [
+        154,
+        123
+      ],
+      "reference_points": null,
+      "uncertain_regions_xyxy": [],
+      "scoreable": false,
+      "unscored_reason": "Vehicle separation and shadow boundaries are too ambiguous for a defensible assistant reference at this resolution. Requires human review."
+    }
+  ],
+  "threshold": 0.3,
+  "match_radius_ground_m": 2.5,
+  "reference_status": "provisional assistant visual labels; not human ground truth",
+  "evaluation_margin_px": 8,
+  "frozen_at_utc": "2026-11-15T02:01:24.581322+00:00",
+  "review_note": "Vehicle centers corrected on a reference-only overlay before any detector predictions were generated or inspected.",
+  "source_samples": {
+    "cal-poly-g2-cdfw2022": {
+      "sha256": "b87b6f61033f69a76efc34156dbeb05fc324f7d3b4bcb7b189819c1935006a4a",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    "cal-poly-g2-county2014": {
+      "sha256": "80bda0ea291d063f18d53766b993253e622d672b0d65eca72f53fd52f624dafa",
+      "dimensions": [
+        985,
+        985
+      ]
+    }
+  }
+}

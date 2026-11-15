@@ -1,0 +1,234 @@
+{
+  "created_at_utc": "2026-11-15T02:08:16.793314+00:00",
+  "model": {
+    "repository": "geobase/car-detection",
+    "revision": "a3706aca0bce126fce8fa86061c09582a6562f62",
+    "sha256": "fc850ef4fbc16dfbe6272b69699ef91945aa0855e36d0f705cf475429d3eca04",
+    "model_card": "https://huggingface.co/geobase/car-detection",
+    "declared_license": "MIT",
+    "upstream_model_card": "https://huggingface.co/giswqs/geoai",
+    "onnxruntime_version": "1.32.0",
+    "numpy_version": "2.3.5"
+  },
+  "reference_sha256": "1a75b4eec06a1ffaba8bf2d7b8bebba3c89806c65e2ba6b2e8b11304409de6aa",
+  "reference_status": "provisional assistant visual labels; not human ground truth",
+  "reference_frozen_at_utc": "2026-11-15T02:01:24.581322+00:00",
+  "human_verified": false,
+  "confidence_threshold": 0.3,
+  "run_kind": "initial_512px_baseline",
+  "approx_ground_tile_m": null,
+  "duplicate_suppression_iou": null,
+  "tile_edge_exclusion_fraction": null,
+  "selection_note": "Fixed 512px context baseline.",
+  "match_radius_ground_m": 2.5,
+  "scope": "Small fixed windows at one lot. Not a validation of occupancy, parking legality or a forecast.",
+  "windows": [
+    {
+      "id": "county2014-north",
+      "sample_id": "cal-poly-g2-county2014",
+      "scoreable": true,
+      "window_xyxy": [
+        384,
+        246,
+        601,
+        492
+      ],
+      "context_origins": [
+        [
+          236,
+          113
+        ]
+      ],
+      "tile_size_px": 512,
+      "scored_detections": [],
+      "ignored_detections": [],
+      "scored_reference_points": [
+        [
+          42,
+          16
+        ],
+        [
+          106,
+          132
+        ],
+        [
+          111,
+          145
+        ],
+        [
+          111,
+          157
+        ],
+        [
+          60,
+          146
+        ],
+        [
+          75,
+          170
+        ],
+        [
+          80,
+          182
+        ],
+        [
+          95,
+          202
+        ],
+        [
+          96,
+          212
+        ],
+        [
+          96,
+          222
+        ],
+        [
+          88,
+          233
+        ]
+      ],
+      "candidate_count_in_evaluation_region": 0,
+      "provisional_reference_count": 11,
+      "agreement": {
+        "matched": 0,
+        "unmatched_predictions": 0,
+        "unmatched_reference": 11,
+        "precision_vs_provisional_reference": null,
+        "recall_vs_provisional_reference": 0.0,
+        "matches": []
+      }
+    },
+    {
+      "id": "county2014-south",
+      "sample_id": "cal-poly-g2-county2014",
+      "scoreable": true,
+      "window_xyxy": [
+        404,
+        492,
+        699,
+        729
+      ],
+      "context_origins": [
+        [
+          296,
+          354
+        ]
+      ],
+      "tile_size_px": 512,
+      "scored_detections": [],
+      "ignored_detections": [],
+      "scored_reference_points": [
+        [
+          20,
+          14
+        ],
+        [
+          29,
+          34
+        ],
+        [
+          49,
+          65
+        ],
+        [
+          112,
+          19
+        ],
+        [
+          201,
+          186
+        ],
+        [
+          100,
+          224
+        ],
+        [
+          20,
+          224
+        ]
+      ],
+      "candidate_count_in_evaluation_region": 0,
+      "provisional_reference_count": 7,
+      "agreement": {
+        "matched": 0,
+        "unmatched_predictions": 0,
+        "unmatched_reference": 7,
+        "precision_vs_provisional_reference": null,
+        "recall_vs_provisional_reference": 0.0,
+        "matches": []
+      }
+    },
+    {
+      "id": "cdfw2022-north",
+      "sample_id": "cal-poly-g2-cdfw2022",
+      "scoreable": false,
+      "window_xyxy": [
+        200,
+        128,
+        312,
+        256
+      ],
+      "context_origins": [
+        [
+          0,
+          0
+        ]
+      ],
+      "tile_size_px": 512,
+      "scored_detections": [],
+      "ignored_detections": [],
+      "scored_reference_points": null,
+      "candidate_count_in_evaluation_region": 0,
+      "provisional_reference_count": null,
+      "agreement": null,
+      "unscored_reason": "Vehicle separation and shadow boundaries are too ambiguous for a defensible assistant reference at this resolution. Requires human review."
+    },
+    {
+      "id": "cdfw2022-south",
+      "sample_id": "cal-poly-g2-cdfw2022",
+      "scoreable": false,
+      "window_xyxy": [
+        210,
+        256,
+        364,
+        379
+      ],
+      "context_origins": [
+        [
+          0,
+          0
+        ]
+      ],
+      "tile_size_px": 512,
+      "scored_detections": [],
+      "ignored_detections": [],
+      "scored_reference_points": null,
+      "candidate_count_in_evaluation_region": 0,
+      "provisional_reference_count": null,
+      "agreement": null,
+      "unscored_reason": "Vehicle separation and shadow boundaries are too ambiguous for a defensible assistant reference at this resolution. Requires human review."
+    }
+  ],
+  "inference_seconds": 1.804374124854803,
+  "pooled_provisional_agreement": {
+    "matched": 0,
+    "unmatched_predictions": 0,
+    "unmatched_reference": 18,
+    "precision": null,
+    "recall": 0.0,
+    "scored_windows": 2,
+    "not_human_ground_truth": true,
+    "scored_lots": 1,
+    "scored_source_vintages": 1
+  },
+  "forecast": {
+    "status": "not_available",
+    "probability": null
+  },
+  "permission": {
+    "status": "unknown"
+  },
+  "preprocessing": "RGB float32 NCHW /255; original source pixels in each crop; model performs internal resize/normalization; no external sharpening or super-resolution.",
+  "inference_tile_count": 3
+}

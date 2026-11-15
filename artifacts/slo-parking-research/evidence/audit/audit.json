@@ -1,0 +1,838 @@
+{
+  "checked_on": "2026-11-14",
+  "bbox_wgs84": [
+    -120.7,
+    35.25,
+    -120.62,
+    35.34
+  ],
+  "source_errors": {},
+  "naip_status": "ok",
+  "naip": {
+    "tile_count": 63,
+    "distinct_dates": [
+      {
+        "date": "2012-05-19",
+        "tile_count": 9,
+        "native_gsd_m": [
+          1.0
+        ]
+      },
+      {
+        "date": "2014-06-04",
+        "tile_count": 9,
+        "native_gsd_m": [
+          1.0
+        ]
+      },
+      {
+        "date": "2016-06-16",
+        "tile_count": 9,
+        "native_gsd_m": [
+          0.6
+        ]
+      },
+      {
+        "date": "2018-09-13",
+        "tile_count": 9,
+        "native_gsd_m": [
+          0.6
+        ]
+      },
+      {
+        "date": "2020-06-07",
+        "tile_count": 9,
+        "native_gsd_m": [
+          0.6
+        ]
+      },
+      {
+        "date": "2022-05-19",
+        "tile_count": 9,
+        "native_gsd_m": [
+          0.6
+        ]
+      },
+      {
+        "date": "2024-06-04",
+        "tile_count": 9,
+        "native_gsd_m": [
+          0.6
+        ]
+      }
+    ],
+    "area_coverage": [
+      {
+        "id": "cal-poly-h1",
+        "name": "Cal Poly H1 sample",
+        "center": [
+          -120.670190215348,
+          35.3045435183109
+        ],
+        "span_m": 300,
+        "role": "surface-lot sample, not a complete lot count",
+        "location_source": "https://services6.arcgis.com/2p89s65aBU4qN9v4/arcgis/rest/services/Parking_Lot/FeatureServer/41/query?objectIds=20&outFields=Names&outSR=4326&f=geojson",
+        "tile_count": 7,
+        "distinct_dates": [
+          "2012-05-19",
+          "2014-06-04",
+          "2016-06-16",
+          "2018-09-13",
+          "2020-06-07",
+          "2022-05-19",
+          "2024-06-04"
+        ],
+        "verified_capture_times": 0
+      },
+      {
+        "id": "cal-poly-g2",
+        "name": "Cal Poly G2 sample",
+        "center": [
+          -120.657940848321,
+          35.2966330146154
+        ],
+        "span_m": 240,
+        "role": "surface-lot image-quality target; permit eligibility evaluated separately",
+        "location_source": "https://services6.arcgis.com/2p89s65aBU4qN9v4/arcgis/rest/services/Parking_Lot/FeatureServer/41/query?objectIds=31&outFields=Names&outSR=4326&f=geojson",
+        "tile_count": 7,
+        "distinct_dates": [
+          "2012-05-19",
+          "2014-06-04",
+          "2016-06-16",
+          "2018-09-13",
+          "2020-06-07",
+          "2022-05-19",
+          "2024-06-04"
+        ],
+        "verified_capture_times": 0
+      },
+      {
+        "id": "campus-neighborhood",
+        "name": "Fredericks / Grand neighborhood sample",
+        "center": [
+          -120.6579,
+          35.2931
+        ],
+        "span_m": 300,
+        "role": "approximate research window, not surveyed legal curbs",
+        "location_source": "https://mapsa.slocity.org/hosting/rest/services/sloGISlayers/slogisLandManagement/FeatureServer/16",
+        "tile_count": 7,
+        "distinct_dates": [
+          "2012-05-19",
+          "2014-06-04",
+          "2016-06-16",
+          "2018-09-13",
+          "2020-06-07",
+          "2022-05-19",
+          "2024-06-04"
+        ],
+        "verified_capture_times": 0
+      },
+      {
+        "id": "downtown-slo",
+        "name": "Downtown SLO research sample",
+        "center": [
+          -120.661,
+          35.281
+        ],
+        "span_m": 300,
+        "role": "approximate downtown research window, not a parking facility or recommendation",
+        "location_source": "https://www.slocity.org/government/department-directory/public-works/parking-services/parking-rate-study",
+        "tile_count": 7,
+        "distinct_dates": [
+          "2012-05-19",
+          "2014-06-04",
+          "2016-06-16",
+          "2018-09-13",
+          "2020-06-07",
+          "2022-05-19",
+          "2024-06-04"
+        ],
+        "verified_capture_times": 0
+      }
+    ],
+    "items": [
+      {
+        "id": "ca_m_3512052_nw_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_060_20240604",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_060_20240604",
+        "acquisition_date": "2024-06-04",
+        "catalog_datetime": "2024-06-04T16:00:00.000000Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_060_20240604",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512052_nw_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_060_20220519",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_060_20220519",
+        "acquisition_date": "2022-05-19",
+        "catalog_datetime": "2022-05-19T16:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_060_20220519",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512052_nw_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_060_20200607",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_060_20200607",
+        "acquisition_date": "2020-06-07",
+        "catalog_datetime": "2020-06-07T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_060_20200607",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512052_nw_10_060_20180913_20190209",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_060_20180913_20190209",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_060_20180913_20190208",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_060_20180913_20190208",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_060_20180913_20190208",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_060_20180913_20190208",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_060_20180913_20190209",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_060_20180913_20190209",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_060_20180913_20190209",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_060_20180913_20190209",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_060_20180913_20190208",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_060_20180913_20190208",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_060_20180913_20190208",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_060_20180913_20190208",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_060_20180913_20190208",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_060_20180913_20190208",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_060_20180913_20190208",
+        "acquisition_date": "2018-09-13",
+        "catalog_datetime": "2018-09-13T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_060_20180913_20190208",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512052_nw_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_.6_20160616_20161004",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_.6_20160616_20161004",
+        "acquisition_date": "2016-06-16",
+        "catalog_datetime": "2016-06-16T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 0.6,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_.6_20160616_20161004",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512052_nw_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_1_20140604_20141030",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_1_20140604_20141030",
+        "acquisition_date": "2014-06-04",
+        "catalog_datetime": "2014-06-04T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_1_20140604_20141030",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512052_nw_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512052_nw_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_nw_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_nw_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512051_ne_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512051_ne_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_sw_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_sw_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512044_nw_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512044_nw_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_sw_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_sw_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_se_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_se_10_1_20120519_20120730",
+        "areas_covered_at_center": [
+          "cal-poly-h1",
+          "cal-poly-g2",
+          "campus-neighborhood",
+          "downtown-slo"
+        ]
+      },
+      {
+        "id": "ca_m_3512043_nw_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_nw_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      },
+      {
+        "id": "ca_m_3512043_ne_10_1_20120519_20120730",
+        "acquisition_date": "2012-05-19",
+        "catalog_datetime": "2012-05-19T00:00:00Z",
+        "capture_time_verified": false,
+        "time_precision": "acquisition date only; clock time unverified",
+        "native_gsd_m": 1.0,
+        "item_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ca_m_3512043_ne_10_1_20120519_20120730",
+        "areas_covered_at_center": []
+      }
+    ],
+    "forecast": {
+      "status": "not_available",
+      "probability": null,
+      "reason": "No validated demand model, verified flight times, or local occupancy labels."
+    }
+  },
+  "licensing": {
+    "catalog_license_label": "proprietary",
+    "pc_imagery_downloaded": false,
+    "note": "Catalog access is anonymous. Free access is not a substitute for asset-specific rights review. Sample imagery uses separately documented CDFW/County services.",
+    "usda_policy": "https://www.fpacbc.usda.gov/geospatial-services/customer-services"
+  },
+  "openaerialmap": {
+    "found": 0,
+    "scope": "This bbox and catalog at this check only",
+    "endpoint": "https://api.openaerialmap.org/meta"
+  }
+}

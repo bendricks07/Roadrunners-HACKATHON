@@ -1,0 +1,55 @@
+{
+  "_id": "68a1b1a6e6cf989ff00b4d41",
+  "id": "geobase/car-detection",
+  "private": false,
+  "tags": [
+    "onnx",
+    "geospatial",
+    "geobase",
+    "car-detection",
+    "vehicle-detection",
+    "license:mit",
+    "region:us"
+  ],
+  "downloads": 23,
+  "likes": 1,
+  "modelId": "geobase/car-detection",
+  "author": "geobase",
+  "sha": "a3706aca0bce126fce8fa86061c09582a6562f62",
+  "lastModified": "2025-08-22T13:24:43.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "tags": [
+      "geospatial",
+      "geobase",
+      "car-detection",
+      "vehicle-detection"
+    ],
+    "license": "mit"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "README.md"
+    },
+    {
+      "rfilename": "config.json"
+    },
+    {
+      "rfilename": "onnx/model_quantized.onnx"
+    },
+    {
+      "rfilename": "preprocessor_config.json"
+    }
+  ],
+  "spaces": [
+    "ZyrUx/geoai-all-in-one"
+  ],
+  "createdAt": "2025-08-17T10:40:38.000Z",
+  "usedStorage": 45456423
+}

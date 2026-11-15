@@ -1,0 +1,66 @@
+{
+  "_id": "67c4746d168648451e7ccbbe",
+  "id": "giswqs/geoai",
+  "private": false,
+  "tags": [
+    "license:mit",
+    "region:us"
+  ],
+  "downloads": 0,
+  "likes": 30,
+  "modelId": "giswqs/geoai",
+  "author": "giswqs",
+  "sha": "aa2b25d27b2c78f0e92c7b6a4813a571f9bc2288",
+  "lastModified": "2026-09-21T19:00:10.000Z",
+  "gated": false,
+  "disabled": false,
+  "model-index": null,
+  "config": {},
+  "cardData": {
+    "license": "mit"
+  },
+  "siblings": [
+    {
+      "rfilename": ".gitattributes"
+    },
+    {
+      "rfilename": "DINOv3_LICENSE.md"
+    },
+    {
+      "rfilename": "README.md"
+    },
+    {
+      "rfilename": "building_footprints_usa.pth"
+    },
+    {
+      "rfilename": "building_footprints_usa_rgbn.pth"
+    },
+    {
+      "rfilename": "car_detection_usa.pth"
+    },
+    {
+      "rfilename": "dinov3_vitl16_sat493m.pth"
+    },
+    {
+      "rfilename": "parking_spot_detection.safetensors"
+    },
+    {
+      "rfilename": "ship_detection.pth"
+    },
+    {
+      "rfilename": "solar_panel_detection.pth"
+    },
+    {
+      "rfilename": "water_detection.pth"
+    },
+    {
+      "rfilename": "water_detection_unet_best_model.pth"
+    },
+    {
+      "rfilename": "wetland_detection.pth"
+    }
+  ],
+  "spaces": [],
+  "createdAt": "2025-03-02T15:08:29.000Z",
+  "usedStorage": 4460677591
+}

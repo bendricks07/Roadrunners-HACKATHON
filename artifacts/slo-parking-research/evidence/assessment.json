@@ -1,0 +1,15 @@
+{
+  "labeled_samples": 0,
+  "verified_capture_times": 0,
+  "human_labels": 0,
+  "model_labels": 0,
+  "forecast": {
+    "status": "not_available",
+    "probability": null,
+    "reason": "Counts are observations, not a validated forecast. Need representative repeated surveys, matched capacity, and held-out validation."
+  },
+  "permission": {
+    "status": "unknown",
+    "reason": "Vehicle detections do not establish parking permission."
+  }
+}

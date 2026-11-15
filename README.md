@@ -46,6 +46,10 @@ Official-source desk research for the builder, checked November 14, 2026:
 - [Cal Poly SLO parking findings, conflicts, and source register](docs/research/cal-poly-slo-parking-2026-11-14.md)
 - [Ten campus location records and five city district summaries (JSON)](data/research/cal-poly-slo-parking-seed.json)
 - [Field survey, demo acceptance scenarios, and interview checklist](docs/research/parking-field-and-demo-checklist.md)
+- [Free SLO parking-data feasibility study](docs/research/free-parking-data-feasibility.md)
+- [G2 vehicle detector pilot and limitations](docs/research/g2-vehicle-detector-pilot.md)
+- [Runnable research and detector tools](tools/parking-research/README.md)
+- [All design concepts, app screenshots, research evidence, and downloadable handoffs](artifacts/README.md)
 
 This research is not a live availability feed or a field-verified eligibility dataset. Unknown entrances, boundaries, payment zones, and availability remain explicitly unset.
 

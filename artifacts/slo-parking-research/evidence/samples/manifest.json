@@ -1,0 +1,325 @@
+{
+  "samples": [
+    {
+      "id": "cal-poly-g2-cdfw2022",
+      "area_id": "cal-poly-g2",
+      "file": "cal-poly-g2-cdfw2022.png",
+      "area_role": "surface-lot image-quality target; permit eligibility evaluated separately",
+      "bbox_epsg3857": [
+        -13431727.563314086,
+        4204118.782685929,
+        -13431433.507485947,
+        4204412.83851407
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "approx_ground_m_per_output_pixel": 0.46875,
+      "capture_time_verified": false,
+      "source_url": "https://gis.wildlife.ca.gov/images/rest/services/Base_Remote_Sensing/NAIP_2022/ImageServer/exportImage?bbox=-13431727.563314086%2C4204118.782685929%2C-13431433.507485947%2C4204412.83851407&bboxSR=3857&imageSR=3857&size=512%2C512&f=image&format=png&adjustAspectRatio=false&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B4065%5D%2C+%22ascending%22%3A+true%7D",
+      "provenance": {
+        "raster_names": [
+          "m_3512043_se_10_060_20220519_20220908"
+        ],
+        "acquisition_dates": [
+          "2022-05-19"
+        ],
+        "native_gsd_m": [
+          0.6
+        ],
+        "rights": "CC BY / no restrictions on public use in California catalog",
+        "rights_url": "https://publish.data.ca.gov/dataset/naip-2022-60cm-california",
+        "credit": "USDA NAIP 2022 / California Department of Fish and Wildlife"
+      },
+      "sha256": "b87b6f61033f69a76efc34156dbeb05fc324f7d3b4bcb7b189819c1935006a4a",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run."
+    },
+    {
+      "id": "cal-poly-g2-county2014",
+      "area_id": "cal-poly-g2",
+      "file": "cal-poly-g2-county2014.png",
+      "area_role": "surface-lot image-quality target; permit eligibility evaluated separately",
+      "bbox_epsg3857": [
+        -13431727.563314086,
+        4204118.782685929,
+        -13431433.507485947,
+        4204412.83851407
+      ],
+      "dimensions": [
+        985,
+        985
+      ],
+      "approx_ground_m_per_output_pixel": 0.2436548223350254,
+      "capture_time_verified": false,
+      "source_url": "https://gis.slocounty.ca.gov/arcgis/rest/services/AERIALS/2014_Combined_WGSWMAS/MapServer",
+      "provenance": {
+        "collection_year": 2014,
+        "acquisition_month": "2014-06",
+        "acquisition_date": null,
+        "rights": "County explicitly places its 2014 aerial imagery in the public domain",
+        "rights_url": "https://www.slocounty.ca.gov/departments/information-technology/services/gis-services/gis-aerial-imagery",
+        "credit": "San Luis Obispo County / SLOCOG / Sanborn, 2014",
+        "method": "County published tile cache; no sharpening or upscaling",
+        "cache_level": 19,
+        "cache_tile_count": 20,
+        "cache_bounds": {
+          "row_min": 207139,
+          "row_max": 207142,
+          "col_min": 86421,
+          "col_max": 86425
+        },
+        "web_mercator_m_per_pixel": 0.29858214164761665,
+        "native_resolution_note": "Service contains 6-inch and 1-foot sources; cache pixel size is not verified native image resolution."
+      },
+      "sha256": "80bda0ea291d063f18d53766b993253e622d672b0d65eca72f53fd52f624dafa",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run.",
+      "reused_cached_sample": true
+    },
+    {
+      "id": "cal-poly-h1-cdfw2022",
+      "area_id": "cal-poly-h1",
+      "file": "cal-poly-h1-cdfw2022.png",
+      "area_role": "surface-lot sample, not a complete lot count",
+      "bbox_epsg3857": [
+        -13433127.93155975,
+        4205160.992040246,
+        -13432760.325840252,
+        4205528.597759743
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "approx_ground_m_per_output_pixel": 0.5859375,
+      "capture_time_verified": false,
+      "source_url": "https://gis.wildlife.ca.gov/images/rest/services/Base_Remote_Sensing/NAIP_2022/ImageServer/exportImage?bbox=-13433127.93155975%2C4205160.992040246%2C-13432760.325840252%2C4205528.597759743&bboxSR=3857&imageSR=3857&size=512%2C512&f=image&format=png&adjustAspectRatio=false&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B4065%5D%2C+%22ascending%22%3A+true%7D",
+      "provenance": {
+        "raster_names": [
+          "m_3512043_se_10_060_20220519_20220908"
+        ],
+        "acquisition_dates": [
+          "2022-05-19"
+        ],
+        "native_gsd_m": [
+          0.6
+        ],
+        "rights": "CC BY / no restrictions on public use in California catalog",
+        "rights_url": "https://publish.data.ca.gov/dataset/naip-2022-60cm-california",
+        "credit": "USDA NAIP 2022 / California Department of Fish and Wildlife"
+      },
+      "sha256": "69f8cc20c42f3a38483f498ecc6aee31f3ff61c673a666e877f81f6b0c6587cc",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run."
+    },
+    {
+      "id": "cal-poly-h1-county2014",
+      "area_id": "cal-poly-h1",
+      "file": "cal-poly-h1-county2014.png",
+      "area_role": "surface-lot sample, not a complete lot count",
+      "bbox_epsg3857": [
+        -13433127.93155975,
+        4205160.992040246,
+        -13432760.325840252,
+        4205528.597759743
+      ],
+      "dimensions": [
+        1231,
+        1231
+      ],
+      "approx_ground_m_per_output_pixel": 0.2437043054427295,
+      "capture_time_verified": false,
+      "source_url": "https://gis.slocounty.ca.gov/arcgis/rest/services/AERIALS/2014_Combined_WGSWMAS/MapServer",
+      "provenance": {
+        "collection_year": 2014,
+        "acquisition_month": "2014-06",
+        "acquisition_date": null,
+        "rights": "County explicitly places its 2014 aerial imagery in the public domain",
+        "rights_url": "https://www.slocounty.ca.gov/departments/information-technology/services/gis-services/gis-aerial-imagery",
+        "credit": "San Luis Obispo County / SLOCOG / Sanborn, 2014",
+        "method": "County published tile cache; no sharpening or upscaling",
+        "cache_level": 19,
+        "cache_tile_count": 36,
+        "cache_bounds": {
+          "row_min": 207124,
+          "row_max": 207129,
+          "col_min": 86402,
+          "col_max": 86407
+        },
+        "web_mercator_m_per_pixel": 0.29858214164761665,
+        "native_resolution_note": "Service contains 6-inch and 1-foot sources; cache pixel size is not verified native image resolution."
+      },
+      "sha256": "c3190fafcff77a9fa38ac57abb95550ba2ccff1424b51f493af056d48fc3f208",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run.",
+      "reused_cached_sample": true
+    },
+    {
+      "id": "campus-neighborhood-cdfw2022",
+      "area_id": "campus-neighborhood",
+      "file": "campus-neighborhood-cdfw2022.png",
+      "area_role": "approximate research window, not surveyed legal curbs",
+      "bbox_epsg3857": [
+        -13431759.765056025,
+        4203600.168359975,
+        -13431392.21131542,
+        4203967.722100581
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "approx_ground_m_per_output_pixel": 0.5859375,
+      "capture_time_verified": false,
+      "source_url": "https://gis.wildlife.ca.gov/images/rest/services/Base_Remote_Sensing/NAIP_2022/ImageServer/exportImage?bbox=-13431759.765056025%2C4203600.168359975%2C-13431392.21131542%2C4203967.722100581&bboxSR=3857&imageSR=3857&size=512%2C512&f=image&format=png&adjustAspectRatio=false&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B4065%5D%2C+%22ascending%22%3A+true%7D",
+      "provenance": {
+        "raster_names": [
+          "m_3512043_se_10_060_20220519_20220908"
+        ],
+        "acquisition_dates": [
+          "2022-05-19"
+        ],
+        "native_gsd_m": [
+          0.6
+        ],
+        "rights": "CC BY / no restrictions on public use in California catalog",
+        "rights_url": "https://publish.data.ca.gov/dataset/naip-2022-60cm-california",
+        "credit": "USDA NAIP 2022 / California Department of Fish and Wildlife"
+      },
+      "sha256": "b7bfc5e18b0bfb2b59a207feb466b4315778e17a1ac62c19625573367a3a85ae",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run."
+    },
+    {
+      "id": "campus-neighborhood-county2014",
+      "area_id": "campus-neighborhood",
+      "file": "campus-neighborhood-county2014.png",
+      "area_role": "approximate research window, not surveyed legal curbs",
+      "bbox_epsg3857": [
+        -13431759.765056025,
+        4203600.168359975,
+        -13431392.21131542,
+        4203967.722100581
+      ],
+      "dimensions": [
+        1231,
+        1231
+      ],
+      "approx_ground_m_per_output_pixel": 0.2437043054427295,
+      "capture_time_verified": false,
+      "source_url": "https://gis.slocounty.ca.gov/arcgis/rest/services/AERIALS/2014_Combined_WGSWMAS/MapServer",
+      "provenance": {
+        "collection_year": 2014,
+        "acquisition_month": "2014-06",
+        "acquisition_date": null,
+        "rights": "County explicitly places its 2014 aerial imagery in the public domain",
+        "rights_url": "https://www.slocounty.ca.gov/departments/information-technology/services/gis-services/gis-aerial-imagery",
+        "credit": "San Luis Obispo County / SLOCOG / Sanborn, 2014",
+        "method": "County published tile cache; no sharpening or upscaling",
+        "cache_level": 19,
+        "cache_tile_count": 36,
+        "cache_bounds": {
+          "row_min": 207144,
+          "row_max": 207149,
+          "col_min": 86420,
+          "col_max": 86425
+        },
+        "web_mercator_m_per_pixel": 0.29858214164761665,
+        "native_resolution_note": "Service contains 6-inch and 1-foot sources; cache pixel size is not verified native image resolution."
+      },
+      "sha256": "aa50739a5d189b284efe2d746c494e0de99ba049680974b259b5f0d026ae84fe",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run.",
+      "reused_cached_sample": true
+    },
+    {
+      "id": "downtown-slo-cdfw2022",
+      "area_id": "downtown-slo",
+      "file": "downtown-slo-cdfw2022.png",
+      "area_role": "approximate downtown research window, not a parking facility or recommendation",
+      "bbox_epsg3857": [
+        -13432104.828013064,
+        4201950.044707313,
+        -13431737.329201302,
+        4202317.543519076
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "approx_ground_m_per_output_pixel": 0.5859375,
+      "capture_time_verified": false,
+      "source_url": "https://gis.wildlife.ca.gov/images/rest/services/Base_Remote_Sensing/NAIP_2022/ImageServer/exportImage?bbox=-13432104.828013064%2C4201950.044707313%2C-13431737.329201302%2C4202317.543519076&bboxSR=3857&imageSR=3857&size=512%2C512&f=image&format=png&adjustAspectRatio=false&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B4065%5D%2C+%22ascending%22%3A+true%7D",
+      "provenance": {
+        "raster_names": [
+          "m_3512043_se_10_060_20220519_20220908"
+        ],
+        "acquisition_dates": [
+          "2022-05-19"
+        ],
+        "native_gsd_m": [
+          0.6
+        ],
+        "rights": "CC BY / no restrictions on public use in California catalog",
+        "rights_url": "https://publish.data.ca.gov/dataset/naip-2022-60cm-california",
+        "credit": "USDA NAIP 2022 / California Department of Fish and Wildlife"
+      },
+      "sha256": "e91948ee47e7d792f02feee31927c1830e82ee9f0639bde69903d8444a81bea4",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run."
+    },
+    {
+      "id": "downtown-slo-county2014",
+      "area_id": "downtown-slo",
+      "file": "downtown-slo-county2014.png",
+      "area_role": "approximate downtown research window, not a parking facility or recommendation",
+      "bbox_epsg3857": [
+        -13432104.828013064,
+        4201950.044707313,
+        -13431737.329201302,
+        4202317.543519076
+      ],
+      "dimensions": [
+        1231,
+        1231
+      ],
+      "approx_ground_m_per_output_pixel": 0.2437043054427295,
+      "capture_time_verified": false,
+      "source_url": "https://gis.slocounty.ca.gov/arcgis/rest/services/AERIALS/2014_Combined_WGSWMAS/MapServer",
+      "provenance": {
+        "collection_year": 2014,
+        "acquisition_month": "2014-06",
+        "acquisition_date": null,
+        "rights": "County explicitly places its 2014 aerial imagery in the public domain",
+        "rights_url": "https://www.slocounty.ca.gov/departments/information-technology/services/gis-services/gis-aerial-imagery",
+        "credit": "San Luis Obispo County / SLOCOG / Sanborn, 2014",
+        "method": "County published tile cache; no sharpening or upscaling",
+        "cache_level": 19,
+        "cache_tile_count": 36,
+        "cache_bounds": {
+          "row_min": 207166,
+          "row_max": 207171,
+          "col_min": 86416,
+          "col_max": 86421
+        },
+        "web_mercator_m_per_pixel": 0.29858214164761665,
+        "native_resolution_note": "Service contains 6-inch and 1-foot sources; cache pixel size is not verified native image resolution."
+      },
+      "sha256": "172a824c978b8254f84247db49afba2a7af542c7b9502804df6425e42ae92305",
+      "visible_vehicle_count": null,
+      "verified_legal_capacity": null,
+      "note": "Rendered source crop for visibility/labeling research. Output pixel size does not improve native resolution. No vehicle detector has run.",
+      "reused_cached_sample": true
+    }
+  ],
+  "source_errors": []
+}

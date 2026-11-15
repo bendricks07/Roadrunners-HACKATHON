@@ -1,0 +1,6 @@
+[
+  {"id":"cal-poly-h1","name":"Cal Poly H1 sample","center":[-120.670190215348,35.3045435183109],"span_m":300,"role":"surface-lot sample, not a complete lot count","location_source":"https://services6.arcgis.com/2p89s65aBU4qN9v4/arcgis/rest/services/Parking_Lot/FeatureServer/41/query?objectIds=20&outFields=Names&outSR=4326&f=geojson"},
+  {"id":"cal-poly-g2","name":"Cal Poly G2 sample","center":[-120.657940848321,35.2966330146154],"span_m":240,"role":"surface-lot image-quality target; permit eligibility evaluated separately","location_source":"https://services6.arcgis.com/2p89s65aBU4qN9v4/arcgis/rest/services/Parking_Lot/FeatureServer/41/query?objectIds=31&outFields=Names&outSR=4326&f=geojson"},
+  {"id":"campus-neighborhood","name":"Fredericks / Grand neighborhood sample","center":[-120.6579,35.2931],"span_m":300,"role":"approximate research window, not surveyed legal curbs","location_source":"https://mapsa.slocity.org/hosting/rest/services/sloGISlayers/slogisLandManagement/FeatureServer/16"},
+  {"id":"downtown-slo","name":"Downtown SLO research sample","center":[-120.661,35.281],"span_m":300,"role":"approximate downtown research window, not a parking facility or recommendation","location_source":"https://www.slocity.org/government/department-directory/public-works/parking-services/parking-rate-study"}
+]
