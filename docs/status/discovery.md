@@ -61,3 +61,5 @@ Maintained code lives in [tools/parking-research](../../tools/parking-research/R
 Every pre-existing local and GitHub branch was already contained in `main` at this audit; there were no open pull requests. The [repository audit](repository.md) records the checked tips. Current code, design assets, research, and evidence are all versioned together.
 
 GitHub source and the hosted Site have separate publication histories. The existing public Site is now **version 7**, from app commit `417cc78`, including the home legend alignment fix. All 24 static app files matched the source. The hosted legend was verified at 1280×720, left-aligned with the search dock and 12px above it. See [deployment notes](../deployment.md), [legend verification](../../artifacts/legend-fix/README.md), and the [earlier version 6 checks](../../artifacts/hosted-v6/README.md). Future GitHub pushes still require a separate Site publication.
+
+Quick Verity(1) review on a separate branch: address-range search fix, focused browser smoke checks, and 64 passing tests. See [run report](../verity/Verity(1).md). Main and production are unchanged by this run.

@@ -56,7 +56,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
   const persist = () => { try { localStorage.setItem(PREFS, JSON.stringify({ selectedId: s.selectedId, permits: s.permits, cityPermits: s.cityPermits, destinationId: s.destinationId, priority: s.priority, basemap: s.basemap, estimates: s.estimates, forceFallback: s.forceFallback })); } catch { /* Still usable in this tab. */ } };
   const refresh = () => { persist(); onRefresh(); };
   const visible = () => PARKING_AREAS.filter(area => {
-    const searchTerms = [area.name, area.shortName, ...area.categories, ...(area.guidance?.districts || [])];
+    const searchTerms = [area.name, area.shortName, area.blockLabel || '', ...area.categories, ...(area.guidance?.districts || [])];
     return (s.kind === 'all' || area.kind === s.kind) && searchTerms.join(' ').toLowerCase().includes(s.query.trim().toLowerCase());
   });
   const matchingDestinations = () => DESTINATIONS.filter(d => `${d.name} ${d.subtitle}`.toLowerCase().includes(s.query.trim().toLowerCase()));
