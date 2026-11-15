@@ -83,7 +83,9 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
   }
   function selectArea(id) {
     if (!CAMPUS_AREAS.some(a => a.id === id)) return;
-    s.selectedId = id; s.detail = true; s.expanded = true; refresh(); adapter?.focus(feature(id));
+    s.selectedId = id; s.detail = true; s.expanded = true; persist();
+    document.dispatchEvent(new CustomEvent('campuscurb:explore-real'));
+    adapter?.focus(feature(id));
   }
   function sources() {
     showModal(`${modalHeader('A clearer view of the facts.', 'Real map data. Honest uncertainty.')}<p class="modal-copy">Parking outlines and location points are queried directly from Cal Poly Facilities’ public campus GIS. These are area boundaries, not verified entrances or exact parking stalls.</p><p class="modal-copy">Rules were researched ${CHECKED_ON}. The GIS classification is not used as permission: for example, G2 is labeled commuter in the GIS but the lot directory excludes commuter permits. Unresolved eligibility stays gray. All space availability remains unknown.</p><div class="geo-source-links"><a href="https://maps.calpoly.edu/" target="_blank" rel="noopener noreferrer">Official campus map${icon('external')}</a><a href="${GIS_POLYGONS}" target="_blank" rel="noopener noreferrer">Campus parking outlines${icon('external')}</a><a href="${GIS_POINTS}" target="_blank" rel="noopener noreferrer">Campus parking locations${icon('external')}</a><a href="${selected().sourceUrl}" target="_blank" rel="noopener noreferrer">Parking rules & space categories${icon('external')}</a><a href="https://afd.calpoly.edu/parking/slo/lot-closures/" target="_blank" rel="noopener noreferrer">Official lot closures${icon('external')}</a></div><p class="modal-copy">Imagery is not live. No vacancy feed, verified walking routes, or street-side rule dataset is connected. The sample walkthrough uses separate fictional data.</p><button class="secondary-button" data-geo-action="retry-data">Reload campus GIS${icon('layers')}</button>`);
@@ -113,7 +115,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
       case 'reminder': reminder(); break;
       case 'retry-data': document.getElementById('modal').close(); void loadData(); break;
       case 'fallback': s.forceFallback = true; persist(); location.reload(); break;
-      case 'show-saved': selectArea(target.dataset.id); document.dispatchEvent(new CustomEvent('campuscurb:explore-real')); break;
+      case 'show-saved': selectArea(target.dataset.id); break;
       case 'walkthrough': document.dispatchEvent(new CustomEvent('campuscurb:walkthrough')); break;
     }
   });
