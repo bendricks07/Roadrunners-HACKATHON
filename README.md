@@ -4,11 +4,13 @@
 
 Teammates / GPTs: read the [current implementation status](docs/status/discovery.md), [map configuration](docs/maps.md), and [updated handoff](docs/handoffs/satellite-parking-map.md) before starting new work. Use the latest `main` as your base.
 
-The real geographic Explore view is now integrated on `main`: satellite/terrain switching, campus lot outlines and garage symbols, permit/stay checks, source details, and saved manual return reminders. Cal Poly's public GIS supplies the geometry directly; the old fictional walkthrough remains separately accessible.
+The home screen now opens directly to a full-screen geographic map, floating search, and two essential controls. Tap a street or lot for its compact detail card, directions, rules, and a saved-car reminder. Open **Layers** for Satellite, Dark, Standard, or Terrain, trip/permit settings, source details, and the separate sample walkthrough.
 
-**Google Maps is the preferred provider.** Open **Map settings → Connect Google Maps** with a restricted Maps JavaScript API browser key or a [Google Maps demo key](https://developers.google.com/maps/documentation/javascript/demo-key). A demo key supports satellite/terrain prototyping without billing, subject to Google's eligibility, terms, and quotas. Connection through this form applies to that browser only. Until Google is configured, the app explicitly labels its USDA / USGS imagery and topographic fallback.
+The map extends beyond campus with **40 source-backed City street segments on nine nearby roads**, campus lot outlines, and distinct garage symbols. The satellite fallback now uses **2022 USDA NAIP aerial imagery at 0.6 m native resolution**, with a sharp OpenFreeMap vector map for dark/standard views. No npm install is needed.
 
-Current permit records are incomplete: missing rules remain gray, known exclusions appear red, and occupancy remains unknown. No live vacancies, verified driving entrances, or street parking permissions are invented. See [the map implementation status](docs/status/discovery.md) and [map configuration](docs/maps.md).
+**Chance colors are illustrative demo estimates, not live availability or a validated forecast.** They are independent of permit eligibility, can be turned off in Layers, and never override known exclusions or closed K1. Actual availability and incomplete parking permissions remain unknown. Street highlights are approximate display bands around source centerlines, not surveyed curbs or proof that parking is allowed.
+
+**Google Maps remains the preferred provider.** Open **Layers → Map connection** with a restricted Maps JavaScript API browser key or a [Google Maps demo key](https://developers.google.com/maps/documentation/javascript/demo-key). This connects that browser only. No shared Google key has been supplied; current fallbacks retain their actual provider credits. See [map configuration](docs/maps.md).
 
 ## Open the live demo
 
@@ -24,7 +26,7 @@ The interactive browser prototype is in [`demo/`](demo/). Explore uses real geog
 npm --prefix demo start
 ```
 
-Open **http://localhost:5173**. Requires Node.js 20 or newer; no npm install or backend is needed. Google Maps needs a browser/demo key; the labeled USGS fallback and sample walkthrough work without one.
+Open **http://localhost:5173**. Requires Node.js 20 or newer; no npm install or backend is needed. Google Maps needs a browser/demo key; the credited NAIP / OpenFreeMap / USGS fallbacks and sample walkthrough work without one.
 
 - Explore four campus destinations, compare three sample parking areas, and change permit/stay settings.
 - Preview a route, confirm parking, save a car-location note, and manage a persisted parking session.

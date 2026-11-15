@@ -46,9 +46,9 @@ export function parseCampusDateInput(value) {
   return matches.length === 1 ? matches[0] : NaN;
 }
 export function featureCenter(geometry) {
-  if (!geometry || !['Point', 'Polygon', 'MultiPolygon'].includes(geometry.type) || !Array.isArray(geometry.coordinates)) return null;
+  if (!geometry || !['Point', 'Polygon', 'MultiPolygon', 'LineString', 'MultiLineString'].includes(geometry.type) || !Array.isArray(geometry.coordinates)) return null;
   if (geometry.type === 'Point') return geometry.coordinates.length >= 2 && geometry.coordinates.every(Number.isFinite) ? [geometry.coordinates[1], geometry.coordinates[0]] : null;
-  const points = geometry.coordinates.flat(geometry.type === 'MultiPolygon' ? 2 : 1);
+  const points = geometry.type === 'LineString' ? geometry.coordinates : geometry.coordinates.flat(geometry.type === 'MultiPolygon' ? 2 : 1);
   if (!points.length || points.some(p => !Number.isFinite(p[0]) || !Number.isFinite(p[1]))) return null;
   return [(Math.min(...points.map(p => p[1])) + Math.max(...points.map(p => p[1]))) / 2, (Math.min(...points.map(p => p[0])) + Math.max(...points.map(p => p[0]))) / 2];
 }

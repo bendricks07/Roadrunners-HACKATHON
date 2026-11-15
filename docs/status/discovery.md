@@ -1,35 +1,35 @@
 # Geographic Explore implementation
 
-Canonical branch: `main`, integrated from `codex/satellite-parking-map`. Implementation started November 14, 2026.
+Canonical base: `main`. Current redesign branch: `codex/map-first-redesign`, based on integrated main `4aeeed1`. November 14, 2026 local time.
 
-Published as version 3 at https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site using integrated main app source `3240738` and Site source `fab6d00`. Google is ready to connect, but no shared Google browser/demo key has been supplied; the default view is the labeled USGS fallback.
+Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site . Publication provenance is recorded in `docs/deployment.md` after deploying this revision. No shared Google browser/demo key has been supplied.
 
 ## Implemented
 
-- A map-first Explore layout with a floating desktop panel and phone bottom sheet, restrained light/dark surfaces, a clear legend, parking categories, source information, and keyboard-accessible controls.
-- Google Maps adapter with satellite/hybrid, terrain, GeoJSON overlays, custom accessible parking labels, and an in-app browser/demo-key connection. The source default is blank; a Google key has not been supplied or tested against Google's live SDK.
-- An explicitly labeled USDA/USGS aerial/topographic fallback and locally bundled Leaflet, with no npm install needed to run the app.
-- Direct Cal Poly public GIS queries for eight lot/structure outlines plus closed K1's point; no invented polygons or street segments.
-- Shared permit/time evaluation preserving exclusions, whole-stay checks, unknown policy states, separate occupancy, and distinct Grand Avenue/131 identities.
-- Real-area manual reminders with an explicitly entered deadline and walk estimate, absolute timestamps, local notes, and restore/end behavior. Original demo sessions remain separate.
-- The old fictional walkthrough is reachable from Explore, and the 90-second presentation path remains available.
+- The approved satellite/dark concepts now drive a full-screen map UI. Launch shows only search, layers/location controls, a compact estimate legend, and required attribution. No persistent sidebar, header, results, filter form, or tab bar.
+- A compact selected-place card includes street/lot/garage type, explicit demo estimate, sign/permit caution, Google Maps directions to the mapped area, detailed rules, and saved-car reminders. Exact driving entrances remain unverified.
+- Search groups nearby street names and campus parking, with parking-type filters and trip/permit settings behind an explicit action. Keyboard search/Enter/Escape and map selection retain the same map instance.
+- Satellite uses 2022 USDA NAIP imagery from CDFW at 0.6 m native resolution, replacing the coarse USGS imagery cache. Dark/Standard use original restrained MapLibre styles over OpenFreeMap vector tiles. Terrain remains USGS. All providers retain their real credits.
+- Google Maps is preferred when a browser key is connected, with satellite, dark road map, standard, and terrain views. The connection form remains per browser; no key is committed or a live Google SDK result claimed.
+- 40 real source segments on Fredericks St, Loomis St, Slack St, Murray Ave, Grand Ave, California Blvd, Foothill Blvd, Hathway Ave, and College Ave are queried directly from the City. Exact source IDs AND names must match. These are centerlines, not surveyed curbs or verified street-parking permissions.
+- Eight Cal Poly GIS lot/structure outlines plus closed K1's source point remain separate from street geometry. Original G2/131 permit exclusions, H14 subareas, and closure rules are preserved.
+- Red/yellow/green chance colors are explicitly illustrative demo fixtures. They are independent of eligibility and switchable in Layers. Known ineligibility uses a neutral restriction symbol and cannot become an available recommendation. Actual occupancy remains unknown.
+- Manual reminders for campus or street source IDs require the driver's future deadline, own walk estimate, buffer, note, and acknowledgement. Deadlines persist as absolute timestamps. The original fictional 90-second walkthrough remains available in Layers.
 
 ## Validation
 
-The `Verity` reliability/accessibility pass is integrated on `main`, including saved-state/report normalization, keyboard navigation, timer draft preservation, and cross-tab preferences. Its original walkthrough verification report is in `docs/verity/Verity.md`; it does not establish visual QA for the new geographic view.
-
-- `npm --prefix demo run check`: 26 passing tests covering source conflicts, permit exclusions, future/partial closures, incomplete policy, GIS identity matching, missing geometry, campus timezone/DST, manual sessions, and original session/report behavior.
-- Actual Cal Poly GIS endpoints returned public GeoJSON with `Access-Control-Allow-Origin: *`; the official map configuration identifies both services.
-- A National Map aerial tile at Cal Poly returned HTTP 200 with JPEG imagery. Local app and module requests returned HTTP 200.
-- A JSDOM integration smoke check passed using the actual Leaflet library and fetched campus GIS responses: nine markers/eight outlines, permit and duration updates, selecting details, manual reminder save/restore/end, Google configuration dialog, the original demo session, and the empty street-data state. This checks DOM behavior, not visual rendering in a browser.
-- Full visual browser QA was unavailable because the connected Browser control tool was not exposed in this session. The laptop's existing preview server is serving the updated page at http://localhost:5173.
-- A Google browser/demo key is still required to verify Google-hosted rendering and authentication. Do not describe the fallback as Google imagery.
+- `npm --prefix demo run check`: 32 passing tests. Six new tests cover independent chance fixtures, restrictions overriding fixtures, exact street source identity/type, line geometry, street-session restoration, and invalid City responses. Existing Verity/rule checks remain passing.
+- Full MapLibre base styles AND parking overlay layers validated against the upstream style-spec validator for all four views.
+- JSDOM integration with the actual vendored Leaflet fallback and fetched official source responses passed: nine campus pins, eight outlines, 40 street segments, minimal home, retained map DOM, street search/selection/directions, manual save/restore/end, dark appearance, chance toggle, G2 commuter/time exclusions, Google setup form, and original walkthrough.
+- City runtime query returned HTTP 200 with all 40 source features. CDFW sample returned HTTP 200/JPEG with working CORS; the official California catalog documents 2022/0.6 m/public-use attribution terms.
+- Native preview showed the new desktop shell, but its browser connection disconnected during visual review. Full visual QA across both appearances and phone sizes was not completed; DOM integration/style validation are not a substitute for a rendered visual pass. Google rendering/authentication still requires an appropriate key.
 
 ## Remaining data and integration work
 
-- Connect an appropriate Google browser/demo key for the shared judge deployment; the current connection form is per browser.
-- Field/source review of complete permit rules, exact stalls/subareas, current temporary restrictions, real entrances, costs, and walking routes. Existing research records do not establish a complete current eligibility policy.
-- Source-backed curb segments for street parking, including the correct side and signs. None is currently represented as available parking.
-- Real occupancy, shared reports, live AI, payments, automatic detection, and background/native notification delivery remain unconnected.
+- Connect a suitable Google key for the shared judge deployment; current UI connection is per browser only.
+- Replace the explicit chance fixtures with a validated forecast or actual feed, including freshness/confidence metadata.
+- Verify exact block faces, current signs, permits, curb markings, temporary restrictions, stalls/subareas, entrances, costs, and walking routes. City centerlines provide no parking permission or occupancy fields. Do not infer permission from imagery.
+- City permit district layer 31 mixes residential districts and timed zones; its redistribution restrictions mean no district snapshot is committed. Current street permissions remain unconfirmed.
+- Shared reports, live AI, payments, automatic detection, and background/native notification delivery remain unconnected.
 
-Do not attach the walkthrough's sample prices, walking times, closures, or rules to these real campus IDs. Continue using the existing Site project and public URL; GitHub pushes alone do not publish the demo.
+Keep the existing Site project and public URL. GitHub pushes alone do not publish the demo.

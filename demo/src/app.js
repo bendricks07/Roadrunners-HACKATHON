@@ -1,7 +1,7 @@
 import { AREAS, DESTINATIONS, PERMITS, INITIAL_REPORTS, REPORT_TYPES, DATA_NOTICE } from './data.js';
 import { activeReports, evaluateParking, getWalkMinutes, createSession, headBackAt, sessionPhase, isValidSession, parseSavedState, normalizeReports, MINUTE } from './rules.js';
 import { campusMap } from './map.js';
-import { CAMPUS_AREAS } from './map-model.js';
+import { PARKING_AREAS } from './street-model.js';
 import { createDiscovery } from './discovery.js';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -51,7 +51,7 @@ function readSaved() {
 }
 const saved = readSaved();
 function validStoredSession(value) {
-  return isValidSession(value, [...AREAS, ...CAMPUS_AREAS].map(a => a.id), DESTINATIONS.map(d => d.id)) && (CAMPUS_AREAS.some(a => a.id === value.areaId) === (value.manual === true));
+  return isValidSession(value, [...AREAS, ...PARKING_AREAS].map(a => a.id), DESTINATIONS.map(d => d.id)) && (PARKING_AREAS.some(a => a.id === value.areaId) === (value.manual === true));
 }
 const restoredSession = validStoredSession(saved.session) ? saved.session : null;
 const state = {
@@ -85,7 +85,7 @@ const plan = () => ({ permit: state.permit, durationMinutes: state.durationMinut
 const eligibility = a => evaluateParking(a, plan(), state.reports);
 const walk = a => getWalkMinutes(a, state.destinationId, state.reports);
 const money = a => a.price === 0 ? a.permits.includes(state.permit) ? 'Included with permit' : 'Permit required' : `$${a.price} demo rate`;
-const discovery = createDiscovery({ icon, escape, time, onRefresh: render, onToast: toast, showModal, modalHeader, getSession: () => state.session, onSession(session) {
+const discovery = createDiscovery({ icon, escape, time, onRefresh: render, onToast: toast, showModal, modalHeader, getSession: () => state.session, onAppearance(theme) { state.theme = theme; persist(); }, onSession(session) {
   state.session = session; state.tab = 'parking'; state.mode = 'real'; state.reminderPreview = false; lastPhase = sessionPhase(session); persist(); render(); toast('Your manual reminder is saved in this browser.');
 } });
 const usesRealMap = () => state.mode === 'real' && !(state.tab === 'parking' && state.session && !state.session.manual);
@@ -233,9 +233,9 @@ function render({ preserveDrafts = false } = {}) {
   $('meta[name="theme-color"]').content = state.theme==='dark'?'#111316':'#f7f8fa';
   const content = state.tab==='parking'?parkingPanel():state.tab==='ask'?askPanel():state.tab==='updates'?updatesPanel():explorePanel();
   const realMap = usesRealMap();
-  root.innerHTML = `<div class="app-shell tab-${state.tab} ${realMap ? `geo-mode ${discovery.expanded() ? 'sheet-expanded' : ''}` : ''}"><header class="mobile-appbar"><a href="#" data-tab="explore" class="mobile-brand"><span class="brand-icon">P<span></span></span>CampusCurb</a><div><button class="icon-button" data-action="demo" aria-label="Start 90-second demo">${icon('play')}</button><button class="icon-button" data-action="theme" aria-label="Switch to ${state.theme==='light'?'dark':'light'} appearance">${icon(state.theme==='light'?'moon':'sun')}</button></div></header>${nav()}<main id="main-content" class="content-panel" tabindex="-1">${content}<div class="panel-bottom-brand">CampusCurb<span>A little less circling.</span></div></main>${realMap ? discovery.mapMarkup() : mapPanel()}</div>`;
+  root.innerHTML = realMap ? discovery.shell({ session: state.session, showSession: state.tab === 'parking' }) : `<div class="app-shell tab-${state.tab}"><header class="mobile-appbar"><a href="#" data-tab="explore" class="mobile-brand"><span class="brand-icon">P<span></span></span>CampusCurb</a><div><button class="icon-button" data-action="demo" aria-label="Start 90-second demo">${icon('play')}</button><button class="icon-button" data-action="theme" aria-label="Switch to ${state.theme==='light'?'dark':'light'} appearance">${icon(state.theme==='light'?'moon':'sun')}</button></div></header>${nav()}<main id="main-content" class="content-panel" tabindex="-1">${content}<div class="panel-bottom-brand">CampusCurb<span>A little less circling.</span></div></main>${mapPanel()}</div>`;
   if (realMap) void discovery.mount(state.tab === 'parking' ? state.session : null);
-  if (focusId) document.getElementById(focusId)?.focus({ preventScroll: true });
+  if (focusId && (focusId !== 'geo-search' || root.querySelector('.search-open'))) document.getElementById(focusId)?.focus({ preventScroll: true });
   updateClock(false);
   const chat=$('#chat-messages'); if(chat && state.messages.length) chat.scrollTop=chat.scrollHeight;
   if (draftState) {
