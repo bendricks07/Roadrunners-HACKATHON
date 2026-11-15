@@ -1,12 +1,41 @@
 # Roadrunners HACKATHON
 
-## Next task: satellite parking map
+## Geographic parking map
 
-**Teammate / GPT: start with the [satellite parking map handoff](docs/handoffs/satellite-parking-map.md).** Added November 14, 2026.
+Teammates / GPTs: read the [current implementation status](docs/status/discovery.md), [map configuration](docs/maps.md), and [updated handoff](docs/handoffs/satellite-parking-map.md) before starting new work. Use the latest `main` as your base.
 
-The next interface should put real satellite/terrain imagery behind colored parking areas, street segments, and parking-type symbols, while keeping the polished Apple-style design. The handoff contains the implementation order, data requirements, color meanings, and acceptance checks.
+The real geographic Explore view is now integrated on `main`: satellite/terrain switching, campus lot outlines and garage symbols, permit/stay checks, source details, and saved manual return reminders. Cal Poly's public GIS supplies the geometry directly; the old fictional walkthrough remains separately accessible.
 
-The working browser app is on [`codex/campuscurb-demo`](https://github.com/bendricks07/Roadrunners-HACKATHON/tree/codex/campuscurb-demo), under `demo/`. Start this feature from that branch; `main` currently contains planning and research. This handoff adds instructions only. GitHub pushes do not automatically update the [public judge demo](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site/).
+**Google Maps is the preferred provider.** Open **Map settings → Connect Google Maps** with a restricted Maps JavaScript API browser key or a [Google Maps demo key](https://developers.google.com/maps/documentation/javascript/demo-key). A demo key supports satellite/terrain prototyping without billing, subject to Google's eligibility, terms, and quotas. Connection through this form applies to that browser only. Until Google is configured, the app explicitly labels its USDA / USGS imagery and topographic fallback.
+
+Current permit records are incomplete: missing rules remain gray, known exclusions appear red, and occupancy remains unknown. No live vacancies, verified driving entrances, or street parking permissions are invented. See [the map implementation status](docs/status/discovery.md) and [map configuration](docs/maps.md).
+
+## Open the live demo
+
+**[Try CampusCurb](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site)**
+
+The public demo works on a computer or phone without installation or sign-in. Share this link with judges. Each published version uses the same address. GitHub pushes alone do not publish changes; see [deployment notes](docs/deployment.md).
+
+## Run the working CampusCurb demo
+
+The interactive browser prototype is in [`demo/`](demo/). Explore uses real geographic context and sourced campus records; **Try the sample walkthrough** opens the separate fictional demonstration.
+
+```bash
+npm --prefix demo start
+```
+
+Open **http://localhost:5173**. Requires Node.js 20 or newer; no npm install or backend is needed. Google Maps needs a browser/demo key; the labeled USGS fallback and sample walkthrough work without one.
+
+- Explore four campus destinations, compare three sample parking areas, and change permit/stay settings.
+- Preview a route, confirm parking, save a car-location note, and manage a persisted parking session.
+- See a live countdown and a calculated head-back time including walking and buffer.
+- Use **Try a 90-second session**: an in-app reminder appears after 30 seconds and the session expires after 90 seconds.
+- Ask a rule-based demo guide; add/resolve local reports. A simulated walkway closure changes the return estimate.
+- Switch light/dark appearances and use the responsive desktop or phone layout.
+
+Check with `npm --prefix demo run check`. See [`docs/architecture.md`](docs/architecture.md), [`docs/decisions.md`](docs/decisions.md), and [`docs/status/demo.md`](docs/status/demo.md) for implementation and handoff notes.
+
+The sample walkthrough's rules, prices, routes, map geometry, and reports are illustrative. The geographic view uses separately sourced campus GIS and research records, with eligibility left unknown where incomplete. Live occupancy, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
 
 ## Research handoff
 
@@ -20,7 +49,7 @@ This research is not a live availability feed or a field-verified eligibility da
 
 ## App planning note: CampusCurb
 
-> **Status: proposed product outline, not an implemented app.** Added November 14, 2026. CampusCurb is a working name, not a finalized brand. Features, integrations, and release stages below describe the intended product. Local rules and sources must be verified before use in a live app.
+> **Status: product outline; only the browser-demo subset above is implemented.** Added November 14, 2026. CampusCurb is a working name, not a finalized brand. Features, integrations, and release stages below describe the intended product. Local rules and sources must be verified before use in a live app.
 
 The app is a parking companion that answers four questions: **Where can I park, can I stay there, when should I head back, and how do I get there?**
 

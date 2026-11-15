@@ -1,8 +1,10 @@
 # Next task: satellite / terrain parking map
 
-Prepared November 14, 2026 for the teammate and GPT implementing the next CampusCurb interface. This commit is a documentation handoff; it does not implement or deploy the feature.
+Prepared November 14, 2026 for the teammate and GPT implementing the next CampusCurb interface. The first geographic implementation has since been built and published; this document now directs follow-up work.
 
 ## Start here
+
+**Implementation available on `main`.** Read [the current implementation status](../status/discovery.md) and [map setup](../maps.md) before coding. The geographic UI, campus GIS overlays, and manual reminders exist; complete policy verification, street data, occupancy, and a shared Google Maps key remain unfinished. Do not rebuild the first milestone from the old demo branch.
 
 **Build on the working demo, using a real geographic map as the main Explore interface.** Preserve the polished Apple-style design and the existing parking-session flow.
 
@@ -14,8 +16,8 @@ Actual space availability is part of the vision. There is currently no connected
 
 | Location | Current purpose |
 | --- | --- |
-| `main` | Product plan, official-source research, and this handoff |
-| `codex/campuscurb-demo` | Working browser app in `demo/`, shared rules, architecture, and deployment notes |
+| `main` | Integrated working app in `demo/`, product plan, research, and handoff |
+| `codex/campuscurb-demo` | Earlier walkthrough branch; its changes are included in `main` |
 | `data/research/cal-poly-slo-parking-seed.json` | Research inventory, not executable parking policy or verified geometry |
 | `docs/research/cal-poly-slo-parking-2026-11-14.md` | Sources, conflicts, and known limitations |
 
@@ -23,14 +25,10 @@ Fetch current work and create a short feature branch from the working demo. Pres
 
 ```bash
 git fetch origin
-git switch -c codex/satellite-parking-map origin/codex/campuscurb-demo
+git switch -c codex/parking-map-next origin/main
 ```
 
-This task's demo-branch starting point takes precedence over the README's general suggestion to start from `main`. Do not reset the working app to `main`, which does not yet contain it. If this document is absent on your feature branch, read it on GitHub or with:
-
-```bash
-git show origin/main:docs/handoffs/satellite-parking-map.md
-```
+Start new work from the latest `main`. The original demo-branch starting point was for the first implementation only. Preserve teammates’ local edits and check current branch status before integrating.
 
 Read the working branch's `AGENTS.md`, `docs/architecture.md`, `docs/decisions.md`, `docs/status/demo.md`, and `docs/deployment.md` before changing behavior. Check for newer teammate work before assuming these branch descriptions still hold.
 
@@ -99,7 +97,7 @@ Preserve known research conflicts: Grand Avenue Structure and Structure 131 are 
 
 ## Provider and imagery approach
 
-**Suggested starting point: Mapbox GL JS with Standard Satellite**, subject to available project credentials and current service terms. Its style URL is `mapbox://styles/mapbox/standard-satellite`; the Standard styles support custom-layer slots. Keep provider-specific code behind the map adapter so the rest of the app uses our parking IDs and GeoJSON.
+**User-selected provider: Google Maps JavaScript API**, using satellite/hybrid and terrain views with independent GeoJSON overlays. It is implemented behind the map adapter. A Google browser/demo key is still needed; the explicit USDA/USGS fallback keeps the prototype usable until connected. See [map configuration](../maps.md) for Google’s no-billing demo-key option and shared deployment setup. Keep provider code separate from parking IDs and rules.
 
 - Confirm current SDK compatibility, access, attribution, and usage costs. Document the selected provider and configuration. Use a provider-approved, domain-restricted public browser token where required; keep secret credentials out of browser code and git.
 - The existing demo is static and has no bundler. Do not assume server environment variables automatically exist in browser JavaScript. Document how public configuration reaches both local and hosted builds. Include only blank/example configuration in git.
@@ -109,6 +107,8 @@ Preserve known research conflicts: Grand Avenue Structure and Structure 131 are 
 
 Official references checked for this handoff:
 
+- [Google Maps demo-key setup](https://developers.google.com/maps/documentation/javascript/demo-key)
+- [Google map types](https://developers.google.com/maps/documentation/javascript/maptypes)
 - [Mapbox Standard / Standard Satellite and custom layer slots](https://docs.mapbox.com/map-styles/guides/standard-styles/)
 - [Mapbox Satellite imagery, update timing, and attribution](https://docs.mapbox.com/data/tilesets/reference/mapbox-satellite/)
 - [Google Maps Platform terms, including section 3.2.3 restrictions on derived content](https://cloud.google.com/maps-platform/terms)
@@ -117,7 +117,7 @@ Official references checked for this handoff:
 
 ## Existing app integration
 
-`demo/src/map.js` currently draws an original illustrative SVG. The `north`, `west`, and `grand` demo fixtures are simulated; do not attach their fictional rules, prices, or coordinates to real Cal Poly locations. Keep a clearly separated demo mode or migrate records explicitly, with stable IDs and validation of saved sessions.
+`demo/src/map.js` draws the separate fictional walkthrough; `geographic-map.js` provides the geographic map. The `north`, `west`, and `grand` demo fixtures are simulated; do not attach their fictional rules, prices, or coordinates to real Cal Poly locations. Keep a clearly separated demo mode or migrate records explicitly, with stable IDs and validation of saved sessions.
 
 Reuse `demo/src/rules.js` for shared decisions. If its current fixture-oriented evaluator cannot express verified rules, extend it with explicit unknown outcomes and meaningful tests; do not hardcode a separate set of colors inside the renderer. Keep absolute session deadlines and the return-walk buffer. Missing walking data must not silently become zero minutes or an invented estimate. Existing accelerated sessions and fictional reports must remain visibly simulated.
 
@@ -139,4 +139,4 @@ The current public judge demo is https://campuscurb-roadrunners-demo.buffrhubarb
 
 ## Prompt to give the implementing GPT
 
-> Read the satellite parking map handoff on `origin/main` at `docs/handoffs/satellite-parking-map.md`, then read the working demo's repository guidance and architecture. Implement the first milestone on a feature branch based on the latest `origin/codex/campuscurb-demo`. Keep the Apple-style UI and existing session flow. Start with real satellite imagery, a small source-backed parking overlay dataset, type symbols, and permit/stay eligibility colors with unknown occupancy clearly labeled. Preserve unsupported data as unknown. Push your branch and leave a clear status handoff with validation and blockers.
+> Read the satellite parking map handoff on `origin/main` at `docs/handoffs/satellite-parking-map.md`, then read the working demo's repository guidance and architecture. Read `docs/status/discovery.md` and `docs/maps.md`; the first geographic milestone already exists. Start a follow-up feature branch from the latest `origin/main` and work on the remaining provider/data gaps rather than recreating the interface. Keep the Apple-style UI and existing session flow. Start with real satellite imagery, a small source-backed parking overlay dataset, type symbols, and permit/stay eligibility colors with unknown occupancy clearly labeled. Preserve unsupported data as unknown. Push your branch and leave a clear status handoff with validation and blockers.
