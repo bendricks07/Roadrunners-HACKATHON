@@ -24,6 +24,7 @@ Start with the [repository README](../README.md) for setup and the [current app 
 - [Runnable research tools](../tools/parking-research/README.md).
 - [Design concepts, screenshots, raw evidence, and ZIP handoffs](../artifacts/README.md).
 - [Trip-entry and map-highlight verification](../artifacts/trip-map-fixes/README.md).
+- [Hosted version 6 deployment verification](../artifacts/hosted-v6/README.md).
 
 Research inventories, assistant-generated reference labels, demo availability colors, and current parking permission are separate kinds of evidence. None of the imagery pilot results establishes live vacancy or a validated forecast.
 

@@ -4,6 +4,7 @@ This folder preserves the generated concepts, rendered app evidence, source-back
 
 ## Design and app review
 
+- [Hosted version 6 publication and verification](hosted-v6/README.md), including the deployed trip form and Abbott place card.
 - [Latest trip-entry, Abbott, and restored-highlight verification](trip-map-fixes/README.md), with desktop and phone screenshots. This update addresses the overlay loss and compressed search field in the earlier review.
 - [Earlier rendered app test review](campuscurb-design-test-review.md).
 - [Refined dark selected-street concept](campuscurb-concept-02-dark-selected-street-v2.png) and [refinement prompt](campuscurb-refined-streets-v2-prompt.md).

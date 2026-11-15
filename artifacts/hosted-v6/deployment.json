@@ -1,0 +1,27 @@
+{
+  "verified_on": "2026-11-15",
+  "timezone": "America/Los_Angeles",
+  "project_id": "appgprj_6af8d642a48c8191a783c991f417a5a0",
+  "version_number": 6,
+  "version_id": "appgprj_6af8d642a48c8191a783c991f417a5a0~appgver_90ff225ddd948191945690747ca43386",
+  "deployment_id": "appgdep_6af9ad60be648191b1a2d874b7eea188",
+  "status": "succeeded",
+  "url": "https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site",
+  "deployed_at_utc": "2026-11-15T13:02:31.152389+00:00",
+  "app_repository": "https://github.com/bendricks07/Roadrunners-HACKATHON",
+  "app_commit": "50552300b611176bd60ae1fb6096b99805e43698",
+  "site_source_commit": "20da836ce4d0ce3b47c720d2fb742f82c438e48a",
+  "archive_sha256": "sha256:9dcd79618f6a8c0c3337bb0604fcd6c5c1fd2b77355ab6c0a06ead0fec5f3330",
+  "static_files_match_source": 24,
+  "checks": {
+    "app_tests_passed": 37,
+    "hosted_trip_form_opened": true,
+    "hosted_expanded_inventory_rendered": true,
+    "hosted_abbott_search_and_selection_passed": true
+  },
+  "screenshots": [
+    "campuscurb-live-v6.jpg",
+    "campuscurb-live-v6-abbott.jpg"
+  ],
+  "audience_preserved": "public"
+}
