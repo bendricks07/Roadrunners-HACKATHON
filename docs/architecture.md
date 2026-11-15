@@ -36,6 +36,8 @@ Active walkway reports add return time. Entrance closures exclude recommendation
 
 The browser key is `campuscurb.demo.v1`. Reports and notes are not sent to a service or shared between devices. Sessions are validated on restoration; a second browser tab receives storage updates.
 
+Saved payloads are parsed with `parseSavedState`; `normalizeReports` rejects malformed records, deduplicates report IDs, and retains local unverified provenance. Storage events synchronize session, reports and saved preferences across tabs. The clock refreshes views when active reports expire, and preserves focused drafts during those refreshes. Native background delivery is still not connected.
+
 ## Integration seams
 
 The `codex/satellite-parking-map` branch adds `map-model.js` (source-backed research identities and runtime GIS queries), `geographic-map.js` (Google/USGS adapters), and `discovery.js` / `discovery.css` (geographic Explore and manual reminder UI). `runtime-config.js` contains blank public map configuration. Read `docs/maps.md` for provider setup and data confidence. Real `cal-poly-slo-*` IDs are separate from walkthrough fixtures; manual reminders carry `manual: true` and require the driver's deadline and walk estimate.

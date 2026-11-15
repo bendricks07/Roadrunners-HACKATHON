@@ -1,5 +1,5 @@
 import { AREAS, DESTINATIONS, PERMITS, INITIAL_REPORTS, REPORT_TYPES, DATA_NOTICE } from './data.js';
-import { activeReports, evaluateParking, getWalkMinutes, createSession, headBackAt, sessionPhase, isValidSession, MINUTE } from './rules.js';
+import { activeReports, evaluateParking, getWalkMinutes, createSession, headBackAt, sessionPhase, isValidSession, parseSavedState, normalizeReports, MINUTE } from './rules.js';
 import { campusMap } from './map.js';
 import { CAMPUS_AREAS } from './map-model.js';
 import { createDiscovery } from './discovery.js';
@@ -9,7 +9,8 @@ const root = $('#app');
 const modal = $('#modal');
 const KEY = 'campuscurb.demo.v1';
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
-const time = value => new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' }).format(value);
+const timeFormatter = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
+const time = value => timeFormatter.format(value);
 const shortTime = value => time(value).replace(' AM', '').replace(' PM', '');
 const paths = {
   compass: '<circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5Z"/>',
@@ -46,7 +47,7 @@ const paths = {
 const icon = (name, className = '') => `<svg class="icon ${className}" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || paths.info}</svg>`;
 
 function readSaved() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+  try { return parseSavedState(localStorage.getItem(KEY)); } catch { return {}; }
 }
 const saved = readSaved();
 function validStoredSession(value) {
@@ -58,12 +59,14 @@ const state = {
   tab: restoredSession ? 'parking' : 'explore', detail: false, selectedId: restoredSession?.areaId || 'north', destinationId: DESTINATIONS.some(d => d.id === saved.destinationId) ? saved.destinationId : 'library',
   permit: PERMITS.some(p => p.id === saved.permit) ? saved.permit : 'commuter', durationMinutes: [60,90,120,180,240].includes(saved.durationMinutes) ? saved.durationMinutes : 90,
   sort: 'best', favorites: Array.isArray(saved.favorites) ? saved.favorites.filter(id => AREAS.some(a => a.id === id)) : [],
-  reports: Array.isArray(saved.reports) ? saved.reports.filter(r => AREAS.some(a => a.id === r.areaId) && REPORT_TYPES[r.type] && Number.isFinite(r.expiresAt) && typeof r.description === 'string').map(r => ({ ...r, title: REPORT_TYPES[r.type], description: r.description.slice(0, 500), simulated: true })) : [...INITIAL_REPORTS],
+  reports: Array.isArray(saved.reports) ? normalizeReports(saved.reports, AREAS.map(a => a.id), REPORT_TYPES) : INITIAL_REPORTS.map(r => ({ ...r })),
   session: restoredSession,
   theme: saved.theme === 'dark' ? 'dark' : 'light', messages: [], reminderPreview: false, routeMode: 'drive', zoom: 1, mapPosition: { x: 0, y: 0 },
 };
 let toastTimer;
 let lastPhase = state.session ? sessionPhase(state.session) : null;
+const reportSignature = () => activeReports(state.reports).map(r => r.id).join('|');
+let lastReportSignature = reportSignature();
 
 function persist() {
   const { destinationId, permit, durationMinutes, favorites, reports, session, theme, mode } = state;
@@ -128,7 +131,7 @@ function explorePanel() {
   const eligibleCount = sorted.filter(a => eligibility(a).status === 'eligible').length;
   return `<button class="geo-return-button" data-action="real-map">${icon('back')}Back to the real campus map</button>${heading('SAMPLE WALKTHROUGH', 'Find your place.', 'Fictional lots and rules for the presentation.')}
     <div class="plan-section">${searchControl()}${filters()}</div>
-    <div class="results-header"><h2>${eligibleCount ? `${eligibleCount} options for you` : state.permit === 'unknown' ? 'Check before parking' : 'Adjust your plan'}</h2><span>Near ${destination().name.replace('Kennedy ', '').replace('University ', '')}</span></div>
+    <div class="results-header"><h2>${eligibleCount ? `${eligibleCount} option${eligibleCount === 1 ? '' : 's'} for you` : state.permit === 'unknown' ? 'Check before parking' : 'Adjust your plan'}</h2><span>Near ${destination().name.replace('Kennedy ', '').replace('University ', '')}</span></div>
     <div class="segmented" aria-label="Sort parking">${[['best','Best match'],['closest','Closest'],['price','Lowest cost']].map(([id,label]) => `<button class="${state.sort===id?'active':''}" data-sort="${id}" aria-pressed="${state.sort===id}">${label}</button>`).join('')}</div>
     <div class="parking-results">${sorted.map((a,index) => `${eligibility(a).status!=='eligible' && (index===0 || eligibility(sorted[index-1]).status!==eligibility(a).status)?`<div class="result-group-label">${eligibility(a).status==='unknown'?'CHECK BEFORE PARKING':'DOESN’T FIT THIS PLAN'}</div>`:''}${parkingCard(a,index)}`).join('')}</div>
     <div class="quiet-note">${icon('info')}<p>Permit fit and space availability are different. Always check the signs when you arrive.</p></div>
@@ -183,6 +186,7 @@ function answerQuestion(question) {
   const q = question.toLowerCase();
   const a = area();
   const result = eligibility(a);
+  if (/overnight|over night|tomorrow|weekend|holiday/.test(q)) return 'I cannot verify overnight, future-day, weekend, or holiday parking permission from these sample rules. A positive result for your selected short demo stay does not establish permission for those times. Check the current official Cal Poly guidance and posted signs.';
   if (/head|back|expire|deadline|time|long|when/.test(q)) {
     if (!state.session) return 'You don’t have an active parking session yet. Choose a parking option and tap “I parked here.” I’ll calculate your head-back time from the confirmed deadline, return walk, and buffer.';
     const s=state.session;
@@ -217,10 +221,14 @@ function mapPanel() {
   return `<section class="map-pane" aria-label="Campus parking map"><div class="map-toolbar"><div class="campus-chip">${icon('building')}<span>Cal Poly, San Luis Obispo</span><span class="location-online"></span></div><button class="data-chip" data-action="data-info">Demo data${icon('info')}</button></div><div class="map-canvas" id="map-canvas"><div class="map-world" id="map-world" style="transform:translate(${state.mapPosition.x}px,${state.mapPosition.y}px) scale(${state.zoom})">${campusMap({selectedId:mapArea.id,destinationId:dest.id,route:true,mode:isSession?'car':'drive',reports:state.reports})}</div></div><div class="map-controls"><button class="icon-button" data-action="zoom-in" aria-label="Zoom in">${icon('plus')}</button><button class="icon-button" data-action="zoom-out" aria-label="Zoom out">${icon('minus')}</button><span></span><button class="icon-button" data-action="recenter" aria-label="Recenter map">${icon('locate')}</button></div><div class="map-location-card"><div class="location-card-icon">${icon(isSession?'walk':'navigate')}</div><div><div class="location-card-eyebrow">${isSession?'YOUR RETURN WALK':mapEligibility==='eligible'?'A SPOT THAT FITS YOUR DAY':mapEligibility==='unknown'?'CHECK YOUR PERMIT FIRST':'DOESN’T FIT YOUR CURRENT PLAN'}</div><h2>${isSession?`Back to ${mapArea.name}`:mapArea.name}</h2><p>${isSession?'From '+dest.name:dest.name+' is a short walk away'}</p></div><div class="route-duration"><strong>${isSession && state.session.demo?'30 sec':selectedWalk+' min'}</strong><span>${icon('walk')}walk</span></div><button class="round-action" data-action="${isSession?'walk-back':'details'}" data-id="${mapArea.id}" aria-label="${isSession?'View return route':'View parking details'}">${icon('arrow')}</button></div><div class="map-footer"><span>${icon('pin')}Illustrative campus map</span><span>Rules and routes are simulated</span></div><div class="map-compass" aria-hidden="true"><span>N</span>${icon('navigate')}</div></section>`;
 }
 
-function render() {
+function render({ preserveDrafts = false } = {}) {
+  const focusedId = root.contains(document.activeElement) ? document.activeElement.id : null;
+  const draft = preserveDrafts && focusedId ? document.getElementById(focusedId) : null;
+  const draftState = draft && 'value' in draft ? { value: draft.value, start: draft.selectionStart, end: draft.selectionEnd } : null;
   const focusId = document.activeElement?.id?.startsWith('geo-') ? document.activeElement.id : null;
   discovery.detach();
   syncSessionWalk();
+  lastReportSignature = reportSignature();
   document.documentElement.dataset.theme = state.theme;
   $('meta[name="theme-color"]').content = state.theme==='dark'?'#111316':'#f7f8fa';
   const content = state.tab==='parking'?parkingPanel():state.tab==='ask'?askPanel():state.tab==='updates'?updatesPanel():explorePanel();
@@ -230,11 +238,20 @@ function render() {
   if (focusId) document.getElementById(focusId)?.focus({ preventScroll: true });
   updateClock(false);
   const chat=$('#chat-messages'); if(chat && state.messages.length) chat.scrollTop=chat.scrollHeight;
+  if (draftState) {
+    const input = document.getElementById(focusedId);
+    if (input) {
+      input.value = draftState.value; input.focus({ preventScroll: true });
+      if (draftState.start !== null) input.setSelectionRange?.(draftState.start, draftState.end);
+      if (focusedId === 'destination-search') $('#destination-options').innerHTML = destinationOptions(input.value);
+    }
+  }
 }
 
 function showModal(content) {
   modal.innerHTML=`<div class="modal-body">${content}</div>`;
   if(!modal.open) modal.showModal();
+  (modal.querySelector('form select, form input, form textarea') || modal.querySelector('button, a[href]'))?.focus();
 }
 function modalHeader(title, text='') { return `<div class="modal-heading"><div><h2 id="modal-title">${title}</h2>${text?`<p>${text}</p>`:''}</div><button class="icon-button" data-action="close-modal" aria-label="Close dialog">${icon('close')}</button></div>`; }
 function startDialog() {
@@ -266,6 +283,7 @@ function syncSessionWalk() {
   return true;
 }
 function updateClock(allowRender=true) {
+  if (allowRender && reportSignature() !== lastReportSignature) { render({ preserveDrafts: true }); return; }
   if(!state.session) return;
   const changed=syncSessionWalk();
   const s=state.session;
@@ -274,7 +292,7 @@ function updateClock(allowRender=true) {
   const progress=$('[data-session-progress]'); if(progress) progress.style.width=`${Math.max(0,Math.min(100,(Date.now()-s.startedAt)/(s.deadlineAt-s.startedAt)*100))}%`;
   if((phase!==lastPhase || changed) && allowRender) {
     const phaseChanged=phase!==lastPhase;
-    lastPhase=phase; render();
+    lastPhase=phase; render({ preserveDrafts: true });
     if(phaseChanged && phase==='head-back') toast('Time to head back. Your return walk and buffer are included.');
     if(phaseChanged && phase==='expired') toast(state.session.manual ? 'Your manual reminder time has arrived.' : 'Your parking time has ended.');
   }
@@ -282,11 +300,11 @@ function updateClock(allowRender=true) {
 
 document.addEventListener('click', event => {
   const target=event.target.closest('button, a[data-tab], [data-select-area]');
-  if(!event.target.closest('.search-wrap')) { const options=$('#destination-options'); if(options) options.hidden=true; }
+  if(!event.target.closest('.search-wrap')) closeDestinationOptions();
   if(!target) return;
   if(target.disabled) return;
   if(target.dataset.tab) { event.preventDefault(); state.tab=target.dataset.tab; state.detail=false; state.reminderPreview=false; render(); return; }
-  if(target.dataset.destination) { state.destinationId=target.dataset.destination; persist(); render(); return; }
+  if(target.dataset.destination) { state.destinationId=target.dataset.destination; persist(); render(); $('#destination-search')?.focus(); closeDestinationOptions(); return; }
   if(target.dataset.sort) { state.sort=target.dataset.sort; render(); return; }
   if(target.dataset.selectArea) { state.selectedId=target.dataset.selectArea; state.tab='explore'; state.detail=true; render(); return; }
   if(target.dataset.question) { const q=target.dataset.question; state.messages.push({role:'user',text:q},{role:'assistant',text:answerQuestion(q)}); render(); return; }
@@ -326,12 +344,39 @@ document.addEventListener('focusin', event => {
   if(event.target.id==='destination-search') { $('#destination-options').hidden=false; event.target.setAttribute('aria-expanded','true'); event.target.select(); }
 });
 document.addEventListener('input', event => {
-  if(event.target.id==='destination-search') { $('#destination-options').innerHTML=destinationOptions(event.target.value); $('#destination-options').hidden=false; }
+  if(event.target.id==='destination-search') { $('#destination-options').innerHTML=destinationOptions(event.target.value); $('#destination-options').hidden=false; event.target.setAttribute('aria-expanded','true'); }
+  if(event.target.id==='report-description') event.target.setCustomValidity('');
 });
 document.addEventListener('keydown', event => {
+  const options = $('#destination-options');
+  if (event.target.id === 'destination-search' && ['ArrowDown', 'ArrowUp', 'Enter'].includes(event.key)) {
+    const choices = options ? [...options.querySelectorAll('button')] : [];
+    if (choices.length) {
+      event.preventDefault(); options.hidden = false;
+      event.target.setAttribute('aria-expanded', 'true');
+      if (event.key === 'Enter') choices[0].click();
+      else choices[event.key === 'ArrowUp' ? choices.length - 1 : 0].focus();
+    }
+  } else if (event.target.matches('.destination-option') && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    event.preventDefault();
+    const choices = [...options.querySelectorAll('button')];
+    const index = choices.indexOf(event.target);
+    choices[(index + (event.key === 'ArrowDown' ? 1 : -1) + choices.length) % choices.length].focus();
+  }
   const marker=event.target.closest('[data-select-area]');
   if(marker && ['Enter',' '].includes(event.key)) { event.preventDefault(); marker.dispatchEvent(new MouseEvent('click',{bubbles:true})); }
-  if(event.key==='Escape') { const options=$('#destination-options'); if(options) { options.hidden=true; $('#destination-search')?.setAttribute('aria-expanded','false'); } }
+  if(event.key==='Escape' && options && !options.hidden) {
+    event.preventDefault();
+    $('#destination-search')?.focus(); closeDestinationOptions();
+  }
+});
+function closeDestinationOptions() {
+  const options = $('#destination-options');
+  if (options) options.hidden = true;
+  $('#destination-search')?.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('focusout', event => {
+  if (event.target.closest('.search-wrap') && !event.relatedTarget?.closest('.search-wrap')) closeDestinationOptions();
 });
 document.addEventListener('submit', event => {
   const form=event.target;
@@ -347,7 +392,12 @@ document.addEventListener('submit', event => {
   if(form.id==='report-form') {
     const type=data.get('type'), areaId=data.get('area');
     const description=String(data.get('description')).trim().slice(0,500);
-    if(!REPORT_TYPES[type]||!AREAS.some(a=>a.id===areaId)||description.length<5) return;
+    if(!Object.hasOwn(REPORT_TYPES,type)||!AREAS.some(a=>a.id===areaId)) return;
+    if(description.length<5) {
+      const input = $('#report-description');
+      input.setCustomValidity('Add at least 5 non-space characters describing the update.');
+      input.reportValidity(); return;
+    }
     state.reports.push({id:crypto.randomUUID(),areaId,type,title:REPORT_TYPES[type],description,extraWalkMinutes:type==='path'?3:0,createdAt:Date.now(),expiresAt:Date.now()+(type==='full'?15:180)*MINUTE,status:'Community report · Unverified',simulated:true,active:true});
     persist(); modal.close(); render(); toast('Update shared in this browser demo. Suggestions have been refreshed.');
   }
@@ -372,11 +422,18 @@ document.addEventListener('pointermove', event => {
 document.addEventListener('pointerup',()=>{drag=null;});
 document.addEventListener('pointercancel',()=>{drag=null;});
 window.addEventListener('storage', event => {
-  if(event.key!==KEY) return;
+  if(event.key!==KEY && event.key!==null) return;
   const other=readSaved();
   state.session=validStoredSession(other.session)?other.session:null;
-  if(Array.isArray(other.reports)) state.reports=other.reports.filter(r=>AREAS.some(a=>a.id===r.areaId)&&REPORT_TYPES[r.type]&&Number.isFinite(r.expiresAt)&&typeof r.description==='string');
-  render();
+  state.reports=Array.isArray(other.reports)?normalizeReports(other.reports,AREAS.map(a=>a.id),REPORT_TYPES):INITIAL_REPORTS.map(r=>({ ...r }));
+  state.destinationId=DESTINATIONS.some(d=>d.id===other.destinationId)?other.destinationId:'library';
+  state.permit=PERMITS.some(p=>p.id===other.permit)?other.permit:'commuter';
+  state.durationMinutes=[60,90,120,180,240].includes(other.durationMinutes)?other.durationMinutes:90;
+  state.favorites=Array.isArray(other.favorites)?other.favorites.filter(id=>AREAS.some(a=>a.id===id)):[];
+  state.theme=other.theme==='dark'?'dark':'light';
+  state.mode=other.mode==='demo'?'demo':'real';
+  lastPhase=state.session?sessionPhase(state.session):null;
+  render({ preserveDrafts: true });
 });
 document.addEventListener('campuscurb:walkthrough', () => { state.mode='demo'; state.tab='explore'; state.detail=false; persist(); render(); });
 document.addEventListener('campuscurb:explore-real', () => { state.mode='real'; state.tab='explore'; persist(); render(); });

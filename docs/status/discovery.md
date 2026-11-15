@@ -16,7 +16,9 @@ Published as version 2 at https://campuscurb-roadrunners-demo.buffrhubarb.chatgp
 
 ## Validation
 
-- `npm --prefix demo run check`: 21 passing tests covering source conflicts, permit exclusions, future/partial closures, incomplete policy, GIS identity matching, missing geometry, campus timezone/DST, manual sessions, and original session/report behavior.
+The `Verity` reliability/accessibility pass is integrated on `main`, including saved-state/report normalization, keyboard navigation, timer draft preservation, and cross-tab preferences. Its original walkthrough verification report is in `docs/verity/Verity.md`; it does not establish visual QA for the new geographic view.
+
+- `npm --prefix demo run check`: 26 passing tests covering source conflicts, permit exclusions, future/partial closures, incomplete policy, GIS identity matching, missing geometry, campus timezone/DST, manual sessions, and original session/report behavior.
 - Actual Cal Poly GIS endpoints returned public GeoJSON with `Access-Control-Allow-Origin: *`; the official map configuration identifies both services.
 - A National Map aerial tile at Cal Poly returned HTTP 200 with JPEG imagery. Local app and module requests returned HTTP 200.
 - A JSDOM integration smoke check passed using the actual Leaflet library and fetched campus GIS responses: nine markers/eight outlines, permit and duration updates, selecting details, manual reminder save/restore/end, Google configuration dialog, the original demo session, and the empty street-data state. This checks DOM behavior, not visual rendering in a browser.

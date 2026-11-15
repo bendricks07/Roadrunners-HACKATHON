@@ -1,5 +1,9 @@
 # CampusCurb browser demo handoff
 
+## Verity follow-up
+
+The `Verity` changes, now integrated on `main`, add keyboard-accessible search/map controls, focused dialog transitions, clearer unsupported guide answers, resilient saved-report restoration, report-expiry refreshes, draft preservation during timers, and preference synchronization between tabs. See [the run report](../verity/Verity.md) for observed coverage, regression checks, screenshots, and limitations. The original branch publication did not update the judge Site; see current `docs/deployment.md` for subsequent integrated publications.
+
 Branch: `codex/campuscurb-demo`
 
 ## Completed
