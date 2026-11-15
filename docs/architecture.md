@@ -35,6 +35,8 @@ The browser key is `campuscurb.demo.v1`. Reports and notes are not sent to a ser
 
 ## Integration seams
 
+The `codex/satellite-parking-map` branch adds `map-model.js` (source-backed research identities and runtime GIS queries), `geographic-map.js` (Google/USGS adapters), and `discovery.js` / `discovery.css` (geographic Explore and manual reminder UI). `runtime-config.js` contains blank public map configuration. Read `docs/maps.md` for provider setup and data confidence. Real `cal-poly-slo-*` IDs are separate from walkthrough fixtures; manual reminders carry `manual: true` and require the driver's deadline and walk estimate.
+
 - Replace `data.js` with verified records while retaining stable area IDs.
 - Import the pure `rules.js` helpers into another app without the DOM UI.
 - Replace `answerQuestion` in `app.js` with a configured service; currently it is explicitly a rule-based guide.

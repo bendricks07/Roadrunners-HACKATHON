@@ -2,6 +2,9 @@
 
 - Read `README.md`, `docs/architecture.md`, `docs/decisions.md`, and relevant files under `docs/status/` before changing shared behavior.
 - The working browser prototype lives in `demo/`. Keep it runnable while other app implementations are developed independently.
+- Geographic Explore is implemented on `codex/satellite-parking-map`. Read `docs/maps.md` and `docs/status/discovery.md` for provider configuration and data gaps. Keep real `cal-poly-slo-*` IDs separate from the walkthrough's `north`, `west`, and `grand` IDs.
+- Google Maps is preferred. Its browser/demo key is optional configuration, not a server secret; do not commit keys. Until connected, keep the USGS fallback explicitly labeled. Never use scraped Google map tiles or trace Google imagery into the parking dataset.
+- Campus GIS geometry is queried directly. Its `Types` classifications are not eligibility policy. Preserve G2/Structure 131 exclusions, H14 subareas, and closed K1. Missing policy and space availability remain unknown.
 - Start with `npm --prefix demo start`; check with `npm --prefix demo run check`. Node 20+ is required; no install step or package dependencies are needed.
 - Share parking decisions through `demo/src/rules.js`. Keep deadlines as absolute timestamps; head-back time includes the return walk and buffer.
 - Clearly label simulated rules, prices, routes, reports, and availability. Never make a confident recommendation from unknown eligibility or invent live occupancy or completed payments.

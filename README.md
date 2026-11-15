@@ -1,5 +1,13 @@
 # Roadrunners HACKATHON
 
+## Geographic parking map
+
+The `codex/satellite-parking-map` branch adds the real geographic Explore view: satellite/terrain switching, campus lot outlines and garage symbols, permit/stay checks, source details, and saved manual return reminders. Cal Poly's public GIS supplies the geometry directly; the old fictional walkthrough remains separately accessible.
+
+**Google Maps is the preferred provider.** Open **Map settings → Connect Google Maps** with a restricted Maps JavaScript API browser key or a [Google Maps demo key](https://developers.google.com/maps/documentation/javascript/demo-key). A demo key supports satellite/terrain prototyping without billing, subject to Google's eligibility, terms, and quotas. Connection through this form applies to that browser only. Until Google is configured, the app explicitly labels its USDA / USGS imagery and topographic fallback.
+
+Current permit records are incomplete: missing rules remain gray, known exclusions appear red, and occupancy remains unknown. No live vacancies, verified driving entrances, or street parking permissions are invented. See [the map implementation status](docs/status/discovery.md) and [map configuration](docs/maps.md).
+
 ## Open the live demo
 
 **[Try CampusCurb](https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site)**
@@ -8,13 +16,13 @@ The public demo works on a computer or phone without installation or sign-in. Sh
 
 ## Run the working CampusCurb demo
 
-The interactive browser prototype is in [`demo/`](demo/). It implements a subset of the product plan below, using clearly labeled sample data.
+The interactive browser prototype is in [`demo/`](demo/). Explore uses real geographic context and sourced campus records; **Try the sample walkthrough** opens the separate fictional demonstration.
 
 ```bash
 npm --prefix demo start
 ```
 
-Open **http://localhost:5173**. Requires Node.js 20 or newer; **no install step, API keys, account, or backend service** is needed.
+Open **http://localhost:5173**. Requires Node.js 20 or newer; no npm install or backend is needed. Google Maps needs a browser/demo key; the labeled USGS fallback and sample walkthrough work without one.
 
 - Explore four campus destinations, compare three sample parking areas, and change permit/stay settings.
 - Preview a route, confirm parking, save a car-location note, and manage a persisted parking session.
@@ -25,7 +33,7 @@ Open **http://localhost:5173**. Requires Node.js 20 or newer; **no install step,
 
 Check with `npm --prefix demo run check`. See [`docs/architecture.md`](docs/architecture.md), [`docs/decisions.md`](docs/decisions.md), and [`docs/status/demo.md`](docs/status/demo.md) for implementation and handoff notes.
 
-Rules, prices, routes, map geometry, and reports are illustrative. Live occupancy, verified eligibility, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
+The sample walkthrough's rules, prices, routes, map geometry, and reports are illustrative. The geographic view uses separately sourced campus GIS and research records, with eligibility left unknown where incomplete. Live occupancy, payments, automatic detection, live AI, and background notifications are not connected. Reminders appear while the browser demo is open.
 
 ## Research handoff
 

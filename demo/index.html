@@ -7,7 +7,9 @@
     <meta name="description" content="CampusCurb — a calmer way to park. An interactive Cal Poly parking demo.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="/src/vendor/leaflet/leaflet.css">
     <link rel="stylesheet" href="/src/styles.css">
+    <link rel="stylesheet" href="/src/discovery.css">
     <title>CampusCurb — Find your place</title>
   </head>
   <body>
@@ -15,6 +17,7 @@
     <div id="app"></div>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <dialog id="modal" aria-labelledby="modal-title"></dialog>
+    <script src="/src/vendor/leaflet/leaflet.js"></script>
     <script type="module" src="/src/app.js"></script>
   </body>
 </html>
