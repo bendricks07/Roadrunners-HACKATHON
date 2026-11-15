@@ -1,0 +1,51 @@
+{
+  "desktop": {
+    "aligned": true,
+    "dock": {
+      "bottom": 688,
+      "height": 132,
+      "width": 440,
+      "x": 24,
+      "y": 556
+    },
+    "gap": 12,
+    "legend": {
+      "bottom": 544,
+      "height": 94,
+      "width": 250.9375,
+      "x": 24,
+      "y": 450
+    },
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    }
+  },
+  "intermediate": {
+    "aligned": true,
+    "gap": 12,
+    "viewport": {
+      "height": 700,
+      "width": 900
+    }
+  },
+  "phone": {
+    "dock": {
+      "bottom": 810,
+      "left": 16,
+      "right": 374,
+      "top": 682
+    },
+    "horizontalOverflow": false,
+    "legend": {
+      "bottom": 604,
+      "left": 16,
+      "right": 243.9375,
+      "top": 521
+    },
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  }
+}

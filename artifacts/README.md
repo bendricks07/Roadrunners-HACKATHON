@@ -4,6 +4,7 @@ This folder preserves the generated concepts, rendered app evidence, source-back
 
 ## Design and app review
 
+- [Estimate legend alignment fix and hosted version 7](legend-fix/README.md), with wide-screen screenshot and layout measurements.
 - [Hosted version 6 publication and verification](hosted-v6/README.md), including the deployed trip form and Abbott place card.
 - [Latest trip-entry, Abbott, and restored-highlight verification](trip-map-fixes/README.md), with desktop and phone screenshots. This update addresses the overlay loss and compressed search field in the earlier review.
 - [Earlier rendered app test review](campuscurb-design-test-review.md).

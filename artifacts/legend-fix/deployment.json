@@ -1,0 +1,14 @@
+{
+  "project_id": "appgprj_6af8d642a48c8191a783c991f417a5a0",
+  "version": 7,
+  "version_id": "appgprj_6af8d642a48c8191a783c991f417a5a0~appgver_c0f536c8dbf881918155b0cadd7eee05",
+  "deployment_id": "appgdep_6af9b0856b38819190a0812287d17b03",
+  "status": "succeeded",
+  "url": "https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site",
+  "deployed_at_utc": "2026-11-15T13:15:55.084394+00:00",
+  "app_commit": "417cc78eb4575ccc69c4baf53090349c8159ef70",
+  "site_source_commit": "d9e9e1ddeb7a2e76307b650cb018d856fa6734ae",
+  "archive_sha256": "sha256:6e37aaeda80e11507a6ac74450ec65453168d08f516669819867c82eacbbc77a",
+  "app_tests_passed": 37,
+  "hosted_check": "Legend left edge matches search dock at 24px; 12px gap at 1280x720."
+}
