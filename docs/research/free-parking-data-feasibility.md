@@ -6,7 +6,7 @@ Research checked November 14, 2026, America/Los_Angeles. Scope: free/open source
 
 Proceed with an imagery/geometry and observation-labeling pilot. Do not claim an hourly parking forecast from the free aerial archive alone. The strongest free demand evidence identified is the City's historical parking surveys; fresh repeated observations are still needed to establish current behavior and validate predictions.
 
-The working prototype is in [`tools/parking-research`](../../tools/parking-research/README.md). It queries real catalogs, distinguishes map tiles from capture dates, downloads source-backed research samples, and validates future count records. No trained vehicle detector or vacancy forecast has run. The browser app's illustrative colors and existing parking rules are unchanged.
+The working prototype is in [`tools/parking-research`](../../tools/parking-research/README.md). It queries real catalogs, distinguishes map tiles from capture dates, downloads source-backed research samples, and validates future count records. At this study's initial milestone, no detector had run. The subsequent [G2 vehicle detector pilot](g2-vehicle-detector-pilot.md) records actual local inference and its poor provisional recall; no vacancy forecast is validated. The browser app's illustrative colors and existing parking rules are unchanged.
 
 ## Verified results
 

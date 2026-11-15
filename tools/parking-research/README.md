@@ -1,6 +1,6 @@
 # CampusCurb free-source evidence prototype
 
-This is a working research/data-ingestion prototype, not a trained vehicle detector or parking forecast. It is separate from the public browser app. Auditing and count validation use Python 3.10+ and the standard library; no accounts or paid API are required. County cached-image assembly also requires Pillow (`python3 -m pip install Pillow`) or the Codex bundled Python, which already includes it. CDFW crops do not need Pillow.
+This is a working research/data-ingestion prototype with a local pretrained vehicle-detector pilot. It is separate from the public browser app and supplies no parking forecast. Auditing and count validation use Python 3.10+ and the standard library; no accounts or paid API are required. County cached-image assembly also requires Pillow (`python3 -m pip install Pillow`) or the Codex bundled Python, which already includes it. CDFW crops do not need Pillow.
 
 From the repository root:
 
@@ -26,7 +26,25 @@ Existing sample files are reused only when their saved checksum and requested bo
 
 `audit.json` and `samples/manifest.json` are the machine-readable evidence handoff. Results depend on the provider and date queried. The regional audit is not a guarantee of imagery coverage over every curb or time of day.
 
-## Connecting image analysis next
+## Local vehicle detector pilot
+
+The [G2 pilot report](../../docs/research/g2-vehicle-detector-pilot.md) records the tested model, licenses, methods and limits. It found only 7 of 18 provisional assistant reference centers after exploratory scale adjustment, so it is not ready for occupancy integration. Labels are not human-verified ground truth. The 2022 windows have no defensible reference count and remain unscored.
+
+Use Python 3.12 for the pinned detector dependencies. Create a virtual environment outside the repository, then run:
+
+```sh
+python3.12 -m venv /tmp/campuscurb-detector-env
+/tmp/campuscurb-detector-env/bin/python -m pip install -r tools/parking-research/requirements-detect.txt
+/tmp/campuscurb-detector-env/bin/python tools/parking-research/detect.py --download-model --model /tmp/campuscurb-research/model.onnx --manifest /tmp/campuscurb-research/samples/manifest.json --out /tmp/campuscurb-research/baseline
+/tmp/campuscurb-detector-env/bin/python tools/parking-research/detect.py --model /tmp/campuscurb-research/model.onnx --manifest /tmp/campuscurb-research/samples/manifest.json --ground-tile-m 36 --out /tmp/campuscurb-research/scale-adapted
+/tmp/campuscurb-detector-env/bin/python -m unittest discover -s tools/parking-research -p 'test_*.py' -v
+```
+
+`g2-reference.json` is bound to the original delivered G2 sample hashes. A fresh provider download may change bytes or dimensions; if it does, do not reuse these labels. Relabel the new image independently and supply a reviewed reference with `--reference`. Keep an untouched evaluation set before further tuning. The original samples are in the research handoff; model weights are not committed.
+
+The handoff also contains a documented 512×512 positive-control crop. Test the runtime with `detect.py --model /tmp/campuscurb-research/model.onnx --control-image path/to/control-positive.png --out /tmp/campuscurb-research/control`. This confirms that boxes can be produced, not independent accuracy.
+
+## Connecting reviewed observations
 
 Run a detector on a sample, retain its model/version, pixel boxes, confidence thresholds, and reviewed misses/false positives, and compare with independent human labels. A count record can then be assessed with:
 
@@ -36,7 +54,7 @@ python3 tools/parking-research/research.py assess --observations observations.js
 
 The JSON file is a list. Every record needs `area_id`, `sample_id`, `source_url`, integer `visible_vehicle_count`, and `method` (`human` or `model`). A record claiming a verified capture clock also needs timezone-aware `captured_at` and `capture_time_evidence_url`. These fields are claims to review; their presence is not independent verification. No example counts are supplied as if they were real observations.
 
-No detector weights, automated vehicle counts, legally usable capacity, or validated forecast are bundled. Training with sparse aerial snapshots cannot establish an hourly profile. Historic observation, current vacancy, and eligibility remain separate.
+Detector weights are fetched from a pinned source with a SHA-256 check. Raw candidate boxes and provisional comparisons are separate from accepted observations: no whole-lot vehicle counts, legally usable capacity, or validated forecast are supplied. Training with sparse aerial snapshots cannot establish an hourly profile. Historic observation, current vacancy, and eligibility remain separate.
 
 ## Rights and evidence limits
 

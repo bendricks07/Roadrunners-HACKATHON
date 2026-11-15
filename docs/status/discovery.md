@@ -27,7 +27,7 @@ Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site 
 
 ## Remaining data and integration work
 
-Free-source research on `codex/free-parking-research` adds a separate [feasibility study](../research/free-parking-data-feasibility.md) and [working research prototype](../../tools/parking-research/README.md). The tested NAIP archive supplies seven acquisition dates across 2012–2024 over the selected SLO area; clock times are unverified. County 2014 cached imagery and CDFW 2022 crops support a labeling pilot, not an hourly forecast. No trained detector, live occupancy, new eligibility policy, or browser UI change is claimed.
+Free-source research on `codex/free-parking-research` adds a separate [feasibility study](../research/free-parking-data-feasibility.md), [working research prototype](../../tools/parking-research/README.md), and [G2 vehicle detector pilot](../research/g2-vehicle-detector-pilot.md). The tested NAIP archive supplies seven acquisition dates across 2012–2024 over the selected SLO area; clock times are unverified. A pinned MIT-declared quantized Mask R-CNN ran locally: a 512px baseline found no candidates, and exploratory 36m tiling matched 7 of 18 provisional assistant labels in two County 2014 windows. The two 2022 windows had no candidates and are unscored. Labels need independent human verification; counts are not whole-lot occupancy. All 28 research tests and 32 app checks pass. No live occupancy, new eligibility policy, forecast, or browser UI change is claimed.
 
 - Connect a suitable Google key for the shared judge deployment; current UI connection is per browser only.
 - Replace the explicit chance fixtures with a validated forecast or actual feed, including freshness/confidence metadata.
