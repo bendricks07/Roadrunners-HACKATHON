@@ -1,5 +1,6 @@
 import { CAMPUS_AREAS, featureCenter, CHECKED_ON } from './map-model.js';
 import { STREET_GUIDANCE } from './neighborhood-parking.js';
+import { formatParkingDuration } from './rules.js';
 
 export const CITY_STREETS = 'https://mapsa.slocity.org/hosting/rest/services/sloGISlayers/slogisLandManagement/FeatureServer/16';
 export const CITY_PARKING = 'https://www.slocity.org/government/department-directory/public-works/parking-services/residential-permits';
@@ -53,9 +54,12 @@ export const STREET_AREAS = STREET_RECORDS.map(([sourceId, gisName, name, demoCh
   id: 'slo-street-' + sourceId, sourceId, gisName, name, shortName: name, kind: 'street',
   dataset: 'campus-research', categories: ['Street parking', 'Check signs'],
   policyComplete: false, occupancy: 'unknown', entrance: null, walkMinutes: null,
-  sourceUrl: CITY_PARKING, checkedOn: CHECKED_ON, rules: {}, demoChance,
+  sourceUrl: CITY_PARKING, checkedOn: CHECKED_ON,
+  // User-reported sign information, not independently verified City policy.
+  // Both centerlines are display candidates; exact curbs/hours remain unknown.
+  rules: gisName === 'ABBOTT ST' ? { maxStayMinutes: 600, limitProvenance: 'user-reported', limitScope: 'Signed Abbott Street parking spaces; exact curbs and enforcement hours unverified', limitReportedOn: '2026-11-15' } : {}, demoChance,
   guidance: STREET_GUIDANCE[gisName],
-  note: 'City street geometry only. Parking on either side, permit requirements, curb markings, and temporary signs have not been verified. The chance color is an illustrative demo estimate.',
+  note: gisName === 'ABBOTT ST' ? 'A user reported a 10-hour limit for signed Abbott Street parking. Exact curbs, enforcement hours, permit rules and exceptions are unverified. These source centerlines are approximate display candidates, not verified parking curbs. Empty-space availability is unknown.' : 'City street geometry only. Parking on either side, permit requirements, curb markings, and temporary signs have not been verified. The chance color is an illustrative demo estimate.',
 }));
 export const PARKING_AREAS = [...CAMPUS_AREAS, ...STREET_AREAS];
 
@@ -77,8 +81,9 @@ export function parkingDisplay(area, eligibility, showEstimates = true, now = Da
   const full = area.availability?.status === 'full' && area.availability.verified === true && /^https:\/\//.test(area.availability.sourceUrl || '') && Number.isFinite(area.availability.observedAt) && area.availability.observedAt <= now && Number.isFinite(area.availability.expiresAt) && area.availability.expiresAt > now;
   if (blocked || full) {
     const reasons = [blocked ? eligibility?.reason || 'This location is closed to parking.' : '', full ? 'No available spaces: a current verified source reports this area full.' : ''].filter(Boolean);
-    return { ...CHANCE.restricted, color: CHANCE.low.color, label: area.rules.closed ? 'Closed to parking' : eligibility?.permitConflict ? 'Permit or payment needed' : blocked ? 'Not eligible for this trip' : 'No available spaces', reason: reasons.join(' '), chance: 'restricted', locked: !!blocked, illustrative: false, full: !!full };
+    return { ...CHANCE.restricted, color: CHANCE.low.color, label: area.rules.closed ? 'Closed to parking' : eligibility?.durationConflict ? 'Trip exceeds time limit' : eligibility?.permitConflict ? 'Permit or payment needed' : blocked ? 'Not eligible for this trip' : 'No available spaces', reason: reasons.join(' '), chance: 'restricted', locked: !!blocked, illustrative: false, full: !!full };
   }
+  if (eligibility?.maxStayMinutes) return { color: eligibility.limitProvenance === 'user-reported' ? '#ffc34a' : '#258cff', label: `Maximum ${formatParkingDuration(eligibility.maxStayMinutes)}${eligibility.limitProvenance === 'user-reported' ? ' (reported)' : ''}`, reason: `Your planned trip is ${formatParkingDuration(eligibility.plannedStayMinutes)}. The ${eligibility.limitProvenance === 'user-reported' ? 'reported' : 'published'} maximum is ${formatParkingDuration(eligibility.maxStayMinutes)}. ${eligibility.limitProvenance === 'user-reported' ? 'Check the signs for exact curbs, hours and exceptions. ' : ''}Permit eligibility and empty spaces still need checking.`, chance: 'rules', locked: false, illustrative: false };
   if (eligibility?.ruleReviewed && eligibility?.ruleLabel) return { color: eligibility.ruleTone === 'caution' ? '#ffc34a' : '#258cff', label: eligibility.ruleLabel, reason: eligibility.reason, chance: 'rules', locked: false, illustrative: false };
   const chance = showEstimates && !eligibility?.suppressEstimate ? area.demoChance || LOT_DEMO_CHANCES[area.id] || 'unknown' : 'unknown';
   const reason = { good: 'Green: good parking chance in the demo preview. An open space is not confirmed.', limited: 'Yellow: limited parking chance in the demo preview. Availability is unknown; this is not a measured occupancy report.', low: 'Red: low parking chance in the demo preview. This does not mean the location is confirmed full.', unknown: 'Actual space availability is unknown. No live occupancy feed is connected.' }[chance];

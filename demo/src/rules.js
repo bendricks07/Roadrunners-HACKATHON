@@ -1,6 +1,12 @@
 import { researchedPermitRule } from './campus-permit-policy.js';
 export const MINUTE = 60_000;
 
+export function formatParkingDuration(minutes) {
+  if (!Number.isFinite(minutes) || minutes < 0) return 'Not set';
+  const total = Math.ceil(minutes), hours = Math.floor(total / 60), rest = total % 60;
+  return [hours ? `${hours} hour${hours === 1 ? '' : 's'}` : '', rest ? `${rest} minute${rest === 1 ? '' : 's'}` : ''].filter(Boolean).join(' ') || '0 minutes';
+}
+
 // Only the common weekday 7-17 window is used: academic-break evening hours
 // and current holiday/event calendars are not supplied. Never infer free parking.
 const daytimeCache = new Map();
@@ -77,12 +83,20 @@ export function bestParkingResult(area, plans) {
 
 export function evaluateCampusParking(area, plan) {
   const rules = area.rules || {};
-  const result = (status, reason, nextRestrictionAt = null) => ({ status, reason, nextRestrictionAt, occupancy: 'unknown' });
+  const limitApplies = Number.isFinite(rules.maxStayMinutes) && rules.maxStayMinutes > 0 && !rules.limitExemptPermits?.includes(plan.permit);
+  const limit = limitApplies ? { maxStayMinutes: rules.maxStayMinutes, plannedStayMinutes: (plan.departureAt - plan.arrivalAt) / MINUTE, limitProvenance: rules.limitProvenance || 'published', limitScope: rules.limitScope || 'Spaces covered by the published time limit', limitReportedOn: rules.limitReportedOn || null } : {};
+  const result = (status, reason, nextRestrictionAt = null) => ({ status, reason, nextRestrictionAt, occupancy: 'unknown', ...limit });
   if (rules.closed) return result('ineligible', 'Campus closure notice: this lot is permanently closed.');
   if (!Number.isFinite(plan.arrivalAt) || !Number.isFinite(plan.departureAt) || plan.departureAt <= plan.arrivalAt) return result('unknown', 'Choose a valid arrival and departure in campus time.');
   // Apply closures before any recurring permit exemption.
   for (const restriction of rules.closures || []) {
     if (restriction.scope === 'whole-area' && plan.arrivalAt < restriction.endsAt && plan.departureAt > restriction.startsAt) return result('ineligible', restriction.reason || 'A closure overlaps your planned stay.', restriction.startsAt);
+  }
+  // Time limits are independent of permit selection and apply before any
+  // general permit-hours exemption. Elapsed time includes daylight-saving shifts.
+  if (limitApplies && plan.departureAt - plan.arrivalAt > rules.maxStayMinutes * MINUTE) {
+    const provenance = rules.limitProvenance === 'user-reported' ? 'Reported limit - check the signs for exact curbs, hours and exceptions.' : 'Published limit; check the signed space and applicable exceptions.';
+    return { ...result('ineligible', `Trip too long: your planned stay is ${formatParkingDuration(limit.plannedStayMinutes)}; allowed parking time is ${formatParkingDuration(rules.maxStayMinutes)}. ${provenance}`, plan.arrivalAt + rules.maxStayMinutes * MINUTE), durationConflict: true };
   }
   const researched = researchedPermitRule(area, plan);
   if (researched && !C_LOTS.has(area.id)) return researched;
@@ -97,7 +111,6 @@ export function evaluateCampusParking(area, plan) {
   if (rules.deniedPermits?.includes(plan.permit)) return result('ineligible', 'The official lot directory excludes your selected permit here.');
   if (C_LOTS.has(area.id) && ['commuter', 'commuter-grand', 'r3', 'r4', 'ag-commuter'].includes(plan.permit) && overlapsCampusDaytime(plan.arrivalAt, plan.departureAt)) return { ...result('unknown', `Permit mismatch: ${area.name} has no general commuter spaces in the published C-lot directory. Your selected commuter permit does not cover general staff stalls during daytime enforcement. Separately signed special spaces and holiday exceptions need verification.`), permitConflict: true };
   if (researched) return researched;
-  if (rules.maxStayMinutes && !rules.limitExemptPermits?.includes(plan.permit) && plan.departureAt - plan.arrivalAt > rules.maxStayMinutes * MINUTE) return result('ineligible', `Your stay exceeds the published ${rules.maxStayMinutes / 60}-hour limit.`, plan.arrivalAt + rules.maxStayMinutes * MINUTE);
   for (const restriction of rules.closures || []) {
     if (restriction.scope === 'whole-area' && plan.arrivalAt < restriction.endsAt && plan.departureAt > restriction.startsAt) return result('ineligible', restriction.reason || 'A closure overlaps your planned stay.', restriction.startsAt);
   }

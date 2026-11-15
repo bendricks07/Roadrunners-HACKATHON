@@ -79,7 +79,7 @@ test('manual reminders require the driver’s deadline and walk estimate', () =>
   assert.throws(() => createManualSession({ ...options, walkMinutes: NaN }), /walk/);
   assert.throws(() => createManualSession({ ...options, deadlineAt: now }), /future/);
   assert.throws(() => createManualSession({ ...options, area: area('k1') }), /closed/);
-  assert.throws(() => createManualSession({ ...options, area: area('g2'), permit: 'visitor', deadlineAt: now + 121 * MINUTE }), /2-hour/);
+  assert.throws(() => createManualSession({ ...options, area: area('g2'), permit: 'visitor', deadlineAt: now + 121 * MINUTE }), /allowed parking time is 2 hours/);
   const saved = JSON.parse(JSON.stringify(createManualSession(options)));
   assert.equal(saved.manual, true);
   assert.equal(saved.deadlineAt, now + 120 * MINUTE);

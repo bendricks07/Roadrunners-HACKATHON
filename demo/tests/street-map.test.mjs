@@ -17,6 +17,12 @@ test('chance preview never changes unconfirmed street eligibility or unknown occ
     assert.equal(eligibility.occupancy, 'unknown');
     assert.equal(area.policyComplete, false);
     const preview = parkingDisplay(area, eligibility);
+    if (area.rules.maxStayMinutes) {
+      assert.equal(preview.illustrative, false);
+      assert.equal(preview.chance, 'rules');
+      assert.equal(parkingDisplay(area, eligibility, false).chance, 'rules');
+      continue;
+    }
     assert.equal(preview.illustrative, true);
     assert.ok(['good', 'limited', 'low'].includes(preview.chance));
     assert.equal(parkingDisplay(area, eligibility, false).chance, 'unknown');

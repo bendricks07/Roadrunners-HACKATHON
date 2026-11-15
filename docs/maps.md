@@ -40,6 +40,8 @@ These are street centerlines. MapLibre draws paired approximate curb display ban
 
 ## Chance colors, rules, and reminders
 
+An overlong trip overrides demo chance colors with red and a **Trip exceeds time limit** explanation containing planned and allowed duration. The shared evaluator checks elapsed arrival-to-departure time, including midnight/DST, and preserves explicit area-specific permit exceptions. Abbott's 10-hour cap is user-reported, not independently verified City policy; exact curb coverage and enforcement hours require sign checks. Below-limit time fit never establishes legal eligibility or a vacancy. See [duration verification](../artifacts/trip-duration-limits/README.md).
+
 **No permit** is an exclusive setting. Reviewed ordinary-space facilities now use published general enforcement hours (Mon-Thu 7 AM-10 PM; Friday 7 AM-5 PM), including the regular Friday 5 PM-Monday 7 AM exemption. Academic-break/holiday calendars and signed event/special stalls remain separate. Unreviewed areas retain conservative checks and unknown eligibility. Blue means a researched permit rule, not an open space. The ordinary Commuter Annual and Grand Annual products are distinguished using the current guide. See [reviewed scope and sources](research/permit-status-2026-11-15.md).
 
 **Where are you headed?** is edited below map search alongside Trip date & time. Destination ordering remains illustrative, not verified walking navigation. Editors survive background geometry refreshes.
