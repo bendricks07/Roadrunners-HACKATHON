@@ -2,6 +2,8 @@
 
 Branch: `codex/satellite-parking-map`. Implementation started November 14, 2026.
 
+Published as version 2 at https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site using app source `9eb64df` and Site source `85fa758`. Google is ready to connect, but no shared Google browser/demo key has been supplied; the default view is the labeled USGS fallback.
+
 ## Implemented
 
 - A map-first Explore layout with a floating desktop panel and phone bottom sheet, restrained light/dark surfaces, a clear legend, parking categories, source information, and keyboard-accessible controls.

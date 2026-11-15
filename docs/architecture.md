@@ -2,13 +2,16 @@
 
 ## Implemented scope
 
-`demo/` is a standalone, dependency-free ES-module browser app. The repository root remains free for a teammate's chosen framework. The Node server exposes only the app on loopback, not the repository or a data API.
+`demo/` is a standalone ES-module browser app with locally vendored Leaflet; no npm runtime installation is needed. The repository root remains free for a teammate's chosen framework. The Node server exposes only the app on loopback, not the repository or a data API. The geographic client queries Cal Poly's public GIS directly.
 
 | File | Responsibility |
 | --- | --- |
 | `demo/src/data.js` | Explicitly simulated parking areas, destinations, permits, and report fixtures |
 | `demo/src/rules.js` | Eligibility, active reports, walking adjustments, earliest deadlines, sessions, and reminder phases |
-| `demo/src/map.js` | Original SVG map, selected parking markers, and illustrative routes |
+| `demo/src/map.js` | Separate walkthrough's original SVG map, selected markers, and illustrative routes |
+| `demo/src/map-model.js` | Real campus IDs, GIS queries, source identity checks, and campus-time conversion |
+| `demo/src/geographic-map.js` | Google Maps and explicitly labeled USGS/Leaflet adapters |
+| `demo/src/discovery.js` | Geographic parking search, details, provider connection, and manual reminders |
 | `demo/src/app.js` | Four-tab UI, dialogs, browser persistence, guide, reminders, and appearance |
 | `demo/src/styles.css` | Responsive light/dark design system |
 | `demo/server.mjs` | Built-in Node HTTP server restricted to app assets |

@@ -11,3 +11,4 @@ These are choices for Matthew's one-hour demonstration branch, not agreements im
 7. Provide a 90-second demo with a 30-second return walk, 30-second buffer, and reminder after 30 seconds.
 8. Keep reports local; use a walkway-closure simulation to demonstrate connected recommendations and reminders.
 9. Deliver on `codex/campuscurb-demo`, keeping main stable for review and integration.
+10. The geographic extension is isolated on `codex/satellite-parking-map`. Google Maps is preferred, with an explicit USGS fallback while the browser key is missing. Real campus IDs and GIS geometry are separate from fictional walkthrough data; manual real-area reminders never inherit sample rules or walking times. See `docs/maps.md`.
