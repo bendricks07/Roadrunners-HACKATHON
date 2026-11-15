@@ -1,5 +1,9 @@
 # CampusCurb browser demo handoff
 
+## Verity follow-up
+
+The `Verity` branch adds keyboard-accessible search/map controls, focused dialog transitions, clearer unsupported guide answers, resilient saved-report restoration, report-expiry refreshes, draft preservation during timers, and preference synchronization between tabs. See [the run report](../verity/Verity.md) for observed coverage, regression checks, screenshots, and limitations. This branch publication does not update the public judge demo.
+
 Branch: `codex/campuscurb-demo`
 
 ## Completed

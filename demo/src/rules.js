@@ -1,5 +1,27 @@
 export const MINUTE = 60_000;
 
+export function parseSavedState(raw) {
+  try {
+    const value = JSON.parse(raw);
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  } catch { return {}; }
+}
+
+export function normalizeReports(reports, areaIds, types) {
+  if (!Array.isArray(reports)) return [];
+  const seen = new Set();
+  return reports.filter(r => {
+    if (!r || typeof r !== 'object' || typeof r.id !== 'string' || !r.id || seen.has(r.id) || !areaIds.includes(r.areaId) || !Object.hasOwn(types, r.type) || !Number.isFinite(r.createdAt) || !Number.isFinite(r.expiresAt) || r.expiresAt <= r.createdAt || typeof r.description !== 'string') return false;
+    seen.add(r.id);
+    return true;
+  }).map(r => ({
+    id: r.id, areaId: r.areaId, type: r.type, title: types[r.type],
+    description: r.description.slice(0, 500), createdAt: r.createdAt, expiresAt: r.expiresAt,
+    extraWalkMinutes: r.type === 'path' ? (Number.isFinite(r.extraWalkMinutes) && r.extraWalkMinutes >= 0 ? r.extraWalkMinutes : 3) : 0,
+    active: r.active !== false, simulated: true, status: 'Community report · Unverified',
+  }));
+}
+
 export function activeReports(reports, now = Date.now()) {
   return reports.filter(r => r.active !== false && Number(r.expiresAt) > now);
 }
