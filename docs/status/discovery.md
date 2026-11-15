@@ -5,6 +5,7 @@ Consolidated November 15, 2026, America/Los_Angeles, from integrated `main` at `
 ## Integrated behavior
 
 - The map-first redesign opens directly into geographic search with compact street/lot cards, directions, source details, and manual saved-car reminders. The fictional walkthrough remains separate under Layers.
+- On screens wider than 760px, the home estimate legend aligns with the search dock's left edge and stays 12px above its measured top, instead of drifting into the map center. The phone layout and selected-place legend placement retain their existing layout.
 - Satellite uses credited 2022 USDA NAIP/CDFW imagery. Dark/Standard use OpenFreeMap; Terrain uses USGS. Google is preferred when configured with a browser key; no shared key is committed.
 - The expanded campus inventory includes named lots, garages, mapped subareas, stall-category notes, time-limit information, and known closures. Source entries without matching GIS geometry remain searchable. Exact stall permissions and usable capacity still require verification.
 - The City street query covers 42 exact source segments on ten roads, including Abbott. These are centerlines, with approximate display bands rather than surveyed legal curbs.

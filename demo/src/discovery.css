@@ -205,6 +205,10 @@
 .geo-source-links a { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; min-height: 43px; padding: 13px 0; border-bottom: 1px solid var(--line); }
 .geo-source-links .icon { height: 14px; width: 14px; }
 @media (min-width: 1100px) { .geo-map-legend { bottom: 35px; left: 500px; } .place-open .geo-map-legend, .search-open .geo-map-legend, .session-open .geo-map-legend { left: 540px; } }
+/* Keep the home legend attached to the search dock, including saved-car height. */
+@media (min-width: 761px) {
+  .map-home .geo-map-legend { left: 24px; bottom: calc(var(--dock-height) + 44px); }
+}
 @media (max-width: 760px) {
   .geo-dock { left: 16px; bottom: calc(34px + env(safe-area-inset-bottom)); width: calc(100% - 32px); max-width: none; }
   .geo-search { height: 60px; padding: 0 19px; border-radius: 23px; }
