@@ -135,7 +135,7 @@ Reuse `demo/src/rules.js` for shared decisions. If its current fixture-oriented 
 - [ ] Update `docs/status/discovery.md` (create if absent), relevant architecture/configuration notes, and a short source/data-gap list. Record actual checks, screenshots, and remaining limitations.
 - [ ] Push the feature branch and provide a reviewable diff/PR. Coordinate shared-file changes with the teammate maintaining sessions or rules.
 
-The current public judge demo is https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site/. GitHub pushes do not auto-deploy it. Follow the working branch's deployment handoff when the integrated feature is ready; this documentation task does not replace the public demo.
+The current public judge demo is https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site/. GitHub pushes do not auto-deploy it. Follow the working branch's deployment handoff when the integrated feature is ready; the integrated publication is recorded in `docs/deployment.md`.
 
 ## Prompt to give the implementing GPT
 

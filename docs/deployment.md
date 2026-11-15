@@ -7,10 +7,10 @@ The demo is public and does not require ChatGPT or GitHub sign-in. The GitHub re
 ## Current publication
 
 - Site project: `appgprj_6af8d642a48c8191a783c991f417a5a0`
-- Version: 2
-- Source app branch: `codex/satellite-parking-map`
-- Source app commit: `9eb64dff92af3bb96a1d824a510e334ad4513d87`
-- Published source commit: `85fa75856f2773a4fd527df19b6ca20416068bfb`
+- Version: 3
+- Source app branch: `main`
+- Source app commit: `324073871ee842756eafa263ea1a0087508016c2`
+- Published source commit: `fab6d00ba6c3bee78e4fbf33524e10404020974d`
 - Publication checkout on Matthew's Mac: the sibling `campuscurb-site` directory, with its tracked `.openai/hosting.json` identity.
 
 ## Updating the same link
@@ -26,4 +26,4 @@ Changes in this GitHub repository are not automatically deployed. After changing
 
 Only the browser app is hosted. Team research files, repository history, local logs, and credentials are not served. The geographic map uses real campus GIS geometry and separately reviewed research records; incomplete policies and occupancy remain unknown. The separate walkthrough's rules, prices, routes, and community reports remain explicitly illustrative.
 
-Version 2 adds the Google-ready geographic Explore view, source-backed overlays, manual reminders, and an explicitly labeled USDA/USGS fallback. A Google browser/demo key has not been configured for the shared deployment. Map settings connects a key for the current browser only; see [map configuration](maps.md) for shared deployment setup. Do not represent the fallback as Google imagery.
+Version 3 publishes the integrated `main`: the Google-ready geographic Explore view, source-backed overlays, manual reminders, the explicit USDA/USGS fallback, and the Verity saved-state/accessibility fixes. All 26 Node checks and the DOM integration smoke passed. A Google browser/demo key has not been configured for the shared deployment. Map settings connects a key for the current browser only; see [map configuration](maps.md) for shared deployment setup. Do not represent the fallback as Google imagery.

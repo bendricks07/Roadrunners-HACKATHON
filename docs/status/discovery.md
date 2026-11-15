@@ -2,7 +2,7 @@
 
 Canonical branch: `main`, integrated from `codex/satellite-parking-map`. Implementation started November 14, 2026.
 
-Published as version 2 at https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site using app source `9eb64df` and Site source `85fa758`. Google is ready to connect, but no shared Google browser/demo key has been supplied; the default view is the labeled USGS fallback.
+Published as version 3 at https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site using integrated main app source `3240738` and Site source `fab6d00`. Google is ready to connect, but no shared Google browser/demo key has been supplied; the default view is the labeled USGS fallback.
 
 ## Implemented
 
