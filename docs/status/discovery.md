@@ -1,53 +1,40 @@
-# Geographic Explore implementation
+# Current CampusCurb app status
 
-## Latest update: trip entry and map highlights
+Consolidated November 15, 2026, America/Los_Angeles, from integrated `main` at `0f0bd0e`. See the [repository audit](repository.md) for branch coverage, the [architecture](../architecture.md) for implementation details, and [earlier implementation notes](discovery-history-2026-11-14.md) for history.
 
-November 14, 2026 local time: trip date/time is now a map entry directly below search; permit selection remains in Layers > Permits & preferences. Arrival and departure apply together after validation in Los Angeles time. Yellow/red cards explain demo chance colors; known permit conflicts and closures show the actual evaluator reason with a red lock. Low chance never claims confirmed full parking.
+## Integrated behavior
 
-MapLibre base-style replacement now disables style diffing so `style.load` restores the current parking source/layers. Rendered switches across Satellite, Dark, Standard, Terrain and back preserved highlights and a selected Abbott segment. Abbott St adds official City IDs 2173 and 2333, bringing the street total to 42 segments on ten roads. Parking rules remain unverified.
-
-All 37 Node tests and source syntax checks passed, including new date/DST, reason, Abbott identity, and overlay restoration regressions. Desktop and phone evidence is in [trip/map verification](../../artifacts/trip-map-fixes/README.md). The style-switch loss and expanded-search compression listed in the earlier review below are addressed in this update.
-
-GitHub source is being merged to `main` for this request. Public Site version 5 is unchanged: the current connection's source-write credential request returned `Sites project not found`. Its owner/editor needs to publish the merged app to the existing project; see [deployment instructions](../deployment.md).
-
-## Earlier publication and research status
-
-Redesign, free-data research, detector pilot, and all design/research deliverables are published to GitHub `main`, including commit `1b8fe13`. The research branch `codex/free-parking-research` is also published. Feature branch `codex/map-first-redesign` is fully merged and deleted. App source remains `fd63c2a`. November 14, 2026 local time.
-
-Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site . Published version 5 uses Site source `d9675b3`; full provenance and GitHub sync status are recorded in `docs/deployment.md`. No shared Google browser/demo key has been supplied.
-
-## Implemented
-
-- The campus inventory adds named facilities and GIS-mapped subareas, with published stall categories, known time limits and closures. City permit hours and district maps are available under **Plan parking → City permit districts**. Street guidance links historical timed zones to their City reports and calls for current sign verification. Source listings without matching GIS features remain searchable.
-
-- The approved satellite/dark concepts now drive a full-screen map UI. Launch shows only search, layers/location controls, a compact estimate legend, and required attribution. No persistent sidebar, header, results, filter form, or tab bar.
-- A compact selected-place card includes street/lot/garage type, explicit demo estimate, sign/permit caution, Google Maps directions to the mapped area, detailed rules, and saved-car reminders. Exact driving entrances remain unverified.
-- Search groups nearby street names and campus parking, with parking-type filters and trip/permit settings behind an explicit action. Keyboard search/Enter/Escape and map selection retain the same map instance.
-- Satellite uses 2022 USDA NAIP imagery from CDFW at 0.6 m native resolution, replacing the coarse USGS imagery cache. Dark/Standard use original restrained MapLibre styles over OpenFreeMap vector tiles. Terrain remains USGS. All providers retain their real credits.
-- Google Maps is preferred when a browser key is connected, with satellite, dark road map, standard, and terrain views. The connection form remains per browser; no key is committed or a live Google SDK result claimed.
-- 40 real source segments on Fredericks St, Loomis St, Slack St, Murray Ave, Grand Ave, California Blvd, Foothill Blvd, Hathway Ave, and College Ave are queried directly from the City. Exact source IDs AND names must match. These are centerlines, not surveyed curbs or verified street-parking permissions.
-- Eight Cal Poly GIS lot/structure outlines plus closed K1's source point remain separate from street geometry. Original G2/131 permit exclusions, H14 subareas, and closure rules are preserved.
-- Red/yellow/green chance colors are explicitly illustrative demo fixtures. They are independent of eligibility and switchable in Layers. Known ineligibility uses a neutral restriction symbol and cannot become an available recommendation. Actual occupancy remains unknown.
-- Manual reminders for campus or street source IDs require the driver's future deadline, own walk estimate, buffer, note, and acknowledgement. Deadlines persist as absolute timestamps. The original fictional 90-second walkthrough remains available in Layers.
+- The map-first redesign opens directly into geographic search with compact street/lot cards, directions, source details, and manual saved-car reminders. The fictional walkthrough remains separate under Layers.
+- Satellite uses credited 2022 USDA NAIP/CDFW imagery. Dark/Standard use OpenFreeMap; Terrain uses USGS. Google is preferred when configured with a browser key; no shared key is committed.
+- The expanded campus inventory includes named lots, garages, mapped subareas, stall-category notes, time-limit information, and known closures. Source entries without matching GIS geometry remain searchable. Exact stall permissions and usable capacity still require verification.
+- The City street query covers 42 exact source segments on ten roads, including Abbott. These are centerlines, with approximate display bands rather than surveyed legal curbs.
+- Trip arrival/departure is entered below search and validated together in Los Angeles time. Permit selection and the parking planner expose the relevant product choices and source-linked district guidance.
+- Yellow/red chance explanations describe demo fixtures. A known permit conflict or closure shows the evaluator's actual reason and a restriction lock. G2/Structure 131 exclusions, G2's staff exception, H14 subarea uncertainty, and permanent closures remain distinct from chance colors.
+- Style replacement restores parking overlays and selection. The earlier style-switch overlay loss and expanded-search compression were addressed by commit `00c6f99`; [recorded desktop/phone evidence](../../artifacts/trip-map-fixes/README.md) accompanies that update.
+- Manual reminders retain absolute deadlines and use the driver's walk estimate and buffer. Notes stay in the browser; background/native notification delivery is not connected.
 
 ## Validation
 
-- `npm --prefix demo run check`: 32 passing tests. Six new tests cover independent chance fixtures, restrictions overriding fixtures, exact street source identity/type, line geometry, street-session restoration, and invalid City responses. Existing Verity/rule checks remain passing.
-- Full MapLibre base styles AND parking overlay layers validated against the upstream style-spec validator for all four views.
-- JSDOM integration with the actual vendored Leaflet fallback and fetched official source responses passed: nine campus pins, eight outlines, 40 street segments, minimal home, retained map DOM, street search/selection/directions, manual save/restore/end, dark appearance, chance toggle, G2 commuter/time exclusions, Google setup form, and original walkthrough.
-- City runtime query returned HTTP 200 with all 40 source features. CDFW sample returned HTTP 200/JPEG with working CORS; the official California catalog documents 2022/0.6 m/public-use attribution terms.
-- Returning visitors open the new map even when the old walkthrough preference was saved; an old fictional session remains preserved and reachable through the walkthrough.
-- A subsequent rendered review tested the local app at 1280×900 and 390×844 and checked the public app. It reproduced disappearing parking overlays after a style switch and a compressed expanded search field, plus phone framing/touch-target concerns. See the [review and screenshots](../../artifacts/campuscurb-design-test-review.md). These defects remain open; automated checks do not cover them. Google rendering/authentication still requires an appropriate key.
+The integrated source passes **37 Node tests** and its configured syntax checks. The separate research suite passes **28 Python tests** with the detector dependencies installed. Both suites were rerun on November 15 during the repository integration audit. This organization update changes documentation only.
 
-## Remaining data and integration work
+Earlier rendered verification checked desktop/phone trip entry, Abbott selection, and switches through all four map styles. That evidence is dated in its report; this repository organization did not repeat rendered visual testing or verify Google authentication.
 
-Free-source research on `codex/free-parking-research` adds a separate [feasibility study](../research/free-parking-data-feasibility.md), [working research prototype](../../tools/parking-research/README.md), and [G2 vehicle detector pilot](../research/g2-vehicle-detector-pilot.md). The tested NAIP archive supplies seven acquisition dates across 2012–2024 over the selected SLO area; clock times are unverified. A pinned MIT-declared quantized Mask R-CNN ran locally: a 512px baseline found no candidates, and exploratory 36m tiling matched 7 of 18 provisional assistant labels in two County 2014 windows. The two 2022 windows had no candidates and are unscored. Labels need independent human verification; counts are not whole-lot occupancy. All 28 research tests and 32 app checks pass. No live occupancy, new eligibility policy, forecast, or browser UI change is claimed.
+## Research status
 
-- Connect a suitable Google key for the shared judge deployment; current UI connection is per browser only.
-- Fix the rendered style-switch overlay loss and expanded-search compression documented in the [app review](../../artifacts/campuscurb-design-test-review.md), then verify phone framing and touch areas.
-- Replace the explicit chance fixtures with a validated forecast or actual feed, including freshness/confidence metadata.
-- Verify exact block faces, current signs, permits, curb markings, temporary restrictions, stalls/subareas, entrances, costs, and walking routes. City centerlines provide no parking permission or occupancy fields. Do not infer permission from imagery.
-- City permit district layer 31 mixes residential districts and timed zones; its redistribution restrictions mean no district snapshot is committed. Current street permissions remain unconfirmed.
-- Shared reports, live AI, payments, automatic detection, and background/native notification delivery remain unconnected.
+The [free-data study](../research/free-parking-data-feasibility.md) identified seven distinct acquisition dates across 2012–2024 in the tested archive; flight clocks remain unverified. The [G2 detector pilot](../research/g2-vehicle-detector-pilot.md) matched 7 of 18 provisional assistant reference centers after exploratory scale adaptation in two County 2014 windows. The two 2022 windows returned no candidates and are unscored. Labels need independent human verification; counts are not whole-lot occupancy.
 
-Keep the existing Site project and public URL. GitHub pushes alone do not publish the demo.
+Maintained code lives in [tools/parking-research](../../tools/parking-research/README.md); complete delivered snapshots, model provenance, sample images and raw results are in the [artifact index](../../artifacts/README.md). No detector-derived counts or forecast probabilities are connected to the app.
+
+## Remaining work
+
+- Verify exact block faces, signs, stall categories, permit intervals, temporary closures, entrances, costs, walking routes, and usable capacity before confident recommendations. Missing policy remains unknown.
+- Obtain independent labels and held-out detector evaluation, plus repeated timestamped demand observations, before replacing the explicit chance fixtures with a forecast or feed.
+- Configure and verify Google rendering for the intended deployment. Current key setup is per browser.
+- Continue phone framing, touch-area, accessibility, and provider-failure review beyond the recorded checks.
+- Connect any production AI, shared reports, payments, automatic parking detection, or background notifications as separate work; these are not implemented services.
+
+## GitHub and hosting
+
+Every pre-existing local and GitHub branch was already contained in `main` at this audit; there were no open pull requests. The [repository audit](repository.md) records the checked tips. Current code, design assets, research, and evidence are all versioned together.
+
+GitHub source and the hosted Site have separate publication histories. The last recorded hosted version is 5; the later source update's Site write request returned `Sites project not found`. The existing project's authorized owner/editor needs to publish the updated source to the same Site when requested. See [deployment notes](../deployment.md). No Site deployment was performed by this repository organization.

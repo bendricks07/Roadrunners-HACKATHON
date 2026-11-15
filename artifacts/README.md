@@ -4,13 +4,14 @@ This folder preserves the generated concepts, rendered app evidence, source-back
 
 ## Design and app review
 
-- [Rendered app test review and known visual defects](campuscurb-design-test-review.md).
+- [Latest trip-entry, Abbott, and restored-highlight verification](trip-map-fixes/README.md), with desktop and phone screenshots. This update addresses the overlay loss and compressed search field in the earlier review.
+- [Earlier rendered app test review](campuscurb-design-test-review.md).
 - [Refined dark selected-street concept](campuscurb-concept-02-dark-selected-street-v2.png) and [refinement prompt](campuscurb-refined-streets-v2-prompt.md).
 - [Satellite concept](campuscurb-concept-01-satellite-streets.png), [dark concept](campuscurb-concept-02-dark-selected-street.png), [campus areas concept](campuscurb-concept-03-campus-parking-areas.png), and [concept prompts](campuscurb-concept-prompts.md).
 - [Live desktop satellite screenshot](campuscurb-live-desktop-satellite.jpg), [phone satellite](campuscurb-live-phone-satellite.jpg), [phone search](campuscurb-live-phone-search.jpg), [dark style after switch](campuscurb-live-phone-dark-after-switch.jpg), and [dark style after reload](campuscurb-live-phone-dark-after-reload.jpg). Additional local test screenshots are retained at this folder's root.
 - [Earlier generated concept history](design-history/), including the approved [satellite home](design-history/exec-f1fa6530-00b6-42ba-8ae9-02f89ad1a9e7.png) and [dark selected-place](design-history/exec-69d475e7-c4bb-493b-9da4-2e9a5422b3e7.png) references.
 
-Generated concepts use illustrative geography and estimates. They are design references, not source data, navigation maps, or measured parking availability. Screenshots record the state tested, including known defects; they are not claims that those defects were fixed.
+Generated concepts use illustrative geography and estimates. They are design references, not source data, navigation maps, or measured parking availability. Screenshots record the state tested on their report date. Use the latest verification report and [current app status](../docs/status/discovery.md) to distinguish resolved defects from remaining work.
 
 ## Free-data study and detector pilot
 

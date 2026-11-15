@@ -11,4 +11,4 @@
 - Keep parked-car notes private to the browser. Reports in this demo are local fixtures, not real submissions.
 - Use the approved restrained Apple-style design with system typography, neutral surfaces, blue actions, readable status labels, and light/dark appearances.
 - Use short feature branches. Preserve teammates' local edits and update the relevant status document before handing off work.
-- The README's Person A/B/C subsystem split remains a proposal until the team assigns it. This demo does not claim another teammate's production subsystem.
+- The Person A/B/C subsystem split in `docs/plans/team-collaboration.md` remains a proposal until the team assigns it. This demo does not claim another teammate's production subsystem. Use `docs/README.md` for current documentation and `CONTRIBUTING.md` for the development workflow.

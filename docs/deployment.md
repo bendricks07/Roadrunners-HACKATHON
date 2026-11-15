@@ -34,6 +34,8 @@ Google remains unconfigured for the shared deployment. **Layers → Map connecti
 
 ## GitHub sync status for this publication
 
+The [November 15 repository audit](status/repository.md) checks the newer integrated `main`, all remote branches, and open pull requests. The record below describes the earlier November 14 publication.
+
 **GitHub synchronization completed November 14, 2026 local time.** The signed-in GitHub Desktop connection successfully published `main` and `codex/free-parking-research`; Git's remote query independently confirmed both at `1b8fe1353fa6aaac2bddc81fcf8202acaf43dccb` before this status update. The previously unpublished redesign commits, free-data study, local detector pilot, and all 99 copied design/research deliverables are included. See the [artifact index](../artifacts/README.md). These status notes follow that verified publication.
 
 The original Matthew checkout and teammates' branches were preserved. No history was rewritten. Archived handoffs and evidence snapshots retain creation-time pending-push notes; those are historical records. This GitHub synchronization did not create a new Site deployment; the public app remains version 5.
