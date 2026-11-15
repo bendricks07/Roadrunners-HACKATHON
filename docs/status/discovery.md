@@ -1,8 +1,8 @@
 # Geographic Explore implementation
 
-Canonical base: `main`. Current redesign branch: `codex/map-first-redesign`, based on integrated main `4aeeed1`. November 14, 2026 local time.
+Redesign merged into local `main`; feature branch `codex/map-first-redesign` is fully merged and deleted. App source `fd63c2a`. GitHub push is pending because the signed-in desktop connection became unavailable. November 14, 2026 local time.
 
-Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site . Publication provenance is recorded in `docs/deployment.md` after deploying this revision. No shared Google browser/demo key has been supplied.
+Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site . Published version 5 uses Site source `d9675b3`; full provenance and GitHub sync status are recorded in `docs/deployment.md`. No shared Google browser/demo key has been supplied.
 
 ## Implemented
 
@@ -22,6 +22,7 @@ Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site 
 - Full MapLibre base styles AND parking overlay layers validated against the upstream style-spec validator for all four views.
 - JSDOM integration with the actual vendored Leaflet fallback and fetched official source responses passed: nine campus pins, eight outlines, 40 street segments, minimal home, retained map DOM, street search/selection/directions, manual save/restore/end, dark appearance, chance toggle, G2 commuter/time exclusions, Google setup form, and original walkthrough.
 - City runtime query returned HTTP 200 with all 40 source features. CDFW sample returned HTTP 200/JPEG with working CORS; the official California catalog documents 2022/0.6 m/public-use attribution terms.
+- Returning visitors open the new map even when the old walkthrough preference was saved; an old fictional session remains preserved and reachable through the walkthrough.
 - Native preview showed the new desktop shell, but its browser connection disconnected during visual review. Full visual QA across both appearances and phone sizes was not completed; DOM integration/style validation are not a substitute for a rendered visual pass. Google rendering/authentication still requires an appropriate key.
 
 ## Remaining data and integration work

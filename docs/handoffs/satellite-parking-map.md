@@ -1,3 +1,5 @@
+> **Current implementation:** The satellite/dark redesign is published as version 5. Read [current map status](../status/discovery.md) and [deployment/GitHub sync status](../deployment.md) first. The historical handoff below predates the new minimal shell and illustrative chance layer.
+
 # Next task: satellite / terrain parking map
 
 Prepared November 14, 2026 for the teammate and GPT implementing the next CampusCurb interface. The first geographic implementation has since been built and published; this document now directs follow-up work.
