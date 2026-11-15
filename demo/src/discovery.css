@@ -47,6 +47,11 @@
 .geo-trip-entry form { display: grid; gap: 10px; padding: 4px 0 14px; }
 .geo-trip-entry label { display: grid; gap: 5px; font-size: 12px; }
 .geo-trip-entry input { width: 100%; min-width: 0; height: 44px; font-size: 14px; }
+.geo-destination-label { display: grid; gap: 6px; font-size: 12px; padding: 4px 0 8px; }
+.geo-destination-label select { width: 100%; min-width: 0; min-height: 44px; font-size: 14px; }
+.geo-entry-help { padding-bottom: 14px; }
+.map-home:has(.geo-destination-entry[open]) .geo-map-legend { display: none; }
+.map-home .geo-dock { max-height: 75dvh; overflow-y: auto; }
 #geo-trip-error:empty { display: none; }
 #geo-trip-error { color: var(--red); font-size: 12px; }
 .map-home .geo-map-legend { bottom: 204px; }
@@ -149,6 +154,7 @@
 .geo-pin.selected { background: #0b81ff; color: #fff; border-color: #fff; width: 38px; height: 38px; border-radius: 12px; box-shadow: 0 0 0 4px #1685ff30,0 4px 15px #001c4e40; z-index: 20; }
 .geo-pin.recommended:not(.selected) { border-color: #5da9ff; box-shadow: 0 0 0 3px #1685ff35,0 3px 10px #001c4e32; }
 .geo-pin.selected .geo-pin-name { display: block; }
+.geo-pin.selected.locked { background: var(--pin-color); color: #fff; border-color: #fff; box-shadow: 0 0 0 4px #ff626b30,0 4px 15px #40101840; }
 .geo-pin.street { border-radius: 50%; }
 .geo-marker-wrap .geo-pin { top: 0; left: 0; }
 .geo-my-location { width: 17px; height: 17px; border: 3px solid #fff; border-radius: 50%; background: #1485ff; box-shadow: 0 0 0 10px #1685ff30,0 2px 4px #001f452e; }

@@ -15,6 +15,7 @@ export const AREAS = [
   { id: 'grand', name: 'Grand Avenue', detail: 'East campus · Parking structure', label: 'GRAND AVENUE', x: 1009, y: 780, capacity: 'Unknown', drive: 6, walk: { library: 12, union: 6, rec: 10, pac: 4 }, permits: ['commuter', 'staff', 'visitor'], maxStayMinutes: 480, price: 6, tags: ['Covered parking', 'Good for a longer stay'], source: 'Demo fixture', photo: 'grand' },
 ];
 export const PERMITS = [
+  { id: 'none', label: 'No permit', policyId: 'none', student: true },
   // These are the student-facing products identified in the project research handoff.
   // A product selection is not a complete eligibility decision for any individual stall.
   { id: 'commuter-grand', label: 'Commuter Grand annual', policyId: 'commuter-grand', student: true },
@@ -34,6 +35,17 @@ export const PERMITS = [
 ];
 
 export const permitPolicyId = id => PERMITS.find(permit => permit.id === id)?.policyId || id;
+
+export function normalizePermitSelection(ids) {
+  const valid = [...new Set(ids.filter(id => PERMITS.some(p => p.id === id)))];
+  return valid.includes('none') ? ['none'] : valid.includes('unknown') ? ['unknown'] : valid.length ? valid : ['none'];
+}
+
+export function togglePermitSelection(ids, id) {
+  if (id === 'none' || id === 'unknown') return [id];
+  const permits = ids.filter(p => p !== 'none' && p !== 'unknown');
+  return normalizePermitSelection(permits.includes(id) ? permits.filter(p => p !== id) : [...permits, id]);
+}
 export const INITIAL_REPORTS = [
   { id: 'seed-path', areaId: 'north', type: 'path', title: 'East walkway maintenance', description: 'A section of the east walkway is closed in this demonstration. Allow an extra 3 minutes on the return walk.', extraWalkMinutes: 3, createdAt: Date.now() - 18 * 60_000, expiresAt: Date.now() + 6 * 60 * 60_000, status: 'Community report · Unverified', simulated: true, active: false },
 ];

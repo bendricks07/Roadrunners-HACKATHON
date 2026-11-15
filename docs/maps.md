@@ -40,6 +40,12 @@ These are street centerlines. MapLibre draws paired approximate curb display ban
 
 ## Chance colors, rules, and reminders
 
+**No permit** is an exclusive setting. Red missing-permit/payment and permit-mismatch warnings include their specific reason without claiming complete policy. The common weekday 7 AM-5 PM window avoids assuming academic-break evening hours; current holiday/event calendars remain unconnected. Residential 131/R3/R4 authorization is checked 24/7. C-lot daytime commuter cautions concern general staff spaces, with special stalls separate. Neither unknown street rules nor after-hours rules establish free parking. A supported second permit can clear another product's warning.
+
+**Where are you headed?** is edited below map search alongside Trip date & time. Destination ordering remains illustrative, not verified walking navigation. Editors survive background geometry refreshes.
+
+The renderer supports a separate red **No available spaces** reason only for fresh, verified, source-linked observations. No actual feed is connected. See [permit/destination verification](../artifacts/permit-destination-controls/README.md) for the observation contract and limits.
+
 `parkingDisplay()` is separate from `evaluateParking()`. Green/yellow/red chance colors are fixed, explicitly labeled demo fixtures that demonstrate the requested interface, not measured availability or a validated forecast. **Layers → Parking chance preview** turns them off and restores unknown availability. No numeric vacancies or fabricated probabilities are shown.
 
 Known ineligibility or closure overrides the preview with a red restriction marker. G2/131 exclusions, the G2 time limit/staff exception, H14 subarea uncertainty, and closed K1 remain intact in the shared evaluator. Missing legal policy and actual occupancy remain unknown. A green sample color cannot authorize parking or create a confident recommendation.

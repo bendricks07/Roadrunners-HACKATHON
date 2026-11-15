@@ -1,5 +1,36 @@
 export const MINUTE = 60_000;
 
+// Only the common weekday 7-17 window is used: academic-break evening hours
+// and current holiday/event calendars are not supplied. Never infer free parking.
+const daytimeCache = new Map();
+const C_LOTS = new Set(['c1', 'c2', 'c2b', 'c2d', 'c2e', 'c3', 'c4', 'c5', 'c6', 'c7'].map(id => `cal-poly-slo-${id}`));
+function overlapsCampusDaytime(start, end) {
+  const key = `${start}:${end}`;
+  if (!daytimeCache.has(key)) {
+    if (daytimeCache.size > 16) daytimeCache.clear();
+    daytimeCache.set(key, computeCampusDaytime(start, end));
+  }
+  return daytimeCache.get(key);
+}
+function computeCampusDaytime(start, end) {
+  const format = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const daySeen = new Set();
+  for (let t = start - 86400_000; t <= end + 86400_000; t += 12 * 60 * MINUTE) {
+    const p = Object.fromEntries(format.formatToParts(t).map(x => [x.type, x.value]));
+    const date = `${p.year}-${p.month}-${p.day}`;
+    if (daySeen.has(date) || ['Sat', 'Sun'].includes(p.weekday)) continue;
+    daySeen.add(date);
+    // Probe both modern offsets and retain only the one belonging to this day.
+    for (const offset of [7, 8]) {
+      const open = Date.parse(`${date}T07:00:00Z`) + offset * 60 * MINUTE;
+      const hour = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', hour: '2-digit', hourCycle: 'h23' }).format(open));
+      if (hour === 7 && start < open + 10 * 60 * MINUTE && end > open) return true;
+    }
+    if (daySeen.size > 370) break;
+  }
+  return false;
+}
+
 export function parseSavedState(raw) {
   try {
     const value = JSON.parse(raw);
@@ -38,20 +69,33 @@ export function evaluateParking(area, plan, reports = [], now = Date.now()) {
   return { status: 'eligible', reason: plan.permit === 'visitor' ? 'Fits your stay · Payment required in demo' : 'Your permit covers this demo stay', nextRestrictionAt };
 }
 
+export function bestParkingResult(area, plans) {
+  const rank = { eligible: 0, conditional: 1, unknown: 2, ineligible: 3 };
+  return plans.map(plan => evaluateParking(area, plan)).sort((a, b) => rank[a.status] - rank[b.status] || Number(!!a.permitConflict) - Number(!!b.permitConflict))[0] || evaluateParking(area, {});
+}
+
 export function evaluateCampusParking(area, plan) {
   const rules = area.rules || {};
   const result = (status, reason, nextRestrictionAt = null) => ({ status, reason, nextRestrictionAt, occupancy: 'unknown' });
   if (rules.closed) return result('ineligible', 'Campus closure notice: this lot is permanently closed.');
   if (!Number.isFinite(plan.arrivalAt) || !Number.isFinite(plan.departureAt) || plan.departureAt <= plan.arrivalAt) return result('unknown', 'Choose a valid arrival and departure in campus time.');
   if (!plan.permit || plan.permit === 'unknown') return result('unknown', 'Select your permit. Unconfirmed rules still need checking.');
+  if (plan.permit === 'none' && area.kind !== 'street') {
+    const residential = ['cal-poly-slo-r3', 'cal-poly-slo-r4', 'cal-poly-slo-structure-131'].includes(area.id);
+    if (residential) return result('ineligible', `No permit: ${area.name} is a residential parking area with authorization required 24/7. Obtain the correct resident or visitor authorization before parking.`);
+    if (overlapsCampusDaytime(plan.arrivalAt, plan.departureAt)) return { ...result('unknown', `No permit: ${area.name} has permit-controlled or paid spaces during standard weekday enforcement. Obtain the correct permit or pay for a designated space. Campus holidays and special signs must still be checked.`), permitConflict: true };
+    return { ...result('unknown', 'No permit: general enforcement may be outside your trip, but event, reserved, residential and 24/7 spaces can still require authorization. Check the exact space and signs; parking permission is unconfirmed.'), suppressEstimate: true };
+  }
   if (rules.deniedPermits?.includes(plan.permit)) return result('ineligible', 'The official lot directory excludes your selected permit here.');
+  if (C_LOTS.has(area.id) && ['commuter', 'commuter-grand', 'r3', 'r4', 'ag-commuter'].includes(plan.permit) && overlapsCampusDaytime(plan.arrivalAt, plan.departureAt)) return { ...result('unknown', `Permit mismatch: ${area.name} has no general commuter spaces in the published C-lot directory. Your selected commuter permit does not cover general staff stalls during daytime enforcement. Separately signed special spaces and holiday exceptions need verification.`), permitConflict: true };
   if (rules.maxStayMinutes && !rules.limitExemptPermits?.includes(plan.permit) && plan.departureAt - plan.arrivalAt > rules.maxStayMinutes * MINUTE) return result('ineligible', `Your stay exceeds the published ${rules.maxStayMinutes / 60}-hour limit.`, plan.arrivalAt + rules.maxStayMinutes * MINUTE);
   for (const restriction of rules.closures || []) {
     if (restriction.scope === 'whole-area' && plan.arrivalAt < restriction.endsAt && plan.departureAt > restriction.startsAt) return result('ineligible', restriction.reason || 'A closure overlaps your planned stay.', restriction.startsAt);
   }
   if (!area.policyComplete || !rules.reviewedAt || !rules.sourceUrl) return result('unknown', area.id.endsWith('-h14') ? 'Choose and verify the H14 subarea before applying its rules.' : 'The full permit, space, and time rules are not confirmed. Check the official source and posted signs.');
-  if (!rules.allowedPermits?.includes(plan.permit)) return result('unknown', 'Eligibility for this permit has not been established.');
   if (!Number.isFinite(rules.validFrom) || !Number.isFinite(rules.validUntil) || plan.arrivalAt < rules.validFrom || plan.departureAt > rules.validUntil) return result('unknown', 'The reviewed policy does not cover this entire stay.');
+  if (!Array.isArray(rules.allowedPermits)) return result('unknown', 'Eligibility for this permit has not been established.');
+  if (!rules.allowedPermits.includes(plan.permit)) return result('ineligible', `Permit mismatch: the reviewed rules require ${rules.allowedPermits.join(' or ') || 'separate authorization'}. Your selected permit (${plan.permit}) does not cover this area.`);
   if (rules.paymentRequired) return result('conditional', 'Payment is required. Confirm the correct space, product, and paid-through time.');
   return result('eligible', 'The reviewed rules cover your permit and entire planned stay.');
 }

@@ -6,6 +6,8 @@ A parking companion for Cal Poly San Luis Obispo and nearby neighborhoods. The b
 
 GitHub `main` is the integrated source. The hosted demo is published separately and can lag behind it; see [deployment status](docs/deployment.md). The [branch audit](docs/status/repository.md) records which branches are included in `main`.
 
+Edit **Where are you headed?** and **Trip date & time** directly below map search. **Layers > Permits & preferences** includes **No permit**. Red areas explain missing permit/payment, supported permit conflicts or closures; low demo chance is not confirmed full parking. See [verification and limitations](artifacts/permit-destination-controls/README.md).
+
 ## Run and check
 
 Requires Node.js 20 or newer. No npm install, backend, or API key is required for the credited map fallbacks.

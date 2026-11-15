@@ -17,6 +17,8 @@ The demo is public and does not require ChatGPT or GitHub sign-in. The GitHub re
 
 ## Updating the same link
 
+The November 15 no-permit/main-destination source update has [local verification](../artifacts/permit-destination-controls/README.md). The current Codex account reads public metadata, but write-credential requests returned `Sites project not found`. Version 7 remains current; an authorized owner/editor must publish this new source to the same project and URL.
+
 Version 7 fixes the home estimate legend drifting into the center on wide screens. It retains version 6's trip-entry/highlight/Abbott update and expanded campus inventory. The November 15 publication reused the existing Site, public audience, and URL. A fresh source-write credential succeeded, resolving the earlier `Sites project not found` publishing failure. See the [legend fix and hosted verification](../artifacts/legend-fix/README.md), plus the [earlier version 6 verification](../artifacts/hosted-v6/README.md).
 
 Changes in this GitHub repository are not automatically deployed. After changing `demo/`, ask Codex to publish the updated CampusCurb demo to the existing Site. Keep its project identity, slug, and public audience.

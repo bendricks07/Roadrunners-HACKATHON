@@ -1,5 +1,11 @@
 # Current CampusCurb app status
 
+## November 15: no-permit and main destination controls
+
+Added exclusive No permit selection and contextual red missing-permit/payment or mismatch explanations. Selected restricted areas stay red across map styles. Where are you headed? is now a main-map entry alongside Trip date & time, with draft/open-state retention during background refreshes. Full parking has a separate source-verified, expiring display contract; no live occupancy feed is connected. Rules, limits, 43 tests, desktop/phone checks and screenshots are in [the verification record](../../artifacts/permit-destination-controls/README.md).
+
+This update targets GitHub `main`. Publication is blocked for the current account: existing Site source-write requests returned `Sites project not found`. Version 7 remains live until an authorized editor publishes this source. Keep the existing Site and URL.
+
 Consolidated November 15, 2026, America/Los_Angeles, from integrated `main` at `0f0bd0e`. See the [repository audit](repository.md) for branch coverage, the [architecture](../architecture.md) for implementation details, and [earlier implementation notes](discovery-history-2026-11-14.md) for history.
 
 ## Integrated behavior

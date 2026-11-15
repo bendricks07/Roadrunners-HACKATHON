@@ -4,8 +4,8 @@ import { PARKING_AREAS, STREET_AREAS, CITY_STREETS, CITY_PARKING, CHANCE, fetchS
 import { createGeographicMap } from './geographic-map.js';
 import { validateTrip } from './trip-model.js';
 import { MAP_CONFIG } from './runtime-config.js';
-import { evaluateParking, createManualSession, headBackAt, sessionPhase } from './rules.js';
-import { DESTINATIONS, PERMITS, permitPolicyId } from './data.js';
+import { bestParkingResult, createManualSession, headBackAt, sessionPhase } from './rules.js';
+import { DESTINATIONS, PERMITS, permitPolicyId, normalizePermitSelection, togglePermitSelection } from './data.js';
 
 const PREFS = 'campuscurb.discovery.v1', GOOGLE_KEY = 'campuscurb.googleMaps.browserKey';
 const read = (storage, key) => { try { return storage.getItem(key); } catch { return null; } };
@@ -20,30 +20,29 @@ const DESTINATION_AREAS = {
   rec: ['cal-poly-slo-h14', 'cal-poly-slo-grand-structure', 'cal-poly-slo-h16'],
   pac: ['cal-poly-slo-grand-structure', 'cal-poly-slo-structure-131', 'cal-poly-slo-h14'],
 };
-const RESULT_RANK = { eligible: 0, conditional: 1, unknown: 2, ineligible: 3 };
 export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, onSession, onAppearance, showModal, modalHeader, getSession }) {
   let saved = {}; try { saved = JSON.parse(read(localStorage, PREFS)) || {}; } catch { /* Preferences are optional. */ }
   const start = Math.ceil(Date.now() / 900_000) * 900_000;
   const s = {
     selectedId: PARKING_AREAS.some(a => a.id === saved.selectedId) ? saved.selectedId : PARKING_AREAS[0].id,
     permits: Array.isArray(saved.permits) && saved.permits.every(id => PERMITS.some(p => p.id === id))
-      ? [...new Set(saved.permits)]
+      ? normalizePermitSelection(saved.permits)
       : [PERMITS.some(p => p.id === saved.permit) ? saved.permit : 'commuter'],
     destinationId: DESTINATIONS.some(d => d.id === saved.destinationId) ? saved.destinationId : 'library',
     arrival: campusDateInput(start), departure: campusDateInput(start + 90 * 60_000),
-    kind: 'all', query: '', view: 'home', priority: ['closest', 'garage', 'chance'].includes(saved.priority) ? saved.priority : 'closest',
+    openEntry: null, draftArrival: null, draftDeparture: null, kind: 'all', query: '', view: 'home', priority: ['closest', 'garage', 'chance'].includes(saved.priority) ? saved.priority : 'closest',
     basemap: ['satellite', 'dark', 'standard', 'terrain'].includes(saved.basemap) ? saved.basemap : 'satellite',
     estimates: saved.estimates !== false, forceFallback: saved.forceFallback === true,
   };
   let features = { type: 'FeatureCollection', features: [] }, dataState = 'loading', provider = 'Connecting map…', mapError = '', adapter, host, startingMap = false, dataStarted = false, fitted = false, loadingPromise, dockObserver, presentedSession = null;
   const selected = () => PARKING_AREAS.find(a => a.id === s.selectedId) || PARKING_AREAS[0];
   const plan = permit => ({ permit: permitPolicyId(permit), arrivalAt: parseCampusDateInput(s.arrival), departureAt: parseCampusDateInput(s.departure) });
-  const activePermits = () => s.permits.length ? s.permits : ['unknown'];
-  const result = a => activePermits().map(permit => evaluateParking(a, plan(permit))).sort((left, right) => RESULT_RANK[left.status] - RESULT_RANK[right.status])[0];
+  const activePermits = () => normalizePermitSelection(s.permits);
+  const result = a => bestParkingResult(a, activePermits().map(plan));
   const destination = () => DESTINATIONS.find(d => d.id === s.destinationId) || DESTINATIONS[0];
   const recommended = () => {
     const nearby = DESTINATION_AREAS[s.destinationId] || [];
-    const candidates = PARKING_AREAS.filter(area => area.dataset === 'campus-research' && area.kind !== 'street' && !area.rules.closed && result(area).status !== 'ineligible');
+    const candidates = PARKING_AREAS.filter(area => area.dataset === 'campus-research' && area.kind !== 'street' && !area.rules.closed && result(area).status !== 'ineligible' && !result(area).permitConflict);
     const score = area => {
       const destinationRank = nearby.indexOf(area.id);
       const preference = s.priority === 'garage' ? (area.kind === 'garage' ? 0 : 5) : s.priority === 'chance' ? ({ good: 0, limited: 1, low: 2 }[area.demoChance] ?? 3) : 0;
@@ -61,11 +60,12 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
     return (s.kind === 'all' || area.kind === s.kind) && searchTerms.join(' ').toLowerCase().includes(s.query.trim().toLowerCase());
   });
   const matchingDestinations = () => DESTINATIONS.filter(d => `${d.name} ${d.subtitle}`.toLowerCase().includes(s.query.trim().toLowerCase()));
-  const permitSummary = () => s.permits.length ? s.permits.map(id => PERMITS.find(p => p.id === id)?.label).filter(Boolean).join(' · ') : 'No permit selected';
+  const permitSummary = () => s.permits.length ? s.permits.map(id => PERMITS.find(p => p.id === id)?.label).filter(Boolean).join(' · ') : 'No permit';
   const chance = a => { const d = display(a); return `<span class="geo-chance ${d.chance}"><i style="background:${d.color}"></i>${a.rules.closed ? 'Closed' : d.label}${d.illustrative ? '<span>· Demo estimate</span>' : ''}</span>`; };
   const dismissButton = label => `<button class="geo-sheet-close" data-geo-action="home" aria-label="${label}">${icon('close')}</button>`;
-  const tripEntry = () => `<details class="geo-trip-entry"><summary>${icon('clock')}<span><strong>Trip date & time</strong><small>${esc(s.arrival.replace('T', ' '))} to ${esc(s.departure.replace('T', ' '))}</small></span>${icon('chevron')}</summary><form id="geo-trip-form"><label for="geo-arrival">Arrive<input id="geo-arrival" name="arrival" type="datetime-local" value="${s.arrival}" required></label><label for="geo-departure">Leave<input id="geo-departure" name="departure" type="datetime-local" value="${s.departure}" required></label><small>Los Angeles time - used to check parking restrictions</small><p id="geo-trip-error" role="alert"></p><button class="primary-button" type="submit">Update trip${icon('check')}</button></form></details>`;
-  const searchField = () => `<div class="geo-search" role="search">${icon('search')}<input id="geo-search" type="search" autocomplete="off" placeholder="Find parking or enter a destination" value="${esc(s.query)}" aria-label="Search a destination, street, parking lot, or garage" ${s.view === 'search' ? 'aria-controls="geo-results"' : ''}>${s.query ? '<button type="button" class="geo-search-clear" data-geo-action="clear-query" aria-label="Clear search">' + icon('close') + '</button>' : ''}</div>${tripEntry()}`;
+  const destinationEntry = () => `<details id="geo-destination-entry" class="geo-trip-entry geo-destination-entry" ${s.openEntry === 'geo-destination-entry' ? 'open' : ''}><summary>${icon('pin')}<span><strong>Where are you headed?</strong><small>${esc(destination().name)}</small></span>${icon('chevron')}</summary><label class="geo-destination-label" for="geo-destination">Destination<select id="geo-destination">${DESTINATIONS.map(d => `<option value="${d.id}" ${d.id === s.destinationId ? 'selected' : ''}>${esc(d.name)}</option>`).join('')}</select></label><small class="geo-entry-help">Updates the highlighted areas to review. Exact walking routes remain unverified.</small></details>`;
+  const tripEntry = () => `<details id="geo-trip-entry" class="geo-trip-entry" ${s.openEntry === 'geo-trip-entry' ? 'open' : ''}><summary>${icon('clock')}<span><strong>Trip date & time</strong><small>${esc(s.arrival.replace('T', ' '))} to ${esc(s.departure.replace('T', ' '))}</small></span>${icon('chevron')}</summary><form id="geo-trip-form"><label for="geo-arrival">Arrive<input id="geo-arrival" name="arrival" type="datetime-local" value="${s.draftArrival ?? s.arrival}" required></label><label for="geo-departure">Leave<input id="geo-departure" name="departure" type="datetime-local" value="${s.draftDeparture ?? s.departure}" required></label><small>Los Angeles time - used to check parking restrictions</small><p id="geo-trip-error" role="alert"></p><button class="primary-button" type="submit">Update trip${icon('check')}</button></form></details>`;
+  const searchField = () => `<div class="geo-search" role="search">${icon('search')}<input id="geo-search" type="search" autocomplete="off" placeholder="Find parking or enter a destination" value="${esc(s.query)}" aria-label="Search a destination, street, parking lot, or garage" ${s.view === 'search' ? 'aria-controls="geo-results"' : ''}>${s.query ? '<button type="button" class="geo-search-clear" data-geo-action="clear-query" aria-label="Clear search">' + icon('close') + '</button>' : ''}</div>${destinationEntry()}${tripEntry()}`;
   function cards() {
     const seen = new Set(), list = visible().filter(a => { if (seen.has(a.name)) return false; seen.add(a.name); return true; });
     const destinations = s.query.trim() ? matchingDestinations().map(d => `<button class="geo-result geo-destination-result" data-geo-action="set-destination" data-id="${d.id}"><span class="geo-result-icon">${icon('building')}</span><span class="geo-result-copy"><strong>Plan parking for ${esc(d.name)}</strong><small>${esc(d.subtitle)}</small></span>${icon('chevron')}</button>`).join('') : '';
@@ -148,13 +148,13 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
     requestAnimationFrame(() => { adapter?.resize(); adapter?.focus(feature(id)); });
   }
   function sources() {
-    showModal(`${modalHeader('Behind the map', 'Real geography. Illustrative parking chances.')}<div class="geo-source-summary"><span>${icon('layers')}<strong id="geo-provider-status">${esc(provider)}</strong></span><span>${icon('clock')}Rules researched ${CHECKED_ON}</span></div><p class="modal-copy">Green, yellow, and red demonstrate a future parking-chance layer. They are fixed presentation samples, not measured availability or a validated forecast. Yellow means limited demo parking chance; red means low demo parking chance, not confirmed full. Red with a lock means a known permit or trip conflict, or a closure; tap the area for its exact reason. No live vacancies, counts, or occupancy feed are connected. Turn them off in Layers to see unknown availability.</p><p class="modal-copy">Cal Poly supplies lot outlines and garage locations; the City supplies the actual street geometry. Curb highlights are approximate display bands alongside street centerlines. Neither the lines nor the aerial imagery verify that parking is legal on a particular side of the road.</p><p class="modal-copy">Known permit exclusions and closed K1 use a red lock and keep their restrictions. Missing rules remain unconfirmed. A green demo estimate never confirms permission, payment, or an open space. Check the signs, exact entrance, and official information.</p><div class="geo-source-links"><a href="https://maps.calpoly.edu/" target="_blank" rel="noopener noreferrer">Official campus map${icon('external')}</a><a href="${GIS_POLYGONS}" target="_blank" rel="noopener noreferrer">Cal Poly parking outlines${icon('external')}</a><a href="${GIS_POINTS}" target="_blank" rel="noopener noreferrer">Cal Poly garage / lot points${icon('external')}</a><a href="${CITY_STREETS}" target="_blank" rel="noopener noreferrer">City street centerlines${icon('external')}</a><a href="${CITY_PARKING}" target="_blank" rel="noopener noreferrer">City residential parking permits${icon('external')}</a><a href="https://publish.data.ca.gov/dataset/naip-2022-60cm-california" target="_blank" rel="noopener noreferrer">2022 aerial imagery · USDA NAIP / CDFW${icon('external')}</a><a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer">OpenFreeMap / OpenStreetMap${icon('external')}</a></div><p class="modal-copy">Imagery is historical, with 0.6 m native detail; closer zooms resample it. Google Maps is used when a browser key is connected. Otherwise the map uses the explicitly credited aerial, vector, or USGS fallback. Reminder notes stay in your browser.</p>`);
+    showModal(`${modalHeader('Behind the map', 'Real geography. Illustrative parking chances.')}<div class="geo-source-summary"><span>${icon('layers')}<strong id="geo-provider-status">${esc(provider)}</strong></span><span>${icon('clock')}Rules researched ${CHECKED_ON}</span></div><p class="modal-copy">Green, yellow, and red demonstrate a future parking-chance layer. They are fixed presentation samples, not measured availability or a validated forecast. Yellow means limited demo parking chance; red means low demo parking chance, not confirmed full. Red with a lock means a permit/payment warning, known trip conflict, or closure; tap the area for its exact reason. A verified full report would show a separate No available spaces reason, and would expire with its source observation. No live vacancies, counts, or occupancy feed are connected. Turn them off in Layers to see unknown availability.</p><p class="modal-copy">Cal Poly supplies lot outlines and garage locations; the City supplies the actual street geometry. Curb highlights are approximate display bands alongside street centerlines. Neither the lines nor the aerial imagery verify that parking is legal on a particular side of the road.</p><p class="modal-copy">Known permit exclusions and closed K1 use a red lock and keep their restrictions. Missing rules remain unconfirmed. A green demo estimate never confirms permission, payment, or an open space. Check the signs, exact entrance, and official information.</p><div class="geo-source-links"><a href="https://maps.calpoly.edu/" target="_blank" rel="noopener noreferrer">Official campus map${icon('external')}</a><a href="${GIS_POLYGONS}" target="_blank" rel="noopener noreferrer">Cal Poly parking outlines${icon('external')}</a><a href="${GIS_POINTS}" target="_blank" rel="noopener noreferrer">Cal Poly garage / lot points${icon('external')}</a><a href="${CITY_STREETS}" target="_blank" rel="noopener noreferrer">City street centerlines${icon('external')}</a><a href="${CITY_PARKING}" target="_blank" rel="noopener noreferrer">City residential parking permits${icon('external')}</a><a href="https://publish.data.ca.gov/dataset/naip-2022-60cm-california" target="_blank" rel="noopener noreferrer">2022 aerial imagery · USDA NAIP / CDFW${icon('external')}</a><a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer">OpenFreeMap / OpenStreetMap${icon('external')}</a></div><p class="modal-copy">Imagery is historical, with 0.6 m native detail; closer zooms resample it. Google Maps is used when a browser key is connected. Otherwise the map uses the explicitly credited aerial, vector, or USGS fallback. Reminder notes stay in your browser.</p>`);
   }
   function layers() {
     showModal(`${modalHeader('Your map', 'A clearer view, day or night.')}<div class="geo-view-choices" aria-label="Map style">${[['satellite', 'Satellite', 'layers'], ['dark', 'Dark', 'moon'], ['standard', 'Standard', 'sun'], ['terrain', 'Terrain', 'leaf']].map(([id, label, glyph]) => `<button class="geo-view-choice ${s.basemap === id ? 'active' : ''}" data-geo-basemap="${id}" aria-pressed="${s.basemap === id}"><span class="geo-view-swatch ${id}">${icon(glyph)}</span><strong>${label}</strong>${s.basemap === id ? icon('checkCircle') : ''}</button>`).join('')}</div><label class="geo-toggle-row"><span><strong>Parking chance preview</strong><small>Illustrative colors for this demo</small></span><input id="geo-estimates" type="checkbox" role="switch" ${s.estimates ? 'checked' : ''}></label><div class="geo-settings-list"><button data-geo-action="trip">${icon('permit')}<span>Permits & preferences</span><small>${s.permits.length || 'no'} selected</small>${icon('chevron')}</button>${getSession()?.manual ? `<button data-geo-action="session">${icon('car')}<span>Your parked car</span>${icon('chevron')}</button>` : ''}<button data-geo-action="recenter">${icon('locate')}<span>Show campus & neighborhoods</span>${icon('chevron')}</button><button data-geo-action="settings">${icon('layers')}<span>Map connection</span><small>${apiKey() ? 'Google' : 'Aerial / vector fallback'}</small>${icon('chevron')}</button><button data-geo-action="sources">${icon('info')}<span>Sources & estimates</span>${icon('chevron')}</button><button data-geo-action="retry-data">${icon('arrow')}<span>Reload map data</span><small>${dataState === 'ready' ? 'Up to date' : dataState}</small></button><button data-geo-action="walkthrough">${icon('play')}<span>Sample parking walkthrough</span>${icon('chevron')}</button></div>`);
   }
   function trip() {
-    showModal(`${modalHeader('Parking settings', 'Choose permits, a destination, and what matters most.')}<div class="geo-plan"><label>Heading to<select id="geo-destination">${DESTINATIONS.map(d => `<option value="${d.id}" ${d.id === s.destinationId ? 'selected' : ''}>${d.name}</option>`).join('')}</select></label><fieldset class="geo-permit-picker"><legend>Permits to consider</legend><p>Toggle every product you could use. The app hides known conflicts; other spaces still require sign checks.</p><div>${PERMITS.filter(p => p.student).map(p => `<button type="button" class="geo-permit-chip ${s.permits.includes(p.id) ? 'active' : ''}" data-geo-action="toggle-permit" data-id="${p.id}" aria-pressed="${s.permits.includes(p.id)}">${s.permits.includes(p.id) ? icon('check') : icon('plus')}${esc(p.label)}</button>`).join('')}</div><details><summary>Other parking options</summary><div>${PERMITS.filter(p => !p.student && p.id !== 'unknown').map(p => `<button type="button" class="geo-permit-chip ${s.permits.includes(p.id) ? 'active' : ''}" data-geo-action="toggle-permit" data-id="${p.id}" aria-pressed="${s.permits.includes(p.id)}">${s.permits.includes(p.id) ? icon('check') : icon('plus')}${esc(p.label)}</button>`).join('')}</div></details></fieldset><label>Prioritize<select id="geo-priority"><option value="closest" ${s.priority === 'closest' ? 'selected' : ''}>Closest area first · illustrative</option><option value="garage" ${s.priority === 'garage' ? 'selected' : ''}>Parking structure first</option><option value="chance" ${s.priority === 'chance' ? 'selected' : ''}>Higher demo chance first</option></select></label></div><p class="modal-copy">Student products shown here come from the project’s Cal Poly research handoff. This is not a permit purchase tool or a complete lot-policy database.</p><button class="primary-button" data-action="close-modal">Done${icon('check')}</button>`);
+    showModal(`${modalHeader('Parking settings', 'Choose your permits and parking preferences.')}<div class="geo-plan"><fieldset class="geo-permit-picker"><legend>Permits to consider</legend><p>Toggle every product you could use. The app hides known conflicts; other spaces still require sign checks.</p><div>${PERMITS.filter(p => p.student).map(p => `<button type="button" class="geo-permit-chip ${s.permits.includes(p.id) ? 'active' : ''}" data-geo-action="toggle-permit" data-id="${p.id}" aria-pressed="${s.permits.includes(p.id)}">${s.permits.includes(p.id) ? icon('check') : icon('plus')}${esc(p.label)}</button>`).join('')}</div><details><summary>Other parking options</summary><div>${PERMITS.filter(p => !p.student).map(p => `<button type="button" class="geo-permit-chip ${s.permits.includes(p.id) ? 'active' : ''}" data-geo-action="toggle-permit" data-id="${p.id}" aria-pressed="${s.permits.includes(p.id)}">${s.permits.includes(p.id) ? icon('check') : icon('plus')}${esc(p.label)}</button>`).join('')}</div></details></fieldset><label>Prioritize<select id="geo-priority"><option value="closest" ${s.priority === 'closest' ? 'selected' : ''}>Closest area first · illustrative</option><option value="garage" ${s.priority === 'garage' ? 'selected' : ''}>Parking structure first</option><option value="chance" ${s.priority === 'chance' ? 'selected' : ''}>Higher demo chance first</option></select></label></div><p class="modal-copy">Student products shown here come from the project’s Cal Poly research handoff. This is not a permit purchase tool or a complete lot-policy database.</p><button class="primary-button" data-action="close-modal">Done${icon('check')}</button>`);
   }
   function rules() {
     const a = selected(), r = result(a), f = feature(a.id);
@@ -195,6 +195,13 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
     return `<div class="panel-heading"><div class="eyebrow">A LITTLE PEACE OF PARK</div><h1>My Parking</h1><p>Manual reminder · saved in this browser</p></div><div class="session-location"><span class="lot-icon">P</span><div><h2>${a?.name || 'Saved parking area'}</h2><p>${esc(session.note || 'Area saved · exact car position not recorded')}</p></div><button class="icon-button" data-action="edit-note" aria-label="Edit parking note">${icon('pin')}</button></div><div class="session-countdown"><div class="countdown-number" data-countdown>${left}<span>m</span></div><span>${phase === 'expired' ? 'Your reminder time has arrived' : 'Until your manual deadline'}</span><div class="session-progress"><div data-session-progress></div></div></div>${phase !== 'active' ? `<div class="inline-warning">${icon('bell')}${phase === 'expired' ? 'Your reminder time has arrived. Check the parking conditions and move your car as needed.' : 'Time to head back. Your walk and buffer are included.'}</div>` : ''}<div class="timing-card"><div><span>${icon('clock')}Your reminder deadline</span><strong>${time(session.deadlineAt)}</strong></div><div class="headback-row"><span>${icon('walk')}Head back by</span><strong>${time(headBackAt(session.deadlineAt, session.walkMinutes, session.bufferMinutes))}</strong></div></div><p class="buffer-caption">Your estimate: ${session.walkMinutes} min walk + ${session.bufferMinutes} min buffer</p><p class="geo-detail-note">This is your manually entered reminder time. It does not verify permission, payment, or a legal maximum stay. Reminders appear while the app is open.</p><div class="detail-actions"><button class="primary-button" data-geo-action="show-saved" data-id="${session.areaId}">${icon('pin')}View saved parking area</button><button class="secondary-button" data-action="end">End session</button></div>`;
   }
   document.addEventListener('click', event => {
+    const summary = event.target.closest('.geo-trip-entry > summary');
+    if (summary) {
+      const entry = summary.parentElement;
+      s.openEntry = entry.open ? null : entry.id;
+      document.querySelectorAll('.geo-trip-entry').forEach(other => { if (other !== entry) other.open = false; });
+    }
+
     const target = event.target.closest('[data-geo-action],[data-geo-kind],[data-geo-basemap]'); if (!target || target.disabled) return;
     if (target.dataset.geoKind) { s.kind = target.dataset.geoKind; refresh(); return; }
     if (target.dataset.geoBasemap) { s.basemap = target.dataset.geoBasemap; onAppearance?.(s.basemap === 'dark' ? 'dark' : 'light'); adapter?.setView(s.basemap); refresh(); layers(); return; }
@@ -203,7 +210,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
       case 'set-destination': s.destinationId = target.dataset.id; s.query = ''; refresh(); break;
       case 'toggle-permit': {
         const id = target.dataset.id;
-        s.permits = s.permits.includes(id) ? s.permits.filter(permit => permit !== id) : [...s.permits, id];
+        s.permits = togglePermitSelection(s.permits, id);
         refresh();
         trip();
         break;
@@ -236,6 +243,8 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
     s.view = 'search'; refresh(); requestAnimationFrame(() => document.getElementById('geo-search')?.focus());
   });
   document.addEventListener('input', e => {
+    if (e.target.id === 'geo-arrival') { s.draftArrival = e.target.value; return; }
+    if (e.target.id === 'geo-departure') { s.draftDeparture = e.target.value; return; }
     if (e.target.id !== 'geo-search') return;
     s.query = e.target.value; const el = document.getElementById('geo-results'); if (el) el.innerHTML = cards();
   });
@@ -246,7 +255,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
   document.addEventListener('change', e => {
     if (e.target.id === 'geo-estimates') { s.estimates = e.target.checked; refresh(); return; }
     const fields = { 'geo-destination': 'destinationId', 'geo-priority': 'priority' };
-    if (fields[e.target.id]) { s[fields[e.target.id]] = e.target.value; refresh(); }
+    if (fields[e.target.id]) { s[fields[e.target.id]] = e.target.value; s.openEntry = null; refresh(); if (e.target.id === 'geo-destination') onToast('Destination updated. Highlighted areas refreshed.'); }
   });
   document.addEventListener('submit', e => {
     if (!['geo-session-form', 'geo-google-form', 'geo-trip-form'].includes(e.target.id)) return;
@@ -255,7 +264,7 @@ export function createDiscovery({ icon, escape: esc, time, onRefresh, onToast, o
       const arrival = String(f.get('arrival')), departure = String(f.get('departure'));
       const error = validateTrip(arrival, departure);
       if (error) { document.getElementById('geo-trip-error').textContent = error; return; }
-      s.arrival = arrival; s.departure = departure; refresh(); onToast('Trip updated. Parking restrictions refreshed.');
+      s.arrival = arrival; s.departure = departure; s.draftArrival = null; s.draftDeparture = null; s.openEntry = null; refresh(); onToast('Trip updated. Parking restrictions refreshed.');
       return;
     }
     if (e.target.id === 'geo-google-form') {
