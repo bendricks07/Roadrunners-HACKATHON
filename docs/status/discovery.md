@@ -1,5 +1,17 @@
 # Geographic Explore implementation
 
+## Latest update: trip entry and map highlights
+
+November 14, 2026 local time: trip date/time is now a map entry directly below search; permit selection remains in Layers > Permits & preferences. Arrival and departure apply together after validation in Los Angeles time. Yellow/red cards explain demo chance colors; known permit conflicts and closures show the actual evaluator reason with a red lock. Low chance never claims confirmed full parking.
+
+MapLibre base-style replacement now disables style diffing so `style.load` restores the current parking source/layers. Rendered switches across Satellite, Dark, Standard, Terrain and back preserved highlights and a selected Abbott segment. Abbott St adds official City IDs 2173 and 2333, bringing the street total to 42 segments on ten roads. Parking rules remain unverified.
+
+All 37 Node tests and source syntax checks passed, including new date/DST, reason, Abbott identity, and overlay restoration regressions. Desktop and phone evidence is in [trip/map verification](../../artifacts/trip-map-fixes/README.md). The style-switch loss and expanded-search compression listed in the earlier review below are addressed in this update.
+
+GitHub source is being merged to `main` for this request. Public Site version 5 is unchanged: the current connection's source-write credential request returned `Sites project not found`. Its owner/editor needs to publish the merged app to the existing project; see [deployment instructions](../deployment.md).
+
+## Earlier publication and research status
+
 Redesign, free-data research, detector pilot, and all design/research deliverables are published to GitHub `main`, including commit `1b8fe13`. The research branch `codex/free-parking-research` is also published. Feature branch `codex/map-first-redesign` is fully merged and deleted. App source remains `fd63c2a`. November 14, 2026 local time.
 
 Public URL remains https://campuscurb-roadrunners-demo.buffrhubarb.chatgpt.site . Published version 5 uses Site source `d9675b3`; full provenance and GitHub sync status are recorded in `docs/deployment.md`. No shared Google browser/demo key has been supplied.

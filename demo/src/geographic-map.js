@@ -14,6 +14,7 @@ function pinElement(area, display, selected) {
   el.type = 'button'; el.className = `geo-pin ${area.kind} ${selected ? 'selected' : ''} ${display?.recommended ? 'recommended' : ''} ${display?.locked ? 'locked' : ''}`;
   el.style.setProperty('--pin-color', display?.color || '#8a98a9');
   el.setAttribute('aria-label', `${area.name} · ${display?.label || 'Availability unknown'}${display?.illustrative ? ' · demo estimate' : ''}`);
+  el.title = display?.reason || 'Actual availability is unknown.';
   el.innerHTML = `<span class="geo-pin-symbol">${display?.locked ? lockIcon : area.kind === 'garage' ? garageIcon : parkingIcon}</span>${area.kind !== 'street' ? `<span class="geo-pin-name">${area.shortName}</span>` : ''}`;
   return el;
 }
@@ -131,7 +132,9 @@ function vectorMap(host, opts) {
     fit() { map.fitBounds(overviewBounds(), { padding: { top: 45, left: 25, right: 25, bottom: window.innerWidth < 761 ? 125 : 75 }, duration: 650, essential: false }); },
     focus(f) { const p = featureCenter(f?.geometry); if (p) map.easeTo({ center: [p[1], p[0]], zoom: Math.max(map.getZoom(), 16.2), duration: 700, essential: false }); },
     locate(p) { if (locationPin) locationPin.remove(); const el = document.createElement('div'); el.className = 'geo-my-location'; locationPin = new gl.Marker({ element: el }).setLngLat([p[1], p[0]]).addTo(map); map.easeTo({ center: [p[1], p[0]], zoom: 16, duration: 700 }); },
-    setView(next) { if (next === view) return; view = next; failures = 0; map.setStyle(mapStyle(view)); status(); },
+    // A style diff can discard custom layers without a new style.load event.
+    // Rebuild the base style, then restore the latest parking data on style.load.
+    setView(next) { if (next === view) return; view = next; failures = 0; map.setStyle(mapStyle(view), { diff: false }); status(); },
     resize() { map.resize(); },
     destroy() { pins.forEach(p => p.remove()); locationPin?.remove(); map.remove(); },
   };

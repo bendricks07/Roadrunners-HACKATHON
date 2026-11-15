@@ -44,7 +44,9 @@ const STREET_RECORDS = [
   [1843, 'HATHWAY AVE', 'Hathway Ave', 'limited'],
   [1749, 'HATHWAY AVE', 'Hathway Ave', 'low'],
   [2296, 'COLLEGE AVE', 'College Ave', 'good'],
-  [815, 'COLLEGE AVE', 'College Ave', 'limited']
+  [815, 'COLLEGE AVE', 'College Ave', 'limited'],
+  [2173, 'ABBOTT ST', 'Abbott St', 'limited'],
+  [2333, 'ABBOTT ST', 'Abbott St', 'low']
 ];
 export const STREET_AREAS = STREET_RECORDS.map(([sourceId, gisName, name, demoChance]) => ({
   id: 'slo-street-' + sourceId, sourceId, gisName, name, shortName: name, kind: 'street',
@@ -69,9 +71,10 @@ const LOT_DEMO_CHANCES = {
   'cal-poly-slo-h16': 'limited', 'cal-poly-slo-a1': 'low',
 };
 export function parkingDisplay(area, eligibility, showEstimates = true) {
-  if (area.rules.closed || eligibility?.status === 'ineligible') return { ...CHANCE.restricted, chance: 'restricted', locked: true, illustrative: false };
+  if (area.rules.closed || eligibility?.status === 'ineligible') return { ...CHANCE.restricted, color: CHANCE.low.color, label: area.rules.closed ? 'Closed to parking' : 'Not eligible for this trip', reason: eligibility?.reason || 'This location is closed to parking.', chance: 'restricted', locked: true, illustrative: false };
   const chance = showEstimates ? area.demoChance || LOT_DEMO_CHANCES[area.id] || 'unknown' : 'unknown';
-  return { ...CHANCE[chance], chance, locked: false, illustrative: chance !== 'unknown' };
+  const reason = { good: 'Green: good parking chance in the demo preview. An open space is not confirmed.', limited: 'Yellow: limited parking chance in the demo preview. Availability is unknown; this is not a measured occupancy report.', low: 'Red: low parking chance in the demo preview. This does not mean the location is confirmed full.', unknown: 'Actual space availability is unknown. No live occupancy feed is connected.' }[chance];
+  return { ...CHANCE[chance], reason, chance, locked: false, illustrative: chance !== 'unknown' };
 }
 export function mapStreetFeatures(data) {
   return { type: 'FeatureCollection', features: STREET_AREAS.flatMap(a => {

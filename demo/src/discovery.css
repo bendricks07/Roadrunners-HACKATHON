@@ -36,6 +36,24 @@
 .geo-search input::-webkit-search-cancel-button { display: none; }
 .geo-search-clear { width: 28px; height: 36px; color: var(--map-muted); display: grid; place-items: center; padding: 0; }
 .geo-search-clear .icon { width: 16px; height: 16px; }
+.geo-search { flex-shrink: 0; }
+.geo-trip-entry { margin-top: 8px; flex-shrink: 0; background: var(--map-glass); border: 1px solid var(--map-stroke); border-radius: 18px; padding: 0 15px; box-shadow: 0 3px 16px #0b18251a; }
+.geo-trip-entry summary { display: flex; align-items: center; gap: 10px; min-height: 58px; cursor: pointer; list-style: none; }
+.geo-trip-entry summary::-webkit-details-marker { display: none; }
+.geo-trip-entry summary>.icon { width: 18px; height: 18px; flex-shrink: 0; }
+.geo-trip-entry summary>span { flex: 1; min-width: 0; }
+.geo-trip-entry strong { display: block; font-size: 13px; font-weight: 600; }
+.geo-trip-entry small { display: block; font-size: 10px; line-height: 1.5; color: var(--map-muted); overflow-wrap: anywhere; }
+.geo-trip-entry form { display: grid; gap: 10px; padding: 4px 0 14px; }
+.geo-trip-entry label { display: grid; gap: 5px; font-size: 12px; }
+.geo-trip-entry input { width: 100%; min-width: 0; height: 44px; font-size: 14px; }
+#geo-trip-error:empty { display: none; }
+#geo-trip-error { color: var(--red); font-size: 12px; }
+.map-home .geo-map-legend { bottom: 204px; }
+.map-home .geo-map-controls { bottom: 310px; top: auto; }
+.map-home:has(.geo-trip-entry[open]) .geo-map-legend { display: none; }
+.geo-search-content { overflow-y: auto; }
+.geo-search-content>* { flex-shrink: 0; }
 .place-open .geo-dock, .search-open .geo-dock, .session-open .geo-dock { width: 480px; background: var(--map-glass); border: 1px solid var(--map-stroke); border-radius: 27px; box-shadow: 0 7px 40px #0b18253d; backdrop-filter: blur(28px) saturate(1.15); -webkit-backdrop-filter: blur(28px) saturate(1.15); }
 .geo-handle { display: none; }
 .geo-place-content { padding: 16px 19px 12px; }
@@ -117,7 +135,7 @@
 .geo-session-content .detail-actions { margin-top: 18px; }
 .geo-pin { --pin-surface: #fff; position: absolute; display: flex; justify-content: center; align-items: center; color: #314e49; background: #fffffff5; border: 1.8px solid #ffffff; height: 30px; width: 30px; border-radius: 9px; box-shadow: 0 2px 6px #091c3d40; padding: 2px; cursor: pointer; transform: translate(-50%,-50%); }
 .geo-pin.garage { color: #1674d4; height: 34px; width: 34px; border-radius: 10px; }
-.geo-pin.locked { height: 25px; width: 25px; background: #f4f7faf0; color: #687787; border-radius: 7px; }
+.geo-pin.locked { height: 25px; width: 25px; background: #f4f7faf0; color: var(--pin-color, #687787); border: 1.8px solid var(--pin-color, #687787); border-radius: 7px; }
 .geo-pin-symbol { width: 23px; height: 23px; display: grid; place-items: center; }
 .geo-pin-symbol svg { width: 21px; height: 21px; }
 .geo-pin.locked svg { width: 16px; height: 16px; }
@@ -227,5 +245,15 @@
   .map-home:has(.geo-saved-car) .geo-map-controls { bottom: calc(267px + env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) { .geo-map-control, .geo-toggle-row input, .geo-toggle-row input::after { transition: none; } .geo-map-control.locating .icon { animation: none; } }
+@media (max-width: 760px) {
+  .map-home .geo-map-legend { bottom: calc(var(--dock-height) + 112px + env(safe-area-inset-bottom)); }
+  .map-home .geo-map-controls { bottom: calc(var(--dock-height) + 228px + env(safe-area-inset-bottom)); }
+  .map-home .geo-map .maplibregl-ctrl-bottom-right, .map-home .geo-map .leaflet-bottom.leaflet-right { bottom: calc(var(--dock-height) + 45px + env(safe-area-inset-bottom)); }
+  .map-home:has(.geo-trip-entry[open]) .geo-dock { max-height: 65dvh; overflow-y: auto; }
+  .map-home:has(.geo-trip-entry[open]) .geo-map-legend { display: none; }
+  .map-home:has(.geo-trip-entry[open]) .geo-map-controls { top: 16px; bottom: auto; }
+  .map-home:has(.geo-saved-car) .geo-map-legend { bottom: calc(var(--dock-height) + 112px + env(safe-area-inset-bottom)); }
+  .map-home:has(.geo-saved-car) .geo-map-controls { bottom: calc(var(--dock-height) + 228px + env(safe-area-inset-bottom)); }
+}
 .geo-data-credit { background: #ffffffdc; color: #35424c; font: 9px/17px -apple-system,BlinkMacSystemFont,sans-serif; padding: 0 5px; border-radius: 4px; margin: 0 0 3px 4px; }
 .geo-data-credit a { color: #35424c; }

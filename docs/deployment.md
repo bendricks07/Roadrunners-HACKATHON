@@ -15,6 +15,8 @@ The demo is public and does not require ChatGPT or GitHub sign-in. The GitHub re
 
 ## Updating the same link
 
+The November 14 trip-entry/highlight/Abbott update is available in GitHub source, with [local verification evidence](../artifacts/trip-map-fixes/README.md). Publication was attempted through the existing Site identity: metadata is readable, but the current account's write-credential request returned `Sites project not found`. Version 5 remains live until an authorized Site owner/editor publishes the new source. No replacement Site was created.
+
 Changes in this GitHub repository are not automatically deployed. After changing `demo/`, ask Codex to publish the updated CampusCurb demo to the existing Site. Keep its project identity, slug, and public audience.
 
 1. Read the existing publication checkout's `.openai/hosting.json`.
