@@ -2,6 +2,8 @@
 
 ## November 15: reviewed permit schedules
 
+Published to the current public URL as Site version 2, app source `3850591`. Hosted Grand Avenue status and enforcement-resumption text were verified. See [deployment provenance](../deployment.md).
+
 Replaced generic unknown labels with source-backed permit-rule statuses for ordinary spaces in 18 reviewed facilities. Grand Avenue now shows No general permit required for trips wholly within Friday 5 PM-Monday 7 AM, with event/special-space exceptions and the next regular enforcement start. Blue means a reviewed rule; empty-space availability remains unknown. Product matching distinguishes ordinary Commuter Annual from Grand Annual. See [findings, limits and 50 passing tests](../research/permit-status-2026-11-15.md).
 
 ## November 15: no-permit and main destination controls
